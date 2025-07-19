@@ -1,0 +1,35 @@
+{
+    "name": "Hubble",
+    "type": "Satellite",
+    "mission": {
+        "name": "noValue",
+        "agency": "noValue",
+        "launchDate": "noValue",
+        "launchSite": "noValue",
+        "launchVehicle": "noValue",
+        "status": "noValue"
+    },
+    "specifications": {
+        "mass": "noValue",
+        "dimensions": "noValue",
+        "power": "noValue",
+        "propulsion": "noValue"
+    },
+    "orbit": {
+        "type": "noValue",
+        "altitude": "noValue",
+        "inclination": "noValue",
+        "period": "noValue"
+    },
+    "payload": [],
+    "groundStations": [],
+    "images": [],
+    "description": "noValue",
+    "references": [],
+    "lastUpdated": "2025-06-18T08:31:55.875113",
+    "dataSources": {
+        "celestrak": "noValue",
+        "n2yo": "noValue",
+        "spaceTrack": "noValue"
+    }
+}

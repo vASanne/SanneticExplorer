@@ -1,0 +1,126 @@
+{
+    "name": "International Space Station",
+    "type": "Satellite",
+    "priority": "CRITICAL",
+    "mission": {
+        "name": "International Space Station",
+        "agency": "noValue",
+        "launchDate": "noValue",
+        "launchSite": "noValue",
+        "launchVehicle": "noValue",
+        "status": "Active"
+    },
+    "specifications": {
+        "mass": "noValue",
+        "dimensions": "noValue",
+        "power": "noValue",
+        "propulsion": "noValue"
+    },
+    "orbit": {
+        "type": "noValue",
+        "altitude": "~24986 km",
+        "inclination": "0.0114°",
+        "period": "1436.13 minutes",
+        "eccentricity": 0.0001333,
+        "meanMotion": 1.00269727,
+        "epoch": "2025-06-16T21:12:38.646432"
+    },
+    "payload": [],
+    "groundStations": [],
+    "images": [],
+    "tracking": {
+        "currentPosition": "noValue",
+        "velocity": "noValue",
+        "nextPasses": "noValue",
+        "noradId": 39079
+    },
+    "description": "noValue",
+    "references": [],
+    "dataSources": {
+        "celestrak": {
+            "available": true,
+            "lastUpdate": "2025-06-17T20:35:40.140730",
+            "data": {
+                "OBJECT_NAME": "AZERSPACE 1",
+                "OBJECT_ID": "2013-006B",
+                "EPOCH": "2025-06-16T21:12:38.646432",
+                "MEAN_MOTION": 1.00269727,
+                "ECCENTRICITY": 0.0001333,
+                "INCLINATION": 0.0114,
+                "RA_OF_ASC_NODE": 44.3921,
+                "ARG_OF_PERICENTER": 56.8429,
+                "MEAN_ANOMALY": 168.3179,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 39079,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 4514,
+                "BSTAR": 0,
+                "MEAN_MOTION_DOT": 1.44e-06,
+                "MEAN_MOTION_DDOT": 0
+            }
+        },
+        "spaceTrack": {
+            "available": true,
+            "lastUpdate": "2025-06-17T20:35:40.140745",
+            "data": {
+                "CCSDS_OMM_VERS": "3.0",
+                "COMMENT": "GENERATED VIA SPACE-TRACK.ORG API",
+                "CREATION_DATE": "2025-06-17T02:20:21",
+                "ORIGINATOR": "18 SPCS",
+                "OBJECT_NAME": "AZERSPACE 1",
+                "OBJECT_ID": "2013-006B",
+                "CENTER_NAME": "EARTH",
+                "REF_FRAME": "TEME",
+                "TIME_SYSTEM": "UTC",
+                "MEAN_ELEMENT_THEORY": "SGP4",
+                "EPOCH": "2025-06-16T21:12:38.646432",
+                "MEAN_MOTION": "1.00269727",
+                "ECCENTRICITY": "0.00013330",
+                "INCLINATION": "0.0114",
+                "RA_OF_ASC_NODE": "44.3921",
+                "ARG_OF_PERICENTER": "56.8429",
+                "MEAN_ANOMALY": "168.3179",
+                "EPHEMERIS_TYPE": "0",
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": "39079",
+                "ELEMENT_SET_NO": "999",
+                "REV_AT_EPOCH": "4514",
+                "BSTAR": "0.00000000000000",
+                "MEAN_MOTION_DOT": "0.00000144",
+                "MEAN_MOTION_DDOT": "0.0000000000000",
+                "SEMIMAJOR_AXIS": "42165.309",
+                "PERIOD": "1436.126",
+                "APOAPSIS": "35792.795",
+                "PERIAPSIS": "35781.553",
+                "OBJECT_TYPE": "PAYLOAD",
+                "RCS_SIZE": "LARGE",
+                "COUNTRY_CODE": "AZER",
+                "LAUNCH_DATE": "2013-02-07",
+                "SITE": "FRGUI",
+                "DECAY_DATE": null,
+                "FILE": "4758702",
+                "GP_ID": "290117615",
+                "TLE_LINE0": "0 AZERSPACE 1",
+                "TLE_LINE1": "1 39079U 13006B   25167.88378063  .00000144  00000-0  00000-0 0  9991",
+                "TLE_LINE2": "2 39079   0.0114  44.3921 0001333  56.8429 168.3179  1.00269727 45146"
+            }
+        },
+        "wikipedia": {
+            "available": false,
+            "lastUpdate": null
+        },
+        "n2yo": {
+            "available": false,
+            "lastUpdate": null,
+            "data": null
+        }
+    },
+    "metadata": {
+        "version": "2.1",
+        "lastUpdated": "2025-06-17T20:35:40.140749",
+        "updateType": "CRITICAL",
+        "dataQuality": "Medium",
+        "completeness": 50.0
+    }
+}

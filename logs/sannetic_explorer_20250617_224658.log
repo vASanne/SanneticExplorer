@@ -1,0 +1,9 @@
+2025-06-17 22:46:58 | INFO     | __main__             | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_224658.log
+2025-06-17 22:46:58 | INFO     | __main__             | info            | 🛰️ Testing Orbital Propagation Engine
+2025-06-17 22:46:58 | INFO     | __main__             | info            | 📡 Loading ISS data...
+2025-06-17 22:46:58 | INFO     | __main__             | info            | ✅ ISS data loaded successfully
+2025-06-17 22:46:58 | ERROR    | __main__             | error           | Error generating propagation report: string indices must be integers, not 'str'
+2025-06-17 22:46:58 | INFO     | __main__             | info            | 📊 Propagation Report: {'status': 'error', 'can_propagate': False, 'error': "string indices must be integers, not 'str'"}
+2025-06-17 22:46:58 | ERROR    | __main__             | error           | Error propagating position: 'str' object has no attribute 'get'
+2025-06-17 22:46:58 | ERROR    | __main__             | error           | Error predicting passes: 'str' object has no attribute 'get'
+2025-06-17 22:46:58 | INFO     | __main__             | info            | 🔭 Predicted passes over NYC: 0

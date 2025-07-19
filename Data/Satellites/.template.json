@@ -1,0 +1,193 @@
+{
+    "name": "noValue",
+    "type": "noValue",
+    "operator": "noValue",
+    "partners": [
+        "noValue"
+    ],
+    "constellation": {
+        "totalSatellites": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "operationalSatellites": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "orbitalParameters": {
+            "geostationary": {
+                "altitude": {
+                    "value": "noValue",
+                    "unit": "km"
+                },
+                "inclination": {
+                    "value": "noValue",
+                    "unit": "degrees"
+                },
+                "orbitalPeriod": {
+                    "value": "noValue",
+                    "unit": "hours"
+                }
+            },
+            "polar": {
+                "altitude": {
+                    "value": "noValue",
+                    "unit": "km"
+                },
+                "inclination": {
+                    "value": "noValue",
+                    "unit": "degrees"
+                },
+                "orbitalPeriod": {
+                    "value": "noValue",
+                    "unit": "minutes"
+                }
+            }
+        }
+    },
+    "satelliteSpecifications": {
+        "geostationary": {
+            "mass": {
+                "value": "noValue",
+                "unit": "kg"
+            },
+            "dimensions": {
+                "length": {
+                    "value": "noValue",
+                    "unit": "m"
+                },
+                "width": {
+                    "value": "noValue",
+                    "unit": "m"
+                },
+                "height": {
+                    "value": "noValue",
+                    "unit": "m"
+                }
+            },
+            "power": {
+                "value": "noValue",
+                "unit": "W"
+            },
+            "lifetime": {
+                "value": "noValue",
+                "unit": "years"
+            }
+        },
+        "polar": {
+            "mass": {
+                "value": "noValue",
+                "unit": "kg"
+            },
+            "dimensions": {
+                "length": {
+                    "value": "noValue",
+                    "unit": "m"
+                },
+                "width": {
+                    "value": "noValue",
+                    "unit": "m"
+                },
+                "height": {
+                    "value": "noValue",
+                    "unit": "m"
+                }
+            },
+            "power": {
+                "value": "noValue",
+                "unit": "W"
+            },
+            "lifetime": {
+                "value": "noValue",
+                "unit": "years"
+            }
+        }
+    },
+    "instruments": [
+        {
+            "name": "noValue",
+            "type": "noValue",
+            "resolution": {
+                "value": "noValue",
+                "unit": "noValue"
+            },
+            "swathWidth": {
+                "value": "noValue",
+                "unit": "noValue"
+            },
+            "parameters": [
+                "noValue"
+            ],
+            "channels": "noValue",
+            "updateRate": {
+                "value": "noValue",
+                "unit": "noValue"
+            },
+            "frequencyRange": {
+                "min": "noValue",
+                "max": "noValue",
+                "unit": "noValue"
+            }
+        }
+    ],
+    "applications": [
+        "noValue"
+    ],
+    "description": "noValue",
+    "keyFeatures": [
+        "noValue"
+    ],
+    "maintenance": {
+        "launchFrequency": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "replacementStrategy": "noValue",
+        "groundControl": "noValue"
+    },
+    "futureDevelopments": [
+        "noValue"
+    ],
+    "technicalDetails": {
+        "dataTransmission": {
+            "type": "noValue",
+            "bandwidth": {
+                "value": "noValue",
+                "unit": "noValue"
+            }
+        },
+        "attitudeControl": "noValue",
+        "pointingAccuracy": {
+            "value": "noValue",
+            "unit": "noValue"
+        }
+    },
+    "internationalCooperation": {
+        "partners": [
+            "noValue"
+        ],
+        "dataSharing": "noValue"
+    },
+    "scientificOutput": {
+        "publications": "noValue",
+        "classifiedReports": "noValue",
+        "researchAreas": [
+            "noValue"
+        ]
+    },
+    "costs": {
+        "development": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "annualOperations": {
+            "value": "noValue",
+            "unit": "noValue"
+        }
+    },
+    "historicalSignificance": {
+        "firstLaunch": "noValue",
+        "currentGeneration": "noValue",
+        "legacy": "noValue"
+    }
+} 

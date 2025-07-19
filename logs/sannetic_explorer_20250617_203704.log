@@ -1,0 +1,43 @@
+2025-06-17 20:37:04 | INFO     | automation_setup     | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | automation_setup     | section_start   | 
+============================================================
+2025-06-17 20:37:04 | INFO     | automation_setup     | section_start   | 🚀 Starting: Sannetic Explorer Automation Setup
+2025-06-17 20:37:04 | INFO     | automation_setup     | section_start   | ============================================================
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Creating cron schedule...
+2025-06-17 20:37:04 | INFO     | cron_setup           | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | cron_setup           | info            | Created cron schedule: crontab
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | ✅ Creating cron schedule completed
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Creating startup script...
+2025-06-17 20:37:04 | INFO     | startup_setup        | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | startup_setup        | info            | Created startup script: startup.sh
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | ✅ Creating startup script completed
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Updating Dockerfile...
+2025-06-17 20:37:04 | INFO     | dockerfile_setup     | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | dockerfile_setup     | info            | Updated Dockerfile with automation support
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | ✅ Updating Dockerfile completed
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Creating docker-compose override...
+2025-06-17 20:37:04 | INFO     | compose_setup        | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | compose_setup        | info            | Created docker-compose override: docker-compose.automation.yml
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | ✅ Creating docker-compose override completed
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Setting up manual scripts...
+2025-06-17 20:37:04 | INFO     | manual_cron          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203704.log
+2025-06-17 20:37:04 | INFO     | manual_cron          | info            | Setting up manual cron jobs...
+2025-06-17 20:37:04 | INFO     | manual_cron          | info            | Created automation script: automation-scripts/critical-update.sh
+2025-06-17 20:37:04 | INFO     | manual_cron          | info            | Created automation script: automation-scripts/standard-update.sh
+2025-06-17 20:37:04 | INFO     | manual_cron          | info            | Created automation script: automation-scripts/full-update.sh
+2025-06-17 20:37:04 | INFO     | manual_cron          | info            | Created automation script: automation-scripts/health-check.sh
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | ✅ Setting up manual scripts completed
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         | 
+📊 Automation Setup Results
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         | ────────────────────────────────────────
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         |   Total Tasks: 5
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         |   Successful: 5
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         |   Failed: 0
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         |   Success Rate: 100.0%
+2025-06-17 20:37:04 | INFO     | automation_setup     | summary         | ────────────────────────────────────────
+2025-06-17 20:37:04 | INFO     | automation_setup     | section_end     | 📋 Automation Setup: ✅ COMPLETED
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 🎉 Automation setup completed successfully!
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            | 📋 Next steps:
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            |   1. Rebuild container: make build
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            |   2. Start automation: docker-compose -f docker-compose.yml -f docker-compose.automation.yml up -d
+2025-06-17 20:37:04 | INFO     | automation_setup     | info            |   3. Monitor logs: make tail-logs

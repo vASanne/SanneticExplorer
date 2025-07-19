@@ -1,0 +1,23 @@
+# Docker Compose Override for Automation
+version: '3.8'
+
+services:
+  sannetic-explorer:
+    # Override command for automation mode
+    command: ["/app/startup.sh"]
+    
+    # Add health check
+    healthcheck:
+      test: ["CMD", "python", "/app/scripts/status_report.py"]
+      interval: 30m
+      timeout: 10s
+      retries: 3
+      start_period: 5m
+    
+    # Restart policy for automation
+    restart: unless-stopped
+    
+    # Additional volumes for logs
+    volumes:
+      - ./logs:/app/logs:rw
+      - /var/log:/var/log:rw

@@ -1,0 +1,379 @@
+{
+    "metadata": {
+        "lastUpdated": "2025-06-18T08:29:59.057903",
+        "directory": "Data/Planets",
+        "totalObjects": 9
+    },
+    "objects": [
+        {
+            "name": "Jupiter",
+            "filename": "jupiter.json",
+            "type": "gas giant",
+            "lastUpdated": "2025-06-18T08:29:59.059254"
+        },
+        {
+            "name": "noValue",
+            "filename": "template.json",
+            "type": "noValue",
+            "lastUpdated": "2025-06-18T08:29:59.059690"
+        },
+        {
+            "name": "Venus",
+            "filename": "venus.json",
+            "type": "terrestrial planet",
+            "lastUpdated": "2025-06-18T08:29:59.060098"
+        },
+        {
+            "name": "Mercury",
+            "filename": "mercury.json",
+            "type": "terrestrial planet",
+            "lastUpdated": "2025-06-18T08:29:59.060593"
+        },
+        {
+            "name": "Earth",
+            "filename": "earth.json",
+            "type": "terrestrial planet",
+            "lastUpdated": "2025-06-18T08:29:59.060978"
+        },
+        {
+            "name": "Uranus",
+            "filename": "uranus.json",
+            "type": "ice giant",
+            "lastUpdated": "2025-06-18T08:29:59.061357"
+        },
+        {
+            "name": "Neptune",
+            "filename": "neptune.json",
+            "type": "ice giant",
+            "lastUpdated": "2025-06-18T08:29:59.061778"
+        },
+        {
+            "name": "Saturn",
+            "filename": "saturn.json",
+            "type": "gas giant",
+            "lastUpdated": "2025-06-18T08:29:59.062745"
+        },
+        {
+            "name": "Mars",
+            "filename": "mars.json",
+            "type": "terrestrial planet",
+            "lastUpdated": "2025-06-18T08:29:59.064048"
+        }
+    ],
+    "statistics": {
+        "total_files": 9,
+        "total_fields": 727,
+        "filled_fields": 298,
+        "missing_fields": 429,
+        "completion_percentage": 40.990371389270976,
+        "last_updated": "2025-06-18T08:29:59.064121",
+        "field_statistics": {
+            "name": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "type": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "atmosphere.composition": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "atmosphere.pressure.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "moons.count": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "rings.hasRings": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "rings.description": {
+                "total": 4,
+                "filled": 4,
+                "percentage": 100.0
+            },
+            "mass.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "mass.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "diameter.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "diameter.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surfaceTemperature.value": {
+                "total": 5,
+                "filled": 5,
+                "percentage": 100.0
+            },
+            "surfaceTemperature.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "distanceFromSun.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "distanceFromSun.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalPeriod.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalPeriod.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "rotationPeriod.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "rotationPeriod.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "gravity.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "gravity.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbit.semiMajorAxis.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.semiMajorAxis.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.eccentricity": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.inclination.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.inclination.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.longitudeOfAscendingNode.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.longitudeOfAscendingNode.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.argumentOfPeriapsis.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.argumentOfPeriapsis.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.meanAnomaly.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.meanAnomaly.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.epoch": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.orbitalSpeed.value": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "orbit.orbitalSpeed.unit": {
+                "total": 7,
+                "filled": 7,
+                "percentage": 100.0
+            },
+            "metadata.lastEnriched": {
+                "total": 9,
+                "filled": 9,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.mass.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.equatorial.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.polar.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.density.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.surfaceGravity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.escapeVelocity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "orbitalParameters.semiMajorAxis.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "orbitalParameters.inclination.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "orbitalParameters.orbitalPeriod.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "orbitalParameters.rotationPeriod.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "orbitalParameters.axialTilt.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.composition[0].percentage.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.temperature.min.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.temperature.max.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.temperature.average.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "surface.cratering.age.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.strength.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.dipoleMoment.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.tilt.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "moons": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "rings.extent.inner.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "rings.extent.outer.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.pressure.value": {
+                "total": 3,
+                "filled": 3,
+                "percentage": 100.0
+            },
+            "surfaceTemperature.min": {
+                "total": 3,
+                "filled": 3,
+                "percentage": 100.0
+            },
+            "surfaceTemperature.max": {
+                "total": 3,
+                "filled": 3,
+                "percentage": 100.0
+            }
+        }
+    },
+    "objectType": "planets"
+}

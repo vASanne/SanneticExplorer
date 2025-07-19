@@ -1,0 +1,317 @@
+{
+    "name": "Sun",
+    "type": "G-type main-sequence star",
+    "discovery": {
+        "date": "prehistoric",
+        "discoverer": "unknown",
+        "method": "direct observation"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": 1.989e+30,
+            "unit": "kg"
+        },
+        "radius": {
+            "value": 696340,
+            "unit": "km"
+        },
+        "density": {
+            "value": 1408,
+            "unit": "kg/m\u00b3"
+        },
+        "surfaceGravity": {
+            "value": 274,
+            "unit": "m/s\u00b2"
+        },
+        "escapeVelocity": {
+            "value": 617.7,
+            "unit": "km/s"
+        }
+    },
+    "stellarParameters": {
+        "spectralType": "G2V",
+        "luminosity": {
+            "value": 1,
+            "unit": "L\u2609"
+        },
+        "effectiveTemperature": {
+            "value": 5778,
+            "unit": "K"
+        },
+        "colorIndex": {
+            "value": 0.656,
+            "unit": "B-V"
+        },
+        "absoluteMagnitude": {
+            "value": 4.83,
+            "unit": "mag"
+        },
+        "apparentMagnitude": {
+            "value": -26.74,
+            "unit": "mag"
+        }
+    },
+    "nuclearCharacteristics": {
+        "fusionType": "proton-proton chain",
+        "coreTemperature": {
+            "value": 15700000.0,
+            "unit": "K"
+        },
+        "corePressure": {
+            "value": 2.65e+16,
+            "unit": "Pa"
+        },
+        "coreDensity": {
+            "value": 162000.0,
+            "unit": "kg/m\u00b3"
+        },
+        "nuclearReactions": [
+            "proton-proton chain",
+            "CNO cycle"
+        ]
+    },
+    "magneticField": {
+        "strength": {
+            "value": 0.0001,
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": 2.2e+22,
+            "unit": "T\u00b7m\u00b3"
+        },
+        "tilt": {
+            "value": 7.25,
+            "unit": "degrees"
+        },
+        "activityCycle": {
+            "period": {
+                "value": 11,
+                "unit": "years"
+            },
+            "lastMaximum": "2014",
+            "lastMinimum": "2019"
+        }
+    },
+    "atmosphere": {
+        "composition": [
+            {
+                "element": "hydrogen",
+                "percentage": {
+                    "value": 73.46,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "helium",
+                "percentage": {
+                    "value": 24.85,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "oxygen",
+                "percentage": {
+                    "value": 0.77,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "carbon",
+                "percentage": {
+                    "value": 0.29,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "iron",
+                "percentage": {
+                    "value": 0.16,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "neon",
+                "percentage": {
+                    "value": 0.12,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "nitrogen",
+                "percentage": {
+                    "value": 0.09,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "silicon",
+                "percentage": {
+                    "value": 0.07,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "magnesium",
+                "percentage": {
+                    "value": 0.05,
+                    "unit": "%"
+                }
+            },
+            {
+                "element": "sulfur",
+                "percentage": {
+                    "value": 0.04,
+                    "unit": "%"
+                }
+            }
+        ],
+        "chromosphere": {
+            "temperature": {
+                "value": 6000,
+                "unit": "K"
+            },
+            "thickness": {
+                "value": 2000,
+                "unit": "km"
+            }
+        },
+        "corona": {
+            "temperature": {
+                "value": 1000000.0,
+                "unit": "K"
+            },
+            "density": {
+                "value": 1000000000000000.0,
+                "unit": "particles/m\u00b3"
+            }
+        }
+    },
+    "stellarEvolution": {
+        "age": {
+            "value": 4603000000.0,
+            "unit": "years"
+        },
+        "evolutionaryStage": "main sequence",
+        "expectedLifetime": {
+            "value": 10000000000.0,
+            "unit": "years"
+        },
+        "nuclearFuel": {
+            "hydrogen": {
+                "percentage": {
+                    "value": 73.46,
+                    "unit": "%"
+                }
+            },
+            "helium": {
+                "percentage": {
+                    "value": 24.85,
+                    "unit": "%"
+                }
+            },
+            "heavierElements": {
+                "percentage": {
+                    "value": 1.69,
+                    "unit": "%"
+                }
+            }
+        }
+    },
+    "variability": {
+        "type": "solar cycle",
+        "period": {
+            "value": 11,
+            "unit": "years"
+        },
+        "amplitude": {
+            "value": 0.1,
+            "unit": "mag"
+        },
+        "pulsationModes": [
+            "5-minute oscillations",
+            "helioseismic waves"
+        ]
+    },
+    "companions": {
+        "binarySystem": {
+            "isBinary": false,
+            "companionType": "none",
+            "orbitalPeriod": {
+                "value": "noValue",
+                "unit": "days"
+            },
+            "separation": {
+                "value": "noValue",
+                "unit": "AU"
+            }
+        },
+        "planetarySystem": {
+            "confirmedPlanets": 8,
+            "habitableZone": {
+                "inner": {
+                    "value": 0.95,
+                    "unit": "AU"
+                },
+                "outer": {
+                    "value": 1.4,
+                    "unit": "AU"
+                }
+            }
+        }
+    },
+    "observationalData": {
+        "distance": {
+            "value": 0,
+            "unit": "pc"
+        },
+        "properMotion": {
+            "ra": {
+                "value": 0,
+                "unit": "mas/year"
+            },
+            "dec": {
+                "value": 0,
+                "unit": "mas/year"
+            }
+        },
+        "radialVelocity": {
+            "value": 0,
+            "unit": "km/s"
+        },
+        "parallax": {
+            "value": "noValue",
+            "unit": "mas"
+        }
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "solar physics",
+            "stellar evolution",
+            "space weather",
+            "climate science",
+            "nuclear fusion"
+        ],
+        "publications": "countless",
+        "ongoingStudies": [
+            "solar dynamics",
+            "coronal heating",
+            "solar wind",
+            "magnetic field evolution",
+            "solar-terrestrial relations"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "central to many ancient civilizations and religions",
+        "scientificDiscoveries": [
+            "heliocentrism",
+            "nuclear fusion",
+            "solar spectrum",
+            "solar wind",
+            "solar flares"
+        ],
+        "namingHistory": "Known as 'Sun' in English, 'Sol' in Latin, 'Helios' in Greek"
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:29:57.772381"
+    }
+}

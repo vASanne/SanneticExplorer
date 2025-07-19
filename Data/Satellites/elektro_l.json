@@ -1,0 +1,112 @@
+{
+    "name": "Elektro-L",
+    "type": "Satellite",
+    "mission": {
+        "name": "noValue",
+        "agency": "noValue",
+        "launchDate": "noValue",
+        "launchSite": "noValue",
+        "launchVehicle": "noValue",
+        "status": "noValue"
+    },
+    "specifications": {
+        "mass": "noValue",
+        "dimensions": "noValue",
+        "power": "noValue",
+        "propulsion": "noValue"
+    },
+    "orbit": {
+        "type": "noValue",
+        "altitude": "noValue",
+        "inclination": "noValue",
+        "period": "noValue"
+    },
+    "payload": [],
+    "groundStations": [],
+    "images": [],
+    "description": "noValue",
+    "references": [],
+    "lastUpdated": "2025-06-18T08:33:01.172178",
+    "dataSources": {
+        "celestrak": [
+            {
+                "OBJECT_NAME": "ELEKTRO-L 1 (GOMS 2)",
+                "OBJECT_ID": "2011-001A",
+                "EPOCH": "2025-06-16T22:56:38.704128",
+                "MEAN_MOTION": 1.00248128,
+                "ECCENTRICITY": 0.0004928,
+                "INCLINATION": 8.8532,
+                "RA_OF_ASC_NODE": 58.1484,
+                "ARG_OF_PERICENTER": 30.4862,
+                "MEAN_ANOMALY": 141.7957,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 37344,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 5282,
+                "BSTAR": 0,
+                "MEAN_MOTION_DOT": -1.51e-06,
+                "MEAN_MOTION_DDOT": 0
+            },
+            {
+                "OBJECT_NAME": "ELEKTRO-L 2",
+                "OBJECT_ID": "2015-074A",
+                "EPOCH": "2025-06-18T01:52:38.526816",
+                "MEAN_MOTION": 1.00272078,
+                "ECCENTRICITY": 9.68e-05,
+                "INCLINATION": 5.7736,
+                "RA_OF_ASC_NODE": 75.0258,
+                "ARG_OF_PERICENTER": 208.652,
+                "MEAN_ANOMALY": 356.5725,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 41105,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 3486,
+                "BSTAR": 0,
+                "MEAN_MOTION_DOT": -1.07e-06,
+                "MEAN_MOTION_DDOT": 0
+            },
+            {
+                "OBJECT_NAME": "ELEKTRO-L 3",
+                "OBJECT_ID": "2019-095A",
+                "EPOCH": "2025-06-17T20:10:45.598656",
+                "MEAN_MOTION": 1.00271058,
+                "ECCENTRICITY": 5.98e-05,
+                "INCLINATION": 0.0718,
+                "RA_OF_ASC_NODE": 165.6125,
+                "ARG_OF_PERICENTER": 320.0062,
+                "MEAN_ANOMALY": 159.465,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 44903,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 2005,
+                "BSTAR": 0,
+                "MEAN_MOTION_DOT": -8.6e-07,
+                "MEAN_MOTION_DDOT": 0
+            },
+            {
+                "OBJECT_NAME": "ELEKTRO-L 4",
+                "OBJECT_ID": "2023-016A",
+                "EPOCH": "2025-06-17T19:11:51.582048",
+                "MEAN_MOTION": 1.00273531,
+                "ECCENTRICITY": 8.29e-05,
+                "INCLINATION": 0.0891,
+                "RA_OF_ASC_NODE": 93.0723,
+                "ARG_OF_PERICENTER": 75.8686,
+                "MEAN_ANOMALY": 191.0645,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 55506,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 867,
+                "BSTAR": 0,
+                "MEAN_MOTION_DOT": -4.7e-07,
+                "MEAN_MOTION_DDOT": 0
+            }
+        ],
+        "n2yo": "noValue",
+        "spaceTrack": "noValue"
+    }
+}

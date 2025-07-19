@@ -1,0 +1,55 @@
+{
+    "name": "TerraSAR-X",
+    "type": "Satellite",
+    "mission": {
+        "name": "noValue",
+        "agency": "noValue",
+        "launchDate": "noValue",
+        "launchSite": "noValue",
+        "launchVehicle": "noValue",
+        "status": "noValue"
+    },
+    "specifications": {
+        "mass": "noValue",
+        "dimensions": "noValue",
+        "power": "noValue",
+        "propulsion": "noValue"
+    },
+    "orbit": {
+        "type": "noValue",
+        "altitude": "noValue",
+        "inclination": "noValue",
+        "period": "noValue"
+    },
+    "payload": [],
+    "groundStations": [],
+    "images": [],
+    "description": "<p class=\"mw-empty-elt\">\n</p>\n\n<p><b>TerraSAR-X</b> is an imaging radar Earth observation satellite, a joint venture being carried out under a public-private-partnership between the German Aerospace Center (DLR) and EADS Astrium. The exclusive commercial exploitation rights are held by the geo-information service provider Astrium. TerraSAR-X was launched on 15 June 2007 and has been in operational service since January 2008. With its twin satellite TanDEM-X, launched 21 June 2010, TerraSAR-X acquires the data basis for the WorldDEM, the worldwide and homogeneous DEM available from 2014.\n</p>\n\n",
+    "references": [],
+    "lastUpdated": "2025-06-18T08:30:15.904141",
+    "dataSources": {
+        "celestrak": [
+            {
+                "OBJECT_NAME": "TERRASAR-X",
+                "OBJECT_ID": "2007-026A",
+                "EPOCH": "2025-06-16T14:56:50.815968",
+                "MEAN_MOTION": 15.19148043,
+                "ECCENTRICITY": 0.0001655,
+                "INCLINATION": 97.4455,
+                "RA_OF_ASC_NODE": 175.5563,
+                "ARG_OF_PERICENTER": 87.4533,
+                "MEAN_ANOMALY": 272.6891,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 31698,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 99772,
+                "BSTAR": 5.1862e-05,
+                "MEAN_MOTION_DOT": 1.022e-05,
+                "MEAN_MOTION_DDOT": 0
+            }
+        ],
+        "n2yo": "noValue",
+        "spaceTrack": "noValue"
+    }
+}

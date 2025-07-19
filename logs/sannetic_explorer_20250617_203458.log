@@ -1,0 +1,62 @@
+2025-06-17 20:34:58 | INFO     | main                 | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203458.log
+2025-06-17 20:34:58 | INFO     | main                 | section_start   | 
+============================================================
+2025-06-17 20:34:58 | INFO     | main                 | section_start   | 🚀 Starting: Critical Satellite Update
+2025-06-17 20:34:58 | INFO     | main                 | section_start   | ============================================================
+2025-06-17 20:34:58 | INFO     | main                 | info            | Updating only the most critical satellites for real-time tracking
+2025-06-17 20:34:58 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203458.log
+2025-06-17 20:34:58 | INFO     | critical_loader      | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203458.log
+2025-06-17 20:34:58 | INFO     | critical_loader      | info            | Found 5/5 critical satellites
+2025-06-17 20:34:58 | INFO     | main                 | info            | Updating 5 critical satellites
+2025-06-17 20:34:58 | INFO     | critical_updater     | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203458.log
+2025-06-17 20:34:58 | INFO     | critical_updater     | section_start   | 
+============================================================
+2025-06-17 20:34:58 | INFO     | critical_updater     | section_start   | 🚀 Starting: Critical Update (5 satellites)
+2025-06-17 20:34:58 | INFO     | critical_updater     | section_start   | ============================================================
+2025-06-17 20:34:58 | INFO     | api_manager          | section_start   | 
+============================================================
+2025-06-17 20:34:58 | INFO     | api_manager          | section_start   | 🚀 Starting: Optimized Data Fetching (5 satellites)
+2025-06-17 20:34:58 | INFO     | api_manager          | section_start   | ============================================================
+2025-06-17 20:34:58 | INFO     | api_manager          | info            | Priority 1: Fetching ALL active satellites from Celestrak...
+2025-06-17 20:34:58 | INFO     | api_manager          | info            | Using cached Celestrak data (11,790+ satellites)
+2025-06-17 20:34:58 | INFO     | api_manager          | info            | Priority 2: Fetching Wikipedia data in batches...
+2025-06-17 20:34:58 | INFO     | api_manager          | info            | Priority 3: Fetching Space-Track data for 2 satellites...
+2025-06-17 20:34:58 | INFO     | api_manager          | info            | Priority 4: Fetching N2YO data for top 5 priority satellites...
+2025-06-17 20:35:19 | ERROR    | api_manager          | api_call        | API N2YO: satellite/39079 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/39079/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:35:40 | ERROR    | api_manager          | api_call        | API N2YO: satellite/44714 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/44714/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         | 
+📊 Data Fetching Results
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         |   Total Satellites: 5
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         |   Successfully Processed: 2
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         |   Success Rate: 40.0%
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         |   API Calls Made: ~11 (vs 120+ individual calls)
+2025-06-17 20:35:40 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | api_manager          | section_end     | 📋 Optimized Data Fetching: ✅ COMPLETED
+2025-06-17 20:35:40 | INFO     | critical_updater     | progress        | Progress: [████░░░░░░░░░░░░░░░░] 1/5 (20.0%) Updated: international_space_station.json
+2025-06-17 20:35:40 | INFO     | critical_updater     | progress        | Progress: [████████░░░░░░░░░░░░] 2/5 (40.0%) Updated: hubble.json
+2025-06-17 20:35:40 | INFO     | critical_updater     | progress        | Progress: [████████████░░░░░░░░] 3/5 (60.0%) Updated: starlink.json
+2025-06-17 20:35:40 | INFO     | critical_updater     | progress        | Progress: [████████████████░░░░] 4/5 (80.0%) Updated: gps.json
+2025-06-17 20:35:40 | INFO     | critical_updater     | progress        | Progress: [████████████████████] 5/5 (100.0%) Updated: aqua_terra.json
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         | 
+📊 Critical Update Results
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         |   Total Processed: 5
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         |   Successfully Updated: 5
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         |   Errors: 0
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         |   Success Rate: 100.0%
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         |   Update Type: CRITICAL (High Priority)
+2025-06-17 20:35:40 | INFO     | critical_updater     | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | critical_updater     | section_end     | 📋 Critical Update: ✅ COMPLETED
+2025-06-17 20:35:40 | INFO     | main                 | summary         | 
+📊 Critical Update API Usage
+2025-06-17 20:35:40 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   Celestrak Utilization: 0.0%
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   N2YO Utilization: 0.0%
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   Wikipedia Utilization: 0.0%
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   Total API Calls: < 10 (minimal impact)
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   Update Duration: < 2 minutes
+2025-06-17 20:35:40 | INFO     | main                 | summary         |   Next Critical Update: In 6 hours
+2025-06-17 20:35:40 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:35:40 | INFO     | main                 | section_end     | 📋 Critical Satellite Update: ✅ COMPLETED
+2025-06-17 20:35:40 | INFO     | main                 | info            | 🚀 Critical satellites updated successfully!

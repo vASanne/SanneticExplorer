@@ -1,0 +1,87 @@
+{
+    "name": "Venus",
+    "type": "terrestrial planet",
+    "mass": {
+        "value": 4.867e+24,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 12104,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "value": 462,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 0.723,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 224.7,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": -243,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 0,
+        "names": [],
+        "details": []
+    },
+    "atmosphere": {
+        "composition": {
+            "carbonDioxide": "96.5%",
+            "nitrogen": "3.5%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": 9200000.0,
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 8.87,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": false,
+        "description": "noValue"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 0.723,
+            "unit": "AU"
+        },
+        "eccentricity": 0.0067,
+        "inclination": {
+            "value": 3.3947,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 76.68,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 54.884,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 50.115,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 35.02,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Mercury",
+            "Earth"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:28:35.361293"
+    }
+}

@@ -1,0 +1,53 @@
+# Global code owners - all files require review
+* @daniel-dev
+
+# Backend specific files
+/sannetic_explorer/ @daniel-dev
+/backend/ @daniel-dev
+*.py @daniel-dev
+requirements*.txt @daniel-dev
+pyproject.toml @daniel-dev
+setup.py @daniel-dev
+
+# Frontend specific files
+/frontend/ @daniel-dev
+*.svelte @daniel-dev
+*.ts @daniel-dev
+*.js @daniel-dev
+*.css @daniel-dev
+*.html @daniel-dev
+frontend/package.json @daniel-dev
+frontend/vite.config.ts @daniel-dev
+frontend/svelte.config.js @daniel-dev
+
+# E2E tests
+/e2e/ @daniel-dev
+*.spec.ts @daniel-dev
+playwright.config.ts @daniel-dev
+
+# Infrastructure and deployment
+Dockerfile* @daniel-dev
+docker-compose*.yml @daniel-dev
+.github/ @daniel-dev
+Makefile @daniel-dev
+*.yml @daniel-dev
+*.yaml @daniel-dev
+
+# Documentation
+*.md @daniel-dev
+docs/ @daniel-dev
+
+# Configuration files
+.env* @daniel-dev
+*.ini @daniel-dev
+*.toml @daniel-dev
+*.json @daniel-dev
+
+# Scripts
+scripts/ @daniel-dev
+*.sh @daniel-dev
+
+# Data and migrations
+Data/ @daniel-dev
+*.sql @daniel-dev
+migration_*.sql @daniel-dev 

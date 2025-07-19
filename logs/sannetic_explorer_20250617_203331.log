@@ -1,0 +1,15 @@
+2025-06-17 20:33:31 | INFO     | main                 | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203331.log
+2025-06-17 20:33:31 | INFO     | main                 | section_start   | 
+============================================================
+2025-06-17 20:33:31 | INFO     | main                 | section_start   | 🚀 Starting: Critical Satellite Update
+2025-06-17 20:33:31 | INFO     | main                 | section_start   | ============================================================
+2025-06-17 20:33:31 | INFO     | main                 | info            | Updating only the most critical satellites for real-time tracking
+2025-06-17 20:33:31 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203331.log
+2025-06-17 20:33:31 | INFO     | critical_loader      | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_203331.log
+2025-06-17 20:33:31 | WARNING  | critical_loader      | warning         | Critical satellite 'ISS (ZARYA)' not found in index
+2025-06-17 20:33:31 | WARNING  | critical_loader      | warning         | Critical satellite 'HUBBLE SPACE TELESCOPE' not found in index
+2025-06-17 20:33:31 | WARNING  | critical_loader      | warning         | Critical satellite 'STARLINK-1007' not found in index
+2025-06-17 20:33:31 | WARNING  | critical_loader      | warning         | Critical satellite 'GPS BIIR-2  (PRN 13)' not found in index
+2025-06-17 20:33:31 | WARNING  | critical_loader      | warning         | Critical satellite 'TERRA' not found in index
+2025-06-17 20:33:31 | INFO     | critical_loader      | info            | Found 0/5 critical satellites
+2025-06-17 20:33:31 | ERROR    | main                 | error           | No critical satellites found to update!

@@ -1,0 +1,11 @@
+2025-06-17 23:10:37 | INFO     | __main__             | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_231037.log
+2025-06-17 23:10:37 | WARNING  | __main__             | warning         | ⚠️ OpenAI API key not found. AI features will be disabled.
+2025-06-17 23:10:37 | INFO     | __main__             | info            | 💡 Set OPENAI_API_KEY environment variable to enable AI assistance
+2025-06-17 23:10:37 | INFO     | __main__             | info            | 🤖 Testing Sannetic Explorer AI Assistant
+2025-06-17 23:10:37 | WARNING  | __main__             | warning         | ⚠️ ChatGPT API not available
+2025-06-17 23:10:37 | INFO     | __main__             | info            | 💡 Set OPENAI_API_KEY to enable AI features
+2025-06-17 23:10:37 | INFO     | __main__             | info            | 🔧 Fallback analysis confidence: 70.0%
+2025-06-17 23:10:37 | INFO     | __main__             | info            | 💡 Pattern-based suggestions:
+2025-06-17 23:10:37 | INFO     | __main__             | info            |    • Add null checks before accessing object attributes
+2025-06-17 23:10:37 | INFO     | __main__             | info            |    • Validate data structure before processing
+2025-06-17 23:10:37 | INFO     | __main__             | info            |    • Check API response for empty/null data

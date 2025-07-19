@@ -1,0 +1,17 @@
+# Sannetic Explorer Automated Update Schedule
+# Format: minute hour day_of_month month day_of_week user command
+
+# Critical updates every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+0 */6 * * * root cd /app && make update-critical >> /var/log/sannetic-cron.log 2>&1
+
+# Standard updates every 12 hours (02:00, 14:00 UTC)
+0 2,14 * * * root cd /app && make update-optimized >> /var/log/sannetic-cron.log 2>&1
+
+# Full system update daily at 01:00 UTC
+0 1 * * * root cd /app && make update-full >> /var/log/sannetic-cron.log 2>&1
+
+# Health check every hour
+0 * * * * root cd /app && make status >> /var/log/sannetic-health.log 2>&1
+
+# Log rotation weekly on Sunday at 03:00 UTC
+0 3 * * 0 root cd /app && find logs/ -name "*.log" -mtime +7 -delete >> /var/log/sannetic-cron.log 2>&1

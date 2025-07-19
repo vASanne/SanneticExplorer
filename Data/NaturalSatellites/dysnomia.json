@@ -1,0 +1,178 @@
+{
+    "name": "Dysnomia",
+    "type": "natural satellite",
+    "parentBody": "Eris",
+    "discovery": {
+        "date": "2005-09-10",
+        "discoverer": "Michael E. Brown, Chad Trujillo, David Rabinowitz",
+        "method": "telescopic observation"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": 1e+19,
+            "unit": "kg"
+        },
+        "radius": {
+            "value": 342,
+            "unit": "km"
+        },
+        "density": {
+            "value": 1500,
+            "unit": "kg/m³"
+        },
+        "surfaceGravity": {
+            "value": 0.057,
+            "unit": "m/s²"
+        },
+        "escapeVelocity": {
+            "value": 0.197,
+            "unit": "km/s"
+        },
+        "gravity": {
+            "value": "noValue",
+            "unit": "m/s²"
+        }
+    },
+    "orbitalParameters": {
+        "semiMajorAxis": {
+            "value": 37273,
+            "unit": "km"
+        },
+        "eccentricity": {
+            "value": 0.006,
+            "unit": "noValue"
+        },
+        "inclination": {
+            "value": 0.006,
+            "unit": "degrees"
+        },
+        "orbitalPeriod": {
+            "value": 15.774,
+            "unit": "days"
+        },
+        "rotationPeriod": {
+            "value": 15.774,
+            "unit": "days"
+        },
+        "orbitalSpeed": {
+            "value": 0.172,
+            "unit": "km/s"
+        }
+    },
+    "surface": {
+        "type": "icy",
+        "features": [
+            "craters",
+            "ridges",
+            "valleys",
+            "dark regions",
+            "bright regions"
+        ],
+        "albedo": {
+            "value": 0.96,
+            "unit": "noValue"
+        },
+        "cratering": {
+            "density": {
+                "value": "moderate",
+                "unit": "noValue"
+            },
+            "age": {
+                "value": 4500000000.0,
+                "unit": "years"
+            }
+        },
+        "temperature": {
+            "min": {
+                "value": 30,
+                "unit": "K"
+            },
+            "max": {
+                "value": 55,
+                "unit": "K"
+            },
+            "average": {
+                "value": 42.5,
+                "unit": "K"
+            }
+        }
+    },
+    "atmosphere": {
+        "present": false,
+        "composition": [],
+        "pressure": {
+            "value": 0,
+            "unit": "Pa"
+        }
+    },
+    "magneticField": {
+        "present": false,
+        "strength": {
+            "value": 0,
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": 0,
+            "unit": "T·m³"
+        }
+    },
+    "internalStructure": {
+        "core": {
+            "radius": {
+                "value": 114,
+                "unit": "km"
+            },
+            "composition": "rocky silicate"
+        },
+        "mantle": {
+            "thickness": {
+                "value": 171,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        },
+        "crust": {
+            "thickness": {
+                "value": 57,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        }
+    },
+    "exploration": {
+        "missions": [],
+        "firstFlyby": "none",
+        "firstOrbiter": "none",
+        "firstLander": "none"
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "binary system formation",
+            "surface evolution",
+            "ice shell properties",
+            "geological history"
+        ],
+        "publications": "dozens",
+        "ongoingStudies": [
+            "surface features",
+            "internal structure",
+            "composition analysis",
+            "formation history"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "moderate",
+        "scientificDiscoveries": [
+            "first detailed images",
+            "surface features",
+            "internal structure",
+            "formation history"
+        ],
+        "namingHistory": "Named after Dysnomia, the daughter of Eris and the daemon of lawlessness in Greek mythology"
+    },
+    "metadata": {
+        "lastUpdated": "2024-01-01",
+        "dataQuality": "incomplete",
+        "sources": []
+    }
+}

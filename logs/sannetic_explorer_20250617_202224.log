@@ -1,0 +1,52 @@
+2025-06-17 20:22:24 | INFO     | main                 | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202224.log
+2025-06-17 20:22:24 | INFO     | main                 | section_start   | 
+============================================================
+2025-06-17 20:22:24 | INFO     | main                 | section_start   | 🚀 Starting: API Manager Test
+2025-06-17 20:22:24 | INFO     | main                 | section_start   | ============================================================
+2025-06-17 20:22:24 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202224.log
+2025-06-17 20:22:24 | INFO     | api_manager          | section_start   | 
+============================================================
+2025-06-17 20:22:24 | INFO     | api_manager          | section_start   | 🚀 Starting: Optimized Data Fetching (7 satellites)
+2025-06-17 20:22:24 | INFO     | api_manager          | section_start   | ============================================================
+2025-06-17 20:22:24 | INFO     | api_manager          | info            | Priority 1: Fetching ALL active satellites from Celestrak...
+2025-06-17 20:22:24 | INFO     | api_manager          | info            | Using cached Celestrak data (11,790+ satellites)
+2025-06-17 20:22:24 | INFO     | api_manager          | info            | Priority 2: Fetching Wikipedia data in batches...
+2025-06-17 20:22:30 | INFO     | api_manager          | api_call        | API Wikipedia: batch_1 → Success (0 articles)
+2025-06-17 20:22:30 | INFO     | api_manager          | info            | Priority 3: Fetching Space-Track data for 6 satellites...
+2025-06-17 20:23:11 | INFO     | api_manager          | api_call        | API Space-Track: batch_1 → Success (6 satellites)
+2025-06-17 20:23:11 | INFO     | api_manager          | info            | Priority 4: Fetching N2YO data for top 5 priority satellites...
+2025-06-17 20:23:32 | ERROR    | api_manager          | api_call        | API N2YO: satellite/25544 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/25544/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:23:52 | ERROR    | api_manager          | api_call        | API N2YO: satellite/39079 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/39079/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:24:13 | ERROR    | api_manager          | api_call        | API N2YO: satellite/25994 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/25994/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:24:33 | ERROR    | api_manager          | api_call        | API N2YO: satellite/27424 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/27424/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         | 
+📊 Data Fetching Results
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         |   Total Satellites: 7
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         |   Successfully Processed: 6
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         |   Success Rate: 85.7%
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         |   API Calls Made: ~11 (vs 120+ individual calls)
+2025-06-17 20:24:33 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | api_manager          | section_end     | 📋 Optimized Data Fetching: ✅ COMPLETED
+2025-06-17 20:24:33 | INFO     | main                 | summary         | 
+📊 Results by Satellite
+2025-06-17 20:24:33 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   ISS (ZARYA): 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   STARLINK-1007: 0/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   HUBBLE SPACE TELESCOPE: 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   TERRA: 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   AQUA: 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   NOAA 18: 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   GPS BIIR-2  (PRN 13): 2/4 sources
+2025-06-17 20:24:33 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | main                 | summary         | 
+📊 API Usage Report
+2025-06-17 20:24:33 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   Cache Files: 3
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   Celestrak Calls: 0/300
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   Wikipedia Calls: 1/600
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   Space-Track Calls: 1/100
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   N2YO Calls: 0/200
+2025-06-17 20:24:33 | INFO     | main                 | summary         |   Estimated Savings: Estimated 80-90% reduction vs individual calls
+2025-06-17 20:24:33 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:24:33 | INFO     | main                 | section_end     | 📋 API Manager Test: ✅ COMPLETED

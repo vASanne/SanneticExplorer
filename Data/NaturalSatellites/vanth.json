@@ -1,0 +1,178 @@
+{
+    "name": "Vanth",
+    "type": "natural satellite",
+    "parentBody": "Orcus",
+    "discovery": {
+        "date": "2005-11-13",
+        "discoverer": "Michael E. Brown, Terry-Ann Suer",
+        "method": "telescopic observation"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": 3.75e+18,
+            "unit": "kg"
+        },
+        "radius": {
+            "value": 221,
+            "unit": "km"
+        },
+        "density": {
+            "value": 1000,
+            "unit": "kg/m³"
+        },
+        "surfaceGravity": {
+            "value": 0.051,
+            "unit": "m/s²"
+        },
+        "escapeVelocity": {
+            "value": 0.15,
+            "unit": "km/s"
+        },
+        "gravity": {
+            "value": "noValue",
+            "unit": "m/s²"
+        }
+    },
+    "orbitalParameters": {
+        "semiMajorAxis": {
+            "value": 8980,
+            "unit": "km"
+        },
+        "eccentricity": {
+            "value": 0.007,
+            "unit": "noValue"
+        },
+        "inclination": {
+            "value": 0.19,
+            "unit": "degrees"
+        },
+        "orbitalPeriod": {
+            "value": 9.539,
+            "unit": "days"
+        },
+        "rotationPeriod": {
+            "value": 9.539,
+            "unit": "days"
+        },
+        "orbitalSpeed": {
+            "value": 0.068,
+            "unit": "km/s"
+        }
+    },
+    "surface": {
+        "type": "icy",
+        "features": [
+            "craters",
+            "ridges",
+            "valleys",
+            "dark regions",
+            "bright regions"
+        ],
+        "albedo": {
+            "value": 0.8,
+            "unit": "noValue"
+        },
+        "cratering": {
+            "density": {
+                "value": "moderate",
+                "unit": "noValue"
+            },
+            "age": {
+                "value": 4500000000.0,
+                "unit": "years"
+            }
+        },
+        "temperature": {
+            "min": {
+                "value": 30,
+                "unit": "K"
+            },
+            "max": {
+                "value": 55,
+                "unit": "K"
+            },
+            "average": {
+                "value": 42.5,
+                "unit": "K"
+            }
+        }
+    },
+    "atmosphere": {
+        "present": false,
+        "composition": [],
+        "pressure": {
+            "value": 0,
+            "unit": "Pa"
+        }
+    },
+    "magneticField": {
+        "present": false,
+        "strength": {
+            "value": 0,
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": 0,
+            "unit": "T·m³"
+        }
+    },
+    "internalStructure": {
+        "core": {
+            "radius": {
+                "value": 74,
+                "unit": "km"
+            },
+            "composition": "rocky silicate"
+        },
+        "mantle": {
+            "thickness": {
+                "value": 111,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        },
+        "crust": {
+            "thickness": {
+                "value": 36,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        }
+    },
+    "exploration": {
+        "missions": [],
+        "firstFlyby": "none",
+        "firstOrbiter": "none",
+        "firstLander": "none"
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "binary system formation",
+            "surface evolution",
+            "ice shell properties",
+            "geological history"
+        ],
+        "publications": "dozens",
+        "ongoingStudies": [
+            "surface features",
+            "internal structure",
+            "composition analysis",
+            "formation history"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "moderate",
+        "scientificDiscoveries": [
+            "first detailed images",
+            "surface features",
+            "internal structure",
+            "formation history"
+        ],
+        "namingHistory": "Named after Vanth, a winged female demon of the underworld in Etruscan mythology"
+    },
+    "metadata": {
+        "lastUpdated": "2024-01-01",
+        "dataQuality": "incomplete",
+        "sources": []
+    }
+}

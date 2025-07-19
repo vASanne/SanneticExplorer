@@ -1,0 +1,235 @@
+{
+    "name": "Neptune",
+    "type": "ice giant",
+    "mass": {
+        "value": 1.024e+26,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 49244,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "value": -214,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 30.069,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 60190,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": 0.67,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 14,
+        "names": [
+            "Triton",
+            "Nereid",
+            "Proteus",
+            "Larissa",
+            "and 10 others"
+        ],
+        "details": [
+            {
+                "name": "Triton",
+                "mass": {
+                    "value": 2.14e+22,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 2706.8,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 354759,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 5.877,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 5.877,
+                    "unit": "days"
+                },
+                "eccentricity": 1.6e-05,
+                "inclination": {
+                    "value": 156.865,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 4.39,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Nereid",
+                "mass": {
+                    "value": 3.1e+19,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 340,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 5513400,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 360.136,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 11.52,
+                    "unit": "hours"
+                },
+                "eccentricity": 0.7507,
+                "inclination": {
+                    "value": 7.09,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 1.12,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Proteus",
+                "mass": {
+                    "value": 5e+19,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 420,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 117647,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 1.122,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 1.122,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0005,
+                "inclination": {
+                    "value": 0.026,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 7.63,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Larissa",
+                "mass": {
+                    "value": 4.9e+18,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 194,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 73548,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 0.555,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 0.555,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0014,
+                "inclination": {
+                    "value": 0.205,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 9.56,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Other moons",
+                "mass": "noValue",
+                "diameter": "noValue",
+                "distanceFromPlanet": "noValue",
+                "orbitalPeriod": "noValue",
+                "rotationPeriod": "noValue",
+                "eccentricity": "noValue",
+                "inclination": "noValue",
+                "orbitalSpeed": "noValue"
+            }
+        ]
+    },
+    "atmosphere": {
+        "composition": {
+            "hydrogen": "80%",
+            "helium": "19%",
+            "methane": "1%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 11.15,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": true,
+        "description": "Five main rings and four prominent ring arcs"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 30.069,
+            "unit": "AU"
+        },
+        "eccentricity": 0.0086,
+        "inclination": {
+            "value": 1.77,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 131.784,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 273.187,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 256.228,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 5.43,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Jupiter",
+            "Saturn",
+            "Uranus"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:29:17.462213"
+    }
+}

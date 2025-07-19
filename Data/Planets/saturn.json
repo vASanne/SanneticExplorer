@@ -1,0 +1,232 @@
+{
+    "name": "Saturn",
+    "type": "gas giant",
+    "mass": {
+        "value": 5.683e+26,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 116460,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "value": -140,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 9.537,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 10759,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": 0.45,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 146,
+        "names": [
+            "Titan",
+            "Enceladus",
+            "Mimas",
+            "Dione",
+            "and 142 others"
+        ],
+        "details": [
+            {
+                "name": "Titan",
+                "mass": {
+                    "value": 1.3452e+23,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 5150,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 1221870,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 15.945,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 15.945,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0288,
+                "inclination": {
+                    "value": 0.348,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 5.57,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Enceladus",
+                "mass": {
+                    "value": 1.08e+20,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 504.2,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 238020,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 1.37,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 1.37,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0047,
+                "inclination": {
+                    "value": 0.009,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 12.64,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Mimas",
+                "mass": {
+                    "value": 3.75e+19,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 396.4,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 185520,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 0.942,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 0.942,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0202,
+                "inclination": {
+                    "value": 1.574,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 14.32,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Dione",
+                "mass": {
+                    "value": 1.095e+21,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 1123.4,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 377400,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 2.737,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 2.737,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0022,
+                "inclination": {
+                    "value": 0.019,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 10.03,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Other moons",
+                "mass": "noValue",
+                "diameter": "noValue",
+                "distanceFromPlanet": "noValue",
+                "orbitalPeriod": "noValue",
+                "rotationPeriod": "noValue",
+                "eccentricity": "noValue",
+                "inclination": "noValue",
+                "orbitalSpeed": "noValue"
+            }
+        ]
+    },
+    "atmosphere": {
+        "composition": {
+            "hydrogen": "96%",
+            "helium": "3%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 10.44,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": true,
+        "description": "Complex ring system with seven main rings and numerous gaps"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 9.537,
+            "unit": "AU"
+        },
+        "eccentricity": 0.0565,
+        "inclination": {
+            "value": 2.485,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 113.665,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 339.392,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 317.02,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 9.68,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Jupiter"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:29:30.103497"
+    }
+}

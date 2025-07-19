@@ -1,0 +1,246 @@
+{
+    "name": "noValue",
+    "type": "noValue",
+    "parentBody": "noValue",
+    "discovery": {
+        "date": "noValue",
+        "discoverer": "noValue",
+        "method": "noValue"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": "noValue",
+            "unit": "kg"
+        },
+        "radius": {
+            "value": "noValue",
+            "unit": "km"
+        },
+        "density": {
+            "value": "noValue",
+            "unit": "kg/m\u00b3"
+        },
+        "surfaceGravity": {
+            "value": "noValue",
+            "unit": "m/s\u00b2"
+        },
+        "escapeVelocity": {
+            "value": "noValue",
+            "unit": "km/s"
+        },
+        "gravity": {
+            "value": "noValue",
+            "unit": "noValue"
+        }
+    },
+    "orbitalParameters": {
+        "semiMajorAxis": {
+            "value": "noValue",
+            "unit": "km"
+        },
+        "eccentricity": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "inclination": {
+            "value": "noValue",
+            "unit": "degrees"
+        },
+        "orbitalPeriod": {
+            "value": "noValue",
+            "unit": "days"
+        },
+        "rotationPeriod": {
+            "value": "noValue",
+            "unit": "days"
+        },
+        "orbitalSpeed": {
+            "value": "noValue",
+            "unit": "km/s"
+        }
+    },
+    "surface": {
+        "type": "noValue",
+        "features": [
+            "noValue"
+        ],
+        "albedo": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "cratering": {
+            "density": {
+                "value": "noValue",
+                "unit": "noValue"
+            },
+            "age": {
+                "value": "noValue",
+                "unit": "years"
+            }
+        },
+        "temperature": {
+            "min": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "max": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "average": {
+                "value": "noValue",
+                "unit": "K"
+            }
+        }
+    },
+    "atmosphere": {
+        "present": "noValue",
+        "composition": [
+            {
+                "element": "noValue",
+                "percentage": {
+                    "value": "noValue",
+                    "unit": "%"
+                }
+            }
+        ],
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "magneticField": {
+        "present": "noValue",
+        "strength": {
+            "value": "noValue",
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": "noValue",
+            "unit": "T\u00b7m\u00b3"
+        }
+    },
+    "internalStructure": {
+        "core": {
+            "radius": {
+                "value": "noValue",
+                "unit": "km"
+            },
+            "composition": "noValue"
+        },
+        "mantle": {
+            "thickness": {
+                "value": "noValue",
+                "unit": "km"
+            },
+            "composition": "noValue"
+        },
+        "crust": {
+            "thickness": {
+                "value": "noValue",
+                "unit": "km"
+            },
+            "composition": "noValue"
+        }
+    },
+    "exploration": {
+        "missions": [
+            {
+                "name": "noValue",
+                "agency": "noValue",
+                "launchDate": "noValue",
+                "arrivalDate": "noValue",
+                "status": "noValue"
+            }
+        ],
+        "firstFlyby": "noValue",
+        "firstOrbiter": "noValue",
+        "firstLander": "noValue",
+        "discoverer": "noValue",
+        "discoveryDate": "noValue",
+        "discoveryMethod": "noValue"
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "noValue"
+        ],
+        "publications": "noValue",
+        "ongoingStudies": [
+            "noValue"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "noValue",
+        "scientificDiscoveries": [
+            "noValue"
+        ],
+        "namingHistory": "noValue"
+    },
+    "jplMeta": {
+        "orbitMeta": {
+            "n_obs_used": "noValue",
+            "first_obs": "noValue",
+            "last_obs": "noValue",
+            "rms": "noValue",
+            "soln_date": "noValue",
+            "condition_code": "noValue",
+            "orbit_id": "noValue",
+            "producer": "noValue",
+            "data_arc": "noValue",
+            "epoch": "noValue",
+            "equinox": "noValue"
+        },
+        "orbitElements": [
+            {
+                "label": "noValue",
+                "name": "noValue",
+                "title": "noValue",
+                "value": "noValue",
+                "sigma": "noValue",
+                "units": "noValue"
+            }
+        ],
+        "objectMeta": {
+            "fullname": "noValue",
+            "spkid": "noValue",
+            "orbit_class": {
+                "name": "noValue",
+                "code": "noValue"
+            },
+            "pha": "noValue",
+            "neo": "noValue",
+            "kind": "noValue"
+        }
+    },
+    "planet": "noValue",
+    "radius": "noValue",
+    "unit": "noValue",
+    "description": "noValue",
+    "composition": {
+        "surface": "noValue",
+        "atmosphere": "noValue",
+        "interior": "noValue"
+    },
+    "orbit": {
+        "semiMajorAxis": "noValue",
+        "eccentricity": "noValue",
+        "inclination": "noValue",
+        "orbitalPeriod": "noValue",
+        "unit": "noValue"
+    },
+    "physical": {
+        "mass": "noValue",
+        "density": "noValue",
+        "surfaceGravity": "noValue",
+        "escapeVelocity": "noValue",
+        "unit": "noValue"
+    },
+    "images": [],
+    "references": [],
+    "metadata": {
+        "lastUpdated": "2025-06-17T20:27:59.229500",
+        "version": 2,
+        "dataQuality": "noValue",
+        "sources": []
+    }
+}

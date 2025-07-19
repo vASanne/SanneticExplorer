@@ -1,0 +1,81 @@
+{
+    "name": "TerraSAR-X",
+    "type": "Satellite",
+    "identification": {
+        "noradCatalogId": 31698,
+        "internationalDesignator": "noValue",
+        "objectName": "TERRASAR-X",
+        "objectType": "noValue"
+    },
+    "mission": {
+        "name": "TERRASAR-X",
+        "agency": "NASA",
+        "launchDate": "2025-06-16T14:56:50.815968",
+        "status": "Active"
+    },
+    "orbital": {
+        "epoch": "2025-06-16T14:56:50.815968",
+        "meanMotion": 15.19148043,
+        "eccentricity": 0.0001655,
+        "inclination": 97.4455,
+        "argumentOfPerigee": 87.4533,
+        "rightAscension": 175.5563,
+        "meanAnomaly": 272.6891,
+        "bstarDrag": 5.1862e-05,
+        "tle": {
+            "line1": "noValue",
+            "line2": "noValue"
+        }
+    },
+    "tracking": {
+        "currentPosition": "noValue",
+        "velocity": "noValue",
+        "nextPasses": "noValue"
+    },
+    "description": "<p class=\"mw-empty-elt\">\n</p>\n\n<p><b>TerraSAR-X</b> is an imaging radar Earth observation satellite, a joint venture being carried out under a public-private-partnership between the German Aerospace Center (DLR) and EADS Astrium. The exclusive commercial exploitation rights are held by the geo-information service provider Astrium. TerraSAR-X was launched on 15 June 2007 and has been in operational service since January 2008. With its twin satellite TanDEM-X, launched 21 June 2010, TerraSAR-X acquires the data basis for the WorldDEM, the worldwide and homogeneous DEM available from 2014.\n</p>",
+    "dataSources": {
+        "celestrak": {
+            "available": true,
+            "lastUpdate": "2025-06-17T20:25:55.463474",
+            "data": {
+                "OBJECT_NAME": "TERRASAR-X",
+                "OBJECT_ID": "2007-026A",
+                "EPOCH": "2025-06-16T14:56:50.815968",
+                "MEAN_MOTION": 15.19148043,
+                "ECCENTRICITY": 0.0001655,
+                "INCLINATION": 97.4455,
+                "RA_OF_ASC_NODE": 175.5563,
+                "ARG_OF_PERICENTER": 87.4533,
+                "MEAN_ANOMALY": 272.6891,
+                "EPHEMERIS_TYPE": 0,
+                "CLASSIFICATION_TYPE": "U",
+                "NORAD_CAT_ID": 31698,
+                "ELEMENT_SET_NO": 999,
+                "REV_AT_EPOCH": 99772,
+                "BSTAR": 5.1862e-05,
+                "MEAN_MOTION_DOT": 1.022e-05,
+                "MEAN_MOTION_DDOT": 0
+            }
+        },
+        "spaceTrack": {
+            "available": false,
+            "lastUpdate": null,
+            "data": null
+        },
+        "wikipedia": {
+            "available": true,
+            "lastUpdate": "2025-06-17T20:25:55.463482"
+        },
+        "n2yo": {
+            "available": false,
+            "lastUpdate": null,
+            "data": null
+        }
+    },
+    "metadata": {
+        "version": "2.0",
+        "lastUpdated": "2025-06-17T20:25:55.463483",
+        "dataQuality": "Medium",
+        "completeness": 55.0
+    }
+}

@@ -1,0 +1,86 @@
+2025-06-17 20:24:40 | INFO     | main                 | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202440.log
+2025-06-17 20:24:40 | INFO     | main                 | section_start   | 
+============================================================
+2025-06-17 20:24:40 | INFO     | main                 | section_start   | 🚀 Starting: Sannetic Explorer Optimized Data Update
+2025-06-17 20:24:40 | INFO     | main                 | section_start   | ============================================================
+2025-06-17 20:24:40 | INFO     | main                 | info            | Using intelligent batch processing to minimize API calls
+2025-06-17 20:24:40 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202440.log
+2025-06-17 20:24:40 | INFO     | main                 | info            | Found 29 satellites in index
+2025-06-17 20:24:40 | INFO     | main                 | info            | Prioritizing satellites for optimal API usage...
+2025-06-17 20:24:40 | INFO     | main                 | info            | Processing top 20 priority satellites
+2025-06-17 20:24:40 | INFO     | file_updater         | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202440.log
+2025-06-17 20:24:40 | INFO     | file_updater         | section_start   | 
+============================================================
+2025-06-17 20:24:40 | INFO     | file_updater         | section_start   | 🚀 Starting: Updating 20 Satellite Files
+2025-06-17 20:24:40 | INFO     | file_updater         | section_start   | ============================================================
+2025-06-17 20:24:40 | INFO     | api_manager          | section_start   | 
+============================================================
+2025-06-17 20:24:40 | INFO     | api_manager          | section_start   | 🚀 Starting: Optimized Data Fetching (20 satellites)
+2025-06-17 20:24:40 | INFO     | api_manager          | section_start   | ============================================================
+2025-06-17 20:24:40 | INFO     | api_manager          | info            | Priority 1: Fetching ALL active satellites from Celestrak...
+2025-06-17 20:24:40 | INFO     | api_manager          | info            | Using cached Celestrak data (11,790+ satellites)
+2025-06-17 20:24:40 | INFO     | api_manager          | info            | Priority 2: Fetching Wikipedia data in batches...
+2025-06-17 20:24:47 | INFO     | api_manager          | api_call        | API Wikipedia: batch_1 → Success (4 articles)
+2025-06-17 20:24:53 | INFO     | api_manager          | api_call        | API Wikipedia: batch_2 → Success (6 articles)
+2025-06-17 20:24:53 | INFO     | api_manager          | info            | Priority 3: Fetching Space-Track data for 14 satellites...
+2025-06-17 20:24:53 | INFO     | api_manager          | info            | Priority 4: Fetching N2YO data for top 5 priority satellites...
+2025-06-17 20:25:14 | ERROR    | api_manager          | api_call        | API N2YO: satellite/44714 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/44714/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:25:34 | ERROR    | api_manager          | api_call        | API N2YO: satellite/31698 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/31698/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:25:55 | ERROR    | api_manager          | api_call        | API N2YO: satellite/29155 → Failed 404 Client Error: Not Found for url: https://www.n2yo.com/rest/v1/satellite/positions/29155/41.702/-76.014/0/2?apiKey=GGW5PW-ERW9V4-XL3HVB-5IAA
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         | 
+📊 Data Fetching Results
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         |   Total Satellites: 20
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         |   Successfully Processed: 14
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         |   Success Rate: 70.0%
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         |   API Calls Made: ~11 (vs 120+ individual calls)
+2025-06-17 20:25:55 | INFO     | api_manager          | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | api_manager          | section_end     | 📋 Optimized Data Fetching: ✅ COMPLETED
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating GPS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [██░░░░░░░░░░░░░░░░░░] 2/20 (10.0%) Updated: starlink.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [███░░░░░░░░░░░░░░░░░] 3/20 (15.0%) Updated: terrasar_x.json
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating Aqua/Terra: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [█████░░░░░░░░░░░░░░░] 5/20 (25.0%) Updated: goes.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [██████░░░░░░░░░░░░░░] 6/20 (30.0%) Updated: landsat.json
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating Hubble: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [████████░░░░░░░░░░░░] 8/20 (40.0%) Updated: sentinel.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [█████████░░░░░░░░░░░] 9/20 (45.0%) Updated: spot.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [██████████░░░░░░░░░░] 10/20 (50.0%) Updated: meteosat.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [███████████░░░░░░░░░] 11/20 (55.0%) Updated: international_space_station.json
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating COSPAS-SARSAT: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [█████████████░░░░░░░] 13/20 (65.0%) Updated: galileo.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [██████████████░░░░░░] 14/20 (70.0%) Updated: glonass.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [███████████████░░░░░] 15/20 (75.0%) Updated: beidou.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [████████████████░░░░] 16/20 (80.0%) Updated: iridium.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [█████████████████░░░] 17/20 (85.0%) Updated: globalstar.json
+2025-06-17 20:25:55 | INFO     | file_updater         | progress        | Progress: [██████████████████░░] 18/20 (90.0%) Updated: inmarsat.json
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating E-GNSS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | file_updater         | error           | Error updating GMDSS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         | 
+📊 File Update Results
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         |   Total Processed: 20
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         |   Successfully Updated: 14
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         |   Errors: 6
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         |   Success Rate: 70.0%
+2025-06-17 20:25:55 | INFO     | file_updater         | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | file_updater         | section_end     | 📋 Updating Satellite Files: ❌ FAILED
+2025-06-17 20:25:55 | WARNING  | main                 | warning         | Encountered 6 errors:
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating GPS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating Aqua/Terra: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating Hubble: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating COSPAS-SARSAT: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating E-GNSS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | ERROR    | main                 | error           |   Error updating GMDSS: 'NoneType' object has no attribute 'get'
+2025-06-17 20:25:55 | INFO     | main                 | summary         | 
+📊 Final API Usage Report
+2025-06-17 20:25:55 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   Cache Files Created: 4
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   Celestrak Utilization: 0.0%
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   Wikipedia Utilization: 0.3%
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   Space-Track Utilization: 0.0%
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   N2YO Utilization: 0.0%
+2025-06-17 20:25:55 | INFO     | main                 | summary         |   Estimated API Savings: Estimated 80-90% reduction vs individual calls
+2025-06-17 20:25:55 | INFO     | main                 | summary         | ────────────────────────────────────────
+2025-06-17 20:25:55 | INFO     | main                 | section_end     | 📋 Sannetic Explorer Data Update: ❌ FAILED
+2025-06-17 20:25:55 | WARNING  | main                 | warning         | ⚠️ Data update completed with some errors. Check logs for details.

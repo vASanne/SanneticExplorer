@@ -1,0 +1,123 @@
+{
+    "satellites": [
+        {
+            "name": "GPS",
+            "filename": "gps.json"
+        },
+        {
+            "name": "Starlink",
+            "filename": "starlink.json"
+        },
+        {
+            "name": "TerraSAR-X",
+            "filename": "terrasar-x.json"
+        },
+        {
+            "name": "SPOT",
+            "filename": "spot.json"
+        },
+        {
+            "name": "Meteosat",
+            "filename": "meteosat.json"
+        },
+        {
+            "name": "Aqua/Terra",
+            "filename": "aqua_terra.json"
+        },
+        {
+            "name": "GOES",
+            "filename": "goes.json"
+        },
+        {
+            "name": "Landsat",
+            "filename": "landsat.json"
+        },
+        {
+            "name": "Hubble",
+            "filename": "hubble.json"
+        },
+        {
+            "name": "International Space Station",
+            "filename": "iss.json"
+        },
+        {
+            "name": "Sentinel",
+            "filename": "sentinel.json"
+        },
+        {
+            "name": "COSPAS-SARSAT",
+            "filename": "cospas_sarsat.json"
+        },
+        {
+            "name": "Galileo",
+            "filename": "galileo.json"
+        },
+        {
+            "name": "GLONASS",
+            "filename": "glonass.json"
+        },
+        {
+            "name": "BeiDou",
+            "filename": "beidou.json"
+        },
+        {
+            "name": "Iridium",
+            "filename": "iridium.json"
+        },
+        {
+            "name": "Globalstar",
+            "filename": "globalstar.json"
+        },
+        {
+            "name": "Inmarsat",
+            "filename": "inmarsat.json"
+        },
+        {
+            "name": "E-GNSS",
+            "filename": "e_gnss.json"
+        },
+        {
+            "name": "GMDSS",
+            "filename": "gmdss.json"
+        },
+        {
+            "name": "Amber Alert",
+            "filename": "amber_alert.json"
+        },
+        {
+            "name": "Tsunami Warning",
+            "filename": "tsunami_warning.json"
+        },
+        {
+            "name": "Fengyun",
+            "filename": "fengyun.json"
+        },
+        {
+            "name": "Elektro-L",
+            "filename": "elektro_l.json"
+        },
+        {
+            "name": "DMSP",
+            "filename": "dmsp.json"
+        },
+        {
+            "name": "Keyhole",
+            "filename": "keyhole.json"
+        },
+        {
+            "name": "Persona",
+            "filename": "persona.json"
+        },
+        {
+            "name": "Yaogan",
+            "filename": "yaogan.json"
+        },
+        {
+            "name": "Phobos",
+            "filename": "phobos.json"
+        }
+    ],
+    "statistics": {
+        "totalSatellites": 29
+    }
+} 

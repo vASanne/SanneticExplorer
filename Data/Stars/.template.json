@@ -1,0 +1,242 @@
+{
+    "name": "noValue",
+    "type": "noValue",
+    "discovery": {
+        "date": "noValue",
+        "discoverer": "noValue",
+        "method": "noValue"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": "noValue",
+            "unit": "M\u2609"
+        },
+        "radius": {
+            "value": "noValue",
+            "unit": "R\u2609"
+        },
+        "density": {
+            "value": "noValue",
+            "unit": "kg/m\u00b3"
+        },
+        "surfaceGravity": {
+            "value": "noValue",
+            "unit": "m/s\u00b2"
+        },
+        "escapeVelocity": {
+            "value": "noValue",
+            "unit": "km/s"
+        }
+    },
+    "stellarParameters": {
+        "spectralType": "noValue",
+        "luminosity": {
+            "value": "noValue",
+            "unit": "L\u2609"
+        },
+        "effectiveTemperature": {
+            "value": "noValue",
+            "unit": "K"
+        },
+        "colorIndex": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "absoluteMagnitude": {
+            "value": "noValue",
+            "unit": "mag"
+        },
+        "apparentMagnitude": {
+            "value": "noValue",
+            "unit": "mag"
+        }
+    },
+    "nuclearCharacteristics": {
+        "fusionType": "noValue",
+        "coreTemperature": {
+            "value": "noValue",
+            "unit": "K"
+        },
+        "corePressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        },
+        "coreDensity": {
+            "value": "noValue",
+            "unit": "kg/m\u00b3"
+        },
+        "nuclearReactions": [
+            "noValue"
+        ]
+    },
+    "magneticField": {
+        "strength": {
+            "value": "noValue",
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": "noValue",
+            "unit": "T\u00b7m\u00b3"
+        },
+        "tilt": {
+            "value": "noValue",
+            "unit": "degrees"
+        },
+        "activityCycle": {
+            "period": {
+                "value": "noValue",
+                "unit": "years"
+            },
+            "lastMaximum": "noValue",
+            "lastMinimum": "noValue"
+        }
+    },
+    "atmosphere": {
+        "composition": [
+            {
+                "element": "noValue",
+                "percentage": {
+                    "value": "noValue",
+                    "unit": "%"
+                }
+            }
+        ],
+        "chromosphere": {
+            "temperature": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "thickness": {
+                "value": "noValue",
+                "unit": "km"
+            }
+        },
+        "corona": {
+            "temperature": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "density": {
+                "value": "noValue",
+                "unit": "particles/m\u00b3"
+            }
+        }
+    },
+    "stellarEvolution": {
+        "age": {
+            "value": "noValue",
+            "unit": "years"
+        },
+        "evolutionaryStage": "noValue",
+        "expectedLifetime": {
+            "value": "noValue",
+            "unit": "years"
+        },
+        "nuclearFuel": {
+            "hydrogen": {
+                "percentage": {
+                    "value": "noValue",
+                    "unit": "%"
+                }
+            },
+            "helium": {
+                "percentage": {
+                    "value": "noValue",
+                    "unit": "%"
+                }
+            },
+            "heavierElements": {
+                "percentage": {
+                    "value": "noValue",
+                    "unit": "%"
+                }
+            }
+        }
+    },
+    "variability": {
+        "type": "noValue",
+        "period": {
+            "value": "noValue",
+            "unit": "days"
+        },
+        "amplitude": {
+            "value": "noValue",
+            "unit": "mag"
+        },
+        "pulsationModes": [
+            "noValue"
+        ]
+    },
+    "companions": {
+        "binarySystem": {
+            "isBinary": "noValue",
+            "companionType": "noValue",
+            "orbitalPeriod": {
+                "value": "noValue",
+                "unit": "days"
+            },
+            "separation": {
+                "value": "noValue",
+                "unit": "AU"
+            }
+        },
+        "planetarySystem": {
+            "confirmedPlanets": "noValue",
+            "habitableZone": {
+                "inner": {
+                    "value": "noValue",
+                    "unit": "AU"
+                },
+                "outer": {
+                    "value": "noValue",
+                    "unit": "AU"
+                }
+            }
+        }
+    },
+    "observationalData": {
+        "distance": {
+            "value": "noValue",
+            "unit": "pc"
+        },
+        "properMotion": {
+            "ra": {
+                "value": "noValue",
+                "unit": "mas/year"
+            },
+            "dec": {
+                "value": "noValue",
+                "unit": "mas/year"
+            }
+        },
+        "radialVelocity": {
+            "value": "noValue",
+            "unit": "km/s"
+        },
+        "parallax": {
+            "value": "noValue",
+            "unit": "mas"
+        }
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "noValue"
+        ],
+        "publications": "noValue",
+        "ongoingStudies": [
+            "noValue"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "noValue",
+        "scientificDiscoveries": [
+            "noValue"
+        ],
+        "namingHistory": "noValue"
+    },
+    "metadata": {
+        "lastUpdated": "2025-06-18T08:28:07.849291",
+        "version": 2,
+        "lastEnriched": "noValue"
+    }
+}

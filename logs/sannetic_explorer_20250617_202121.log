@@ -1,0 +1,24 @@
+2025-06-17 20:21:21 | INFO     | test_logger          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_202121.log
+2025-06-17 20:21:21 | INFO     | test_logger          | section_start   | 
+============================================================
+2025-06-17 20:21:21 | INFO     | test_logger          | section_start   | 🚀 Starting: Testing Logging System
+2025-06-17 20:21:21 | INFO     | test_logger          | section_start   | ============================================================
+2025-06-17 20:21:21 | INFO     | test_logger          | info            | This is an info message
+2025-06-17 20:21:21 | WARNING  | test_logger          | warning         | This is a warning message
+2025-06-17 20:21:21 | ERROR    | test_logger          | error           | This is an error message
+2025-06-17 20:21:21 | INFO     | test_logger          | api_call        | API Celestrak: /gp.php?GROUP=active → Success (11,790 satellites)
+2025-06-17 20:21:21 | ERROR    | test_logger          | api_call        | API N2YO: /satellite/25544 → Failed 404 Not Found
+2025-06-17 20:21:21 | INFO     | test_logger          | progress        | Progress: [████░░░░░░░░░░░░░░░░] 1/5 (20.0%) Processing satellite 1
+2025-06-17 20:21:21 | INFO     | test_logger          | progress        | Progress: [████████░░░░░░░░░░░░] 2/5 (40.0%) Processing satellite 2
+2025-06-17 20:21:21 | INFO     | test_logger          | progress        | Progress: [████████████░░░░░░░░] 3/5 (60.0%) Processing satellite 3
+2025-06-17 20:21:21 | INFO     | test_logger          | progress        | Progress: [████████████████░░░░] 4/5 (80.0%) Processing satellite 4
+2025-06-17 20:21:21 | INFO     | test_logger          | progress        | Progress: [████████████████████] 5/5 (100.0%) Processing satellite 5
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         | 
+📊 Test Results
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         | ────────────────────────────────────────
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         |   Total Tests: 5
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         |   Passed: 4
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         |   Failed: 1
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         |   Success Rate: 80%
+2025-06-17 20:21:21 | INFO     | test_logger          | summary         | ────────────────────────────────────────
+2025-06-17 20:21:21 | INFO     | test_logger          | section_end     | 📋 Testing Logging System: ✅ COMPLETED

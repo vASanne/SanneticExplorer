@@ -1,0 +1,45 @@
+2025-06-17 23:09:03 | INFO     | __main__             | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_230903.log
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🔍 Starting AI System Health Check...
+2025-06-17 23:09:03 | ERROR    | __main__             | error           | Error checking AI availability: No module named 'scripts'
+2025-06-17 23:09:03 | INFO     | __main__             | info            | Testing logger component...
+2025-06-17 23:09:03 | INFO     | orbital_propagator   | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_230903.log
+2025-06-17 23:09:03 | INFO     | __main__             | info            | ✅ Orbital propagator available
+2025-06-17 23:09:03 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_230903.log
+2025-06-17 23:09:03 | INFO     | __main__             | info            | ✅ API manager available
+2025-06-17 23:09:03 | INFO     | delta_update_manager | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_230903.log
+2025-06-17 23:09:03 | INFO     | __main__             | info            | ✅ Delta manager available
+2025-06-17 23:09:03 | ERROR    | __main__             | error           | AI assistant error: No module named 'scripts'
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🤖 AI Health Check Complete
+2025-06-17 23:09:03 | INFO     | __main__             | info            | ============================================================
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🔴 Overall System Health: 60.0%
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🤖 AI Available: ❌ No
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🔧 Component Health:
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ✅ Logger
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ✅ Orbital Propagator
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ✅ Api Manager
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ✅ Delta Manager
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ❌ Ai Assistant
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    📊 Component Score: 80.0%
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 📊 Data Health:
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    📁 Satellites Directory: ✅
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    📋 Index File: ✅
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    🛰️ Total Satellites: 29
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ✅ Valid Sample Files: 5/5
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    📊 Data Score: 100.0%
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 🔑 API Credentials:
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ❌ OPENAI API KEY
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ❌ N2YO API KEY
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ❌ SPACE TRACK USERNAME
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ❌ SPACE TRACK PASSWORD
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    📊 Credentials Score: 0.0%
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 
+2025-06-17 23:09:03 | INFO     | __main__             | info            | 💡 Recommendations:
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    🤖 Set OPENAI_API_KEY to enable full AI features
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    🔧 Some system components have issues - check error logs
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    🔑 Set N2YO_API_KEY for real-time satellite tracking
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    🔑 Set Space-Track credentials for TLE data access
+2025-06-17 23:09:03 | INFO     | __main__             | info            |    ⚠️ System health needs attention
+2025-06-17 23:09:03 | INFO     | __main__             | info            | ============================================================

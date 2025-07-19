@@ -1,0 +1,49 @@
+{
+    "name": "Mercury",
+    "type": "terrestrial planet",
+    "mass": {
+        "value": 3.285e+23,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 4879,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "min": -180,
+        "max": 430,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 0.387,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 88,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": 58.6,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 0,
+        "names": [],
+        "details": []
+    },
+    "atmosphere": {
+        "composition": "noValue",
+        "pressure": "noValue"
+    },
+    "gravity": {
+        "value": 3.7,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": false,
+        "description": "noValue"
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:28:45.417018"
+    }
+}

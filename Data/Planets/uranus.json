@@ -1,0 +1,268 @@
+{
+    "name": "Uranus",
+    "type": "ice giant",
+    "mass": {
+        "value": 8.681e+25,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 50724,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "value": -224,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 19.191,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 30687,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": -0.72,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 27,
+        "names": [
+            "Titania",
+            "Oberon",
+            "Umbriel",
+            "Ariel",
+            "Miranda",
+            "and 22 others"
+        ],
+        "details": [
+            {
+                "name": "Titania",
+                "mass": {
+                    "value": 3.4e+21,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 1576.8,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 435910,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 8.706,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 8.706,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0011,
+                "inclination": {
+                    "value": 0.34,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 3.64,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Oberon",
+                "mass": {
+                    "value": 3.1e+21,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 1522.8,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 583520,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 13.463,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 13.463,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0014,
+                "inclination": {
+                    "value": 0.058,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 3.15,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Umbriel",
+                "mass": {
+                    "value": 1.27e+21,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 1169.4,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 266000,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 4.144,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 4.144,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0039,
+                "inclination": {
+                    "value": 0.128,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 4.67,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Ariel",
+                "mass": {
+                    "value": 1.35e+21,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 1157.8,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 190900,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 2.52,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 2.52,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0012,
+                "inclination": {
+                    "value": 0.041,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 5.51,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Miranda",
+                "mass": {
+                    "value": 6.59e+19,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 471.6,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 129390,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 1.413,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 1.413,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0013,
+                "inclination": {
+                    "value": 4.338,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 6.66,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Other moons",
+                "mass": "noValue",
+                "diameter": "noValue",
+                "distanceFromPlanet": "noValue",
+                "orbitalPeriod": "noValue",
+                "rotationPeriod": "noValue",
+                "eccentricity": "noValue",
+                "inclination": "noValue",
+                "orbitalSpeed": "noValue"
+            }
+        ]
+    },
+    "atmosphere": {
+        "composition": {
+            "hydrogen": "83%",
+            "helium": "15%",
+            "methane": "2%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 8.69,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": true,
+        "description": "13 faint rings, mostly composed of dark particles"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 19.191,
+            "unit": "AU"
+        },
+        "eccentricity": 0.046,
+        "inclination": {
+            "value": 0.773,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 74.006,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 96.998,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 142.2386,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 6.8,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Jupiter",
+            "Saturn",
+            "Neptune"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:29:04.318140"
+    }
+}

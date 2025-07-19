@@ -1,0 +1,158 @@
+{
+    "name": "Mars",
+    "type": "terrestrial planet",
+    "mass": {
+        "value": 6.39e+23,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 6779,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "min": -140,
+        "max": 20,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 1.524,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 687,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": 1.03,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 2,
+        "names": [
+            "Phobos",
+            "Deimos"
+        ],
+        "details": [
+            {
+                "name": "Phobos",
+                "mass": {
+                    "value": 1.0659e+16,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 22.2,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 9376,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 0.3189,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 0.3189,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0151,
+                "inclination": {
+                    "value": 1.093,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 2.138,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Deimos",
+                "mass": {
+                    "value": 1476200000000000.0,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 12.4,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 23463,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 1.2624,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 1.2624,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0002,
+                "inclination": {
+                    "value": 0.93,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 1.351,
+                    "unit": "km/s"
+                }
+            }
+        ]
+    },
+    "atmosphere": {
+        "composition": {
+            "carbonDioxide": "95%",
+            "nitrogen": "2.7%",
+            "argon": "1.6%",
+            "oxygen": "0.13%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": 600,
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 3.72,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": false,
+        "description": "noValue"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 1.524,
+            "unit": "AU"
+        },
+        "eccentricity": 0.0934,
+        "inclination": {
+            "value": 1.85,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 49.57854,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 286.4623,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 19.412,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 24.07,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Jupiter",
+            "Earth"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:29:43.359143"
+    }
+}

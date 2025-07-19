@@ -1,0 +1,26 @@
+requests>=2.31.0
+python-dotenv>=1.0.0
+jsonschema>=4.20.0
+pandas>=2.1.0
+numpy>=1.24.0
+astropy>=5.3.0  # For astronomical calculations
+ephem>=4.1.4    # For astronomical calculations
+openai>=1.0.0   # For AI-powered debugging and calculations
+flask>=2.0.0    # For web dashboard
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+sqlalchemy==2.0.23
+psycopg2-binary==2.9.9
+pydantic==2.5.0
+python-multipart==0.0.6
+redis==5.0.1
+
+# Development dependencies
+pre-commit>=3.6.0
+black>=23.12.0
+ruff>=0.1.6
+mypy>=1.8.0
+isort>=5.13.0
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+httpx>=0.24.0 

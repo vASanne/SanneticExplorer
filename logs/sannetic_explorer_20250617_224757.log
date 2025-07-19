@@ -1,0 +1,8 @@
+2025-06-17 22:47:57 | INFO     | __main__             | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_224757.log
+2025-06-17 22:47:57 | INFO     | __main__             | info            | 🛰️ Testing Orbital Propagation Engine
+2025-06-17 22:47:57 | INFO     | __main__             | info            | 📡 Loading Starlink data...
+2025-06-17 22:47:57 | INFO     | __main__             | info            | ✅ Starlink data loaded successfully
+2025-06-17 22:47:57 | INFO     | __main__             | info            | 📊 Propagation Report: {'status': 'available', 'can_propagate': True, 'tle_age_days': 0.48296606210648146, 'accuracy_estimate': 'excellent', 'is_fresh': True, 'max_recommended_age': 3, 'orbital_period_minutes': 95.59154269120687, 'next_update_recommended': True, 'orbit_type': 'LEO'}
+2025-06-17 22:47:57 | ERROR    | __main__             | error           | Error propagating position: incorrect TLE checksum at end of line
+2025-06-17 22:47:57 | ERROR    | __main__             | error           | Error predicting passes: incorrect TLE checksum at end of line
+2025-06-17 22:47:57 | INFO     | __main__             | info            | 🔭 Predicted passes over NYC: 0

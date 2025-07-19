@@ -1,0 +1,64 @@
+2025-06-17 22:59:07 | INFO     | orbital_propagator   | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_225907.log
+2025-06-17 22:59:07 | INFO     | ai_assistant         | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_225907.log
+2025-06-17 22:59:07 | WARNING  | ai_assistant         | warning         | ⚠️ OpenAI API key not found. AI features will be disabled.
+2025-06-17 22:59:07 | INFO     | ai_assistant         | info            | 💡 Set OPENAI_API_KEY environment variable to enable AI assistance
+2025-06-17 22:59:07 | INFO     | __main__             | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_225907.log
+2025-06-17 22:59:07 | INFO     | __main__             | info            | 🤖 Testing AI-Enhanced Delta Update Manager
+2025-06-17 22:59:07 | INFO     | api_manager          | _setup_handlers | Logging to file: logs/sannetic_explorer_20250617_225907.log
+2025-06-17 22:59:07 | INFO     | __main__             | info            | 🔧 AI Assistant disabled - using pattern-based fixes
+2025-06-17 22:59:07 | INFO     | __main__             | info            | 📊 Generating AI-enhanced delta report...
+2025-06-17 22:59:07 | INFO     | __main__             | info            | 🔍 AI-enhanced catalog analysis...
+2025-06-17 22:59:07 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:07 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:07 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📊 AI-Enhanced Delta Update Report:
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    Total satellites: 29
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    Propagation ready: 17
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    API savings: 58.6%
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    AI enabled: False
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 💡 AI-Enhanced Recommendations:
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    🔄 Low propagation coverage - recommend full TLE refresh
+2025-06-17 22:59:08 | INFO     | __main__             | info            |    🚨 12 satellites need immediate TLE updates
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 
+🧠 Testing AI-enhanced smart delta update...
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🧠 Starting AI-enhanced smart delta update...
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔍 AI-enhanced catalog analysis...
+2025-06-17 22:59:08 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:08 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:08 | ERROR    | orbital_propagator   | error           | Error generating propagation report: 'NoneType' object is not subscriptable
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🎯 Updating 12 high-priority satellites
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating GPS (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for GPS
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating Aqua/Terra (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Aqua/Terra
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating Hubble (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Hubble
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating International Space Station (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for International Space Station
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating COSPAS-SARSAT (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for COSPAS-SARSAT
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating E-GNSS (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for E-GNSS
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating GMDSS (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for GMDSS
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating Amber Alert (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Amber Alert
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating Tsunami Warning (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Tsunami Warning
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 🔄 Updating Keyhole (reason: no_tle_data)
+2025-06-17 22:59:08 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Keyhole
+2025-06-17 22:59:09 | INFO     | __main__             | info            | 🔄 Updating Persona (reason: no_tle_data)
+2025-06-17 22:59:09 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Persona
+2025-06-17 22:59:09 | INFO     | __main__             | info            | 🔄 Updating Phobos (reason: no_tle_data)
+2025-06-17 22:59:09 | INFO     | __main__             | info            | 📡 Fetching fresh TLE data for Phobos
+2025-06-17 22:59:09 | INFO     | __main__             | info            | ✅ AI-enhanced delta update complete:
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    🔄 TLE updates: 12
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    📡 API calls: 12
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    ⚡ Propagation coverage: 17/29
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    🤖 AI fixes applied: 0
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    🎯 Success rate: 100.0%
+2025-06-17 22:59:09 | INFO     | __main__             | info            | ✅ AI-Enhanced update results:
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    TLE updates: 12
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    API calls: 12
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    AI fixes applied: 0
+2025-06-17 22:59:09 | INFO     | __main__             | info            |    Success rate: 100.0%

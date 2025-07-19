@@ -1,0 +1,178 @@
+{
+    "name": "S/2015 (136472) 1",
+    "type": "natural satellite",
+    "parentBody": "Makemake",
+    "discovery": {
+        "date": "2015-04-27",
+        "discoverer": "Alex H. Parker, Marc W. Buie, Will M. Grundy, Keith S. Noll",
+        "method": "telescopic observation"
+    },
+    "physicalCharacteristics": {
+        "mass": {
+            "value": 1e+18,
+            "unit": "kg"
+        },
+        "radius": {
+            "value": 87.5,
+            "unit": "km"
+        },
+        "density": {
+            "value": 1000,
+            "unit": "kg/m³"
+        },
+        "surfaceGravity": {
+            "value": 0.017,
+            "unit": "m/s²"
+        },
+        "escapeVelocity": {
+            "value": 0.055,
+            "unit": "km/s"
+        },
+        "gravity": {
+            "value": "noValue",
+            "unit": "m/s²"
+        }
+    },
+    "orbitalParameters": {
+        "semiMajorAxis": {
+            "value": 21000,
+            "unit": "km"
+        },
+        "eccentricity": {
+            "value": 0.0,
+            "unit": "noValue"
+        },
+        "inclination": {
+            "value": 0.0,
+            "unit": "degrees"
+        },
+        "orbitalPeriod": {
+            "value": 12.4,
+            "unit": "days"
+        },
+        "rotationPeriod": {
+            "value": 12.4,
+            "unit": "days"
+        },
+        "orbitalSpeed": {
+            "value": 0.123,
+            "unit": "km/s"
+        }
+    },
+    "surface": {
+        "type": "icy",
+        "features": [
+            "craters",
+            "ridges",
+            "valleys",
+            "dark regions",
+            "bright regions"
+        ],
+        "albedo": {
+            "value": 0.8,
+            "unit": "noValue"
+        },
+        "cratering": {
+            "density": {
+                "value": "moderate",
+                "unit": "noValue"
+            },
+            "age": {
+                "value": 4500000000.0,
+                "unit": "years"
+            }
+        },
+        "temperature": {
+            "min": {
+                "value": 30,
+                "unit": "K"
+            },
+            "max": {
+                "value": 55,
+                "unit": "K"
+            },
+            "average": {
+                "value": 42.5,
+                "unit": "K"
+            }
+        }
+    },
+    "atmosphere": {
+        "present": false,
+        "composition": [],
+        "pressure": {
+            "value": 0,
+            "unit": "Pa"
+        }
+    },
+    "magneticField": {
+        "present": false,
+        "strength": {
+            "value": 0,
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": 0,
+            "unit": "T·m³"
+        }
+    },
+    "internalStructure": {
+        "core": {
+            "radius": {
+                "value": 29,
+                "unit": "km"
+            },
+            "composition": "rocky silicate"
+        },
+        "mantle": {
+            "thickness": {
+                "value": 44,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        },
+        "crust": {
+            "thickness": {
+                "value": 14.5,
+                "unit": "km"
+            },
+            "composition": "water ice"
+        }
+    },
+    "exploration": {
+        "missions": [],
+        "firstFlyby": "none",
+        "firstOrbiter": "none",
+        "firstLander": "none"
+    },
+    "scientificSignificance": {
+        "researchAreas": [
+            "binary system formation",
+            "surface evolution",
+            "ice shell properties",
+            "geological history"
+        ],
+        "publications": "dozens",
+        "ongoingStudies": [
+            "surface features",
+            "internal structure",
+            "composition analysis",
+            "formation history"
+        ]
+    },
+    "historicalSignificance": {
+        "culturalImpact": "moderate",
+        "scientificDiscoveries": [
+            "first detailed images",
+            "surface features",
+            "internal structure",
+            "formation history"
+        ],
+        "namingHistory": "Provisional designation S/2015 (136472) 1, awaiting official naming"
+    },
+    "metadata": {
+        "lastUpdated": "2024-01-01",
+        "dataQuality": "incomplete",
+        "sources": []
+    }
+}

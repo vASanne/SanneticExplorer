@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # Test Database
+  test-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: sannetic_explorer_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - test_pgdata:/var/lib/postgresql/data
+
+  # Test Redis
+  test-redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - test_redis_data:/data
+
+  # Test Backend
+  test-backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@test-db:5432/sannetic_explorer_test
+      REDIS_HOST: test-redis
+      REDIS_PORT: 6379
+      LOG_LEVEL: DEBUG
+      DEBUG_MODE: true
+    depends_on: 
+      test-db:
+        condition: service_healthy
+      test-redis:
+        condition: service_healthy
+    ports: 
+      - "8001:8000"  # Different port to avoid conflicts
+    volumes:
+      - ./Data:/app/Data:ro
+      - ./logs:/app/logs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # Test Frontend
+  test-frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      PUBLIC_API_URL: http://localhost:8001
+    depends_on: 
+      test-backend:
+        condition: service_healthy
+    ports: 
+      - "3001:3000"  # Different port to avoid conflicts
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/static:/app/static
+
+  # Test Worker
+  test-worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@test-db:5432/sannetic_explorer_test
+      REDIS_HOST: test-redis
+      REDIS_PORT: 6379
+      LOG_LEVEL: DEBUG
+    depends_on:
+      test-db:
+        condition: service_healthy
+      test-redis:
+        condition: service_healthy
+    volumes:
+      - ./Data:/data:rw
+      - ./logs:/var/log
+
+volumes:
+  test_pgdata:
+    driver: local
+  test_redis_data:
+    driver: local 

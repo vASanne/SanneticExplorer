@@ -1,0 +1,2329 @@
+{
+    "metadata": {
+        "lastUpdated": "2025-06-18T08:29:59.070333",
+        "directory": "Data/NaturalSatellites",
+        "totalObjects": 314
+    },
+    "objects": [
+        {
+            "name": "S/2021 J 2",
+            "filename": "s2021j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 134",
+            "filename": "s2004s134.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hi'iaka",
+            "filename": "hiiaka.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Puck",
+            "filename": "puck.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kalyke",
+            "filename": "kalyke.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 4",
+            "filename": "s2003j4.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Neso",
+            "filename": "neso.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 65",
+            "filename": "s2004s65.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Nereid",
+            "filename": "nereid.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Bebhionn",
+            "filename": "bebhionn.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Aoede",
+            "filename": "aoede.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 73",
+            "filename": "s2004s73.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 24",
+            "filename": "s2004s24.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 122",
+            "filename": "s2004s122.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Carme",
+            "filename": "carme.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Nix",
+            "filename": "nix.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 2",
+            "filename": "s2017j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Charon",
+            "filename": "charon.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 118",
+            "filename": "s2004s118.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Isonoe",
+            "filename": "isonoe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Cupid",
+            "filename": "cupid.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 49",
+            "filename": "s2004s49.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Orthosie",
+            "filename": "orthosie.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 138",
+            "filename": "s2004s138.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Enceladus",
+            "filename": "enceladus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 69",
+            "filename": "s2004s69.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Halimede",
+            "filename": "halimede.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 86",
+            "filename": "s2004s86.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hippocamp",
+            "filename": "hippocamp.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 90",
+            "filename": "s2004s90.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Skathi",
+            "filename": "skathi.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 28",
+            "filename": "s2004s28.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 12",
+            "filename": "s2003j12.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 53",
+            "filename": "s2004s53.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Aegir",
+            "filename": "aegir.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Triton",
+            "filename": "triton.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 102",
+            "filename": "s2004s102.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Prospero",
+            "filename": "prospero.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 12",
+            "filename": "s2004s12.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 114",
+            "filename": "s2004s114.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Naiad",
+            "filename": "naiad.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 143",
+            "filename": "s2004s143.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 45",
+            "filename": "s2004s45.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Pandora",
+            "filename": "pandora.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Albiorix",
+            "filename": "albiorix.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 142",
+            "filename": "s2004s142.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 44",
+            "filename": "s2004s44.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kiviuq",
+            "filename": "kiviuq.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 13",
+            "filename": "s2004s13.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 115",
+            "filename": "s2004s115.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Mimas",
+            "filename": "mimas.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 103",
+            "filename": "s2004s103.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Europa",
+            "filename": "europa.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 52",
+            "filename": "s2004s52.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kerberos",
+            "filename": "kerberos.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Aegaeon",
+            "filename": "aegaeon.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 91",
+            "filename": "s2004s91.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Callisto",
+            "filename": "callisto.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 68",
+            "filename": "s2004s68.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 9",
+            "filename": "s2003j9.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 7",
+            "filename": "s2004s7.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 87",
+            "filename": "s2004s87.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2015 (136472) 1",
+            "filename": "mk2.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 139",
+            "filename": "s2004s139.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 48",
+            "filename": "s2004s48.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 119",
+            "filename": "s2004s119.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 3",
+            "filename": "s2017j3.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Bianca",
+            "filename": "bianca.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Anthe",
+            "filename": "anthe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 123",
+            "filename": "s2004s123.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Pallene",
+            "filename": "pallene.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Cyllene",
+            "filename": "cyllene.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 72",
+            "filename": "s2004s72.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Larissa",
+            "filename": "larissa.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 5",
+            "filename": "s2003j5.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 64",
+            "filename": "s2004s64.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2010 J 1",
+            "filename": "s2010j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 135",
+            "filename": "s2004s135.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2021 J 3",
+            "filename": "s2021j3.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ganymede",
+            "filename": "ganymede.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ferdinand",
+            "filename": "ferdinand.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Phobos",
+            "filename": "phobos.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 80",
+            "filename": "s2004s80.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Thrymr",
+            "filename": "thrymr.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 79",
+            "filename": "s2004s79.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 96",
+            "filename": "s2004s96.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Moon",
+            "filename": "moon.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Namaka",
+            "filename": "namaka.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 128",
+            "filename": "s2004s128.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Leda",
+            "filename": "leda.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Megaclite",
+            "filename": "megaclite.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Perdita",
+            "filename": "perdita.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 55",
+            "filename": "s2004s55.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ijiraq",
+            "filename": "ijiraq.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hegemone",
+            "filename": "hegemone.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 104",
+            "filename": "s2004s104.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Miranda",
+            "filename": "miranda.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Chaldene",
+            "filename": "chaldene.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Pasiphae",
+            "filename": "pasiphae.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 112",
+            "filename": "s2004s112.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 8",
+            "filename": "s2017j8.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Despina",
+            "filename": "despina.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 43",
+            "filename": "s2004s43.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 145",
+            "filename": "s2004s145.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2021 J 4",
+            "filename": "s2021j4.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 132",
+            "filename": "s2004s132.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Setebos",
+            "filename": "setebos.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 63",
+            "filename": "s2004s63.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 2",
+            "filename": "s2003j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Bestla",
+            "filename": "bestla.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 75",
+            "filename": "s2004s75.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Daphnis",
+            "filename": "daphnis.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 124",
+            "filename": "s2004s124.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2011 J 2",
+            "filename": "s2011j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2018 J 1",
+            "filename": "s2018j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 18",
+            "filename": "s2003j18.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 59",
+            "filename": "s2004s59.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 108",
+            "filename": "s2004s108.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 4",
+            "filename": "s2017j4.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2022 J 1",
+            "filename": "s2022j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hydra",
+            "filename": "hydra.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Margaret",
+            "filename": "margaret.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Belinda",
+            "filename": "belinda.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Siarnaq",
+            "filename": "siarnaq.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Pan",
+            "filename": "pan.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 23",
+            "filename": "s2003j23.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 5",
+            "filename": "s2017j5.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 109",
+            "filename": "s2004s109.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Actaea",
+            "filename": "actaea.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 58",
+            "filename": "s2004s58.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Cressida",
+            "filename": "cressida.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 125",
+            "filename": "s2004s125.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 19",
+            "filename": "s2003j19.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 74",
+            "filename": "s2004s74.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Titan",
+            "filename": "titan.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 62",
+            "filename": "s2004s62.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 3",
+            "filename": "s2003j3.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Tarvos",
+            "filename": "tarvos.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Narvi",
+            "filename": "narvi.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Thelxinoe",
+            "filename": "thelxinoe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Laomedeia",
+            "filename": "laomedeia.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Carpo",
+            "filename": "carpo.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 133",
+            "filename": "s2004s133.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2021 J 5",
+            "filename": "s2021j5.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Surtur",
+            "filename": "surtur.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 42",
+            "filename": "s2004s42.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 144",
+            "filename": "s2004s144.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Jarnsaxa",
+            "filename": "jarnsaxa.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 9",
+            "filename": "s2017j9.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 113",
+            "filename": "s2004s113.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Vanth",
+            "filename": "vanth.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 105",
+            "filename": "s2004s105.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 54",
+            "filename": "s2004s54.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Janus",
+            "filename": "janus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Portia",
+            "filename": "portia.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Prometheus",
+            "filename": "prometheus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 129",
+            "filename": "s2004s129.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Helike",
+            "filename": "helike.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 15",
+            "filename": "s2003j15.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Psamathe",
+            "filename": "psamathe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 78",
+            "filename": "s2004s78.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Erinome",
+            "filename": "erinome.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 97",
+            "filename": "s2004s97.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 81",
+            "filename": "s2004s81.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Euanthe",
+            "filename": "euanthe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 39",
+            "filename": "s2004s39.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Deimos",
+            "filename": "deimos.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Juliet",
+            "filename": "juliet.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Arche",
+            "filename": "arche.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 41",
+            "filename": "s2004s41.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Galatea",
+            "filename": "galatea.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Lysithea",
+            "filename": "lysithea.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 110",
+            "filename": "s2004s110.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Oberon",
+            "filename": "oberon.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 106",
+            "filename": "s2004s106.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 57",
+            "filename": "s2004s57.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Thyone",
+            "filename": "thyone.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 16",
+            "filename": "s2003j16.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 94",
+            "filename": "s2004s94.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Mab",
+            "filename": "mab.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Francisco",
+            "filename": "francisco.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Proteus",
+            "filename": "proteus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 82",
+            "filename": "s2004s82.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Aitne",
+            "filename": "aitne.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hermippe",
+            "filename": "hermippe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Mundilfari",
+            "filename": "mundilfari.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Thebe",
+            "filename": "thebe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Trinculo",
+            "filename": "trinculo.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kari",
+            "filename": "kari.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2022 J 3",
+            "filename": "s2022j3.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 6",
+            "filename": "s2017j6.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Thalassa",
+            "filename": "thalassa.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kallichore",
+            "filename": "kallichore.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Callirrhoe",
+            "filename": "callirrhoe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2018 J 3",
+            "filename": "s2018j3.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Praxidike",
+            "filename": "praxidike.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 126",
+            "filename": "s2004s126.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Metis",
+            "filename": "metis.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Cordelia",
+            "filename": "cordelia.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 98",
+            "filename": "s2004s98.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 77",
+            "filename": "s2004s77.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 61",
+            "filename": "s2004s61.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 36",
+            "filename": "s2004s36.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 130",
+            "filename": "s2004s130.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2021 J 6",
+            "filename": "s2021j6.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Sponde",
+            "filename": "sponde.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 37",
+            "filename": "s2004s37.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 131",
+            "filename": "s2004s131.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Taygete",
+            "filename": "taygete.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 60",
+            "filename": "s2004s60.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 99",
+            "filename": "s2004s99.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 76",
+            "filename": "s2004s76.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2018 J 2",
+            "filename": "s2018j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 21",
+            "filename": "s2004s21.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 127",
+            "filename": "s2004s127.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2011 J 1",
+            "filename": "s2011j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Skoll",
+            "filename": "skoll.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Io",
+            "filename": "io.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Harpalyke",
+            "filename": "harpalyke.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 7",
+            "filename": "s2017j7.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2022 J 2",
+            "filename": "s2022j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Eukelade",
+            "filename": "eukelade.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kore",
+            "filename": "kore.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hyrrokkin",
+            "filename": "hyrrokkin.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Desdemona",
+            "filename": "desdemona.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 83",
+            "filename": "s2004s83.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Stephano",
+            "filename": "stephano.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 95",
+            "filename": "s2004s95.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Methone",
+            "filename": "methone.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Themisto",
+            "filename": "themisto.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hyperion",
+            "filename": "hyperion.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 56",
+            "filename": "s2004s56.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Herse",
+            "filename": "herse.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Autonoe",
+            "filename": "autonoe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Tarqeq",
+            "filename": "tarqeq.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 107",
+            "filename": "s2004s107.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 17",
+            "filename": "s2004s17.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 111",
+            "filename": "s2004s111.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Euporie",
+            "filename": "euporie.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Pasithee",
+            "filename": "pasithee.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 146",
+            "filename": "s2004s146.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 40",
+            "filename": "s2004s40.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Fenrir",
+            "filename": "fenrir.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Farbauti",
+            "filename": "farbauti.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ananke",
+            "filename": "ananke.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Styx",
+            "filename": "styx.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ariel",
+            "filename": "ariel.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 120",
+            "filename": "s2004s120.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2018 J 5",
+            "filename": "s2018j5.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 71",
+            "filename": "s2004s71.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2010 J 2",
+            "filename": "s2010j2.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 88",
+            "filename": "s2004s88.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 67",
+            "filename": "s2004s67.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Amalthea",
+            "filename": "amalthea.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Epimetheus",
+            "filename": "epimetheus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Loge",
+            "filename": "loge.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 136",
+            "filename": "s2004s136.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Dysnomia",
+            "filename": "dysnomia.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Paaliaq",
+            "filename": "paaliaq.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Sycorax",
+            "filename": "sycorax.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 47",
+            "filename": "s2004s47.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 141",
+            "filename": "s2004s141.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Caliban",
+            "filename": "caliban.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Mneme",
+            "filename": "mneme.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Umbriel",
+            "filename": "umbriel.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 116",
+            "filename": "s2004s116.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Rosalind",
+            "filename": "rosalind.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 100",
+            "filename": "s2004s100.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Iapetus",
+            "filename": "iapetus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Phoebe",
+            "filename": "phoebe.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 51",
+            "filename": "s2004s51.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2003 J 10",
+            "filename": "s2003j10.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Bergelmir",
+            "filename": "bergelmir.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Elara",
+            "filename": "elara.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Himalia",
+            "filename": "himalia.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 92",
+            "filename": "s2004s92.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ilmar\u00eb",
+            "filename": "ilmare.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Polydeuces",
+            "filename": "polydeuces.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 84",
+            "filename": "s2004s84.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ymir",
+            "filename": "ymir.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Hati",
+            "filename": "hati.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Ophelia",
+            "filename": "ophelia.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 85",
+            "filename": "s2004s85.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Adrastea",
+            "filename": "adrastea.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Greip",
+            "filename": "greip.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 93",
+            "filename": "s2004s93.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Iocaste",
+            "filename": "iocaste.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Sinope",
+            "filename": "sinope.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Atlas",
+            "filename": "atlas.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 50",
+            "filename": "s2004s50.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 101",
+            "filename": "s2004s101.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 117",
+            "filename": "s2004s117.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 46",
+            "filename": "s2004s46.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 140",
+            "filename": "s2004s140.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Tethys",
+            "filename": "tethys.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Kale",
+            "filename": "kale.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2021 J 1",
+            "filename": "s2021j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 137",
+            "filename": "s2004s137.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 31",
+            "filename": "s2004s31.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Titania",
+            "filename": "titania.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Sao",
+            "filename": "sao.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 89",
+            "filename": "s2004s89.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 66",
+            "filename": "s2004s66.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 70",
+            "filename": "s2004s70.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Suttungr",
+            "filename": "suttungr.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2004 S 121",
+            "filename": "s2004s121.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Weywot",
+            "filename": "weywot.json",
+            "type": "natural satellite",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2018 J 4",
+            "filename": "s2018j4.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Rhea",
+            "filename": "rhea.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Fornjot",
+            "filename": "fornjot.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "S/2017 J 1",
+            "filename": "s2017j1.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Erriapus",
+            "filename": "erriapus.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Eurydome",
+            "filename": "eurydome.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        },
+        {
+            "name": "Dione",
+            "filename": "dione.json",
+            "type": "noValue",
+            "lastUpdated": "2024-01-01"
+        }
+    ],
+    "statistics": {
+        "total_files": 314,
+        "total_fields": 42954,
+        "filled_fields": 13670,
+        "missing_fields": 29284,
+        "completion_percentage": 31.82474274805606,
+        "last_updated": "2025-06-18T08:29:59.178972",
+        "field_statistics": {
+            "name": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "parentBody": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "discovery": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.mass.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.density.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.escapeVelocity.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.gravity.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "orbitalParameters.semiMajorAxis.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "orbitalParameters.inclination.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "orbitalParameters.orbitalPeriod.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "surface.temperature.min.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "surface.temperature.max.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "surface.temperature.average.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "atmosphere.present": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "atmosphere.pressure.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "magneticField.present": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "magneticField.strength.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "magneticField.dipoleMoment.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "internalStructure.core.radius.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "internalStructure.mantle.thickness.unit": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "exploration.discoverer": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "exploration.discoveryDate": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "exploration.discoveryMethod": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "planet": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "radius": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "unit": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "description": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "composition.surface": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "composition.atmosphere": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "composition.interior": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "orbit.semiMajorAxis": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "orbit.eccentricity": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "orbit.inclination": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "orbit.orbitalPeriod": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "orbit.unit": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physical.mass": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physical.density": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physical.surfaceGravity": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physical.escapeVelocity": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "physical.unit": {
+                "total": 306,
+                "filled": 306,
+                "percentage": 100.0
+            },
+            "metadata.lastUpdated": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "metadata.dataQuality": {
+                "total": 314,
+                "filled": 314,
+                "percentage": 100.0
+            },
+            "type": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "discovery.date": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "discovery.discoverer": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "discovery.method": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.mass.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.density.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.surfaceGravity.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.surfaceGravity.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.escapeVelocity.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.semiMajorAxis.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.eccentricity.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.inclination.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.orbitalPeriod.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.rotationPeriod.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.rotationPeriod.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.orbitalSpeed.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "orbitalParameters.orbitalSpeed.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.type": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.albedo.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.cratering.density.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.cratering.age.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.cratering.age.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.temperature.min.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.temperature.max.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "surface.temperature.average.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "atmosphere.pressure.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "magneticField.strength.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "magneticField.dipoleMoment.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.core.radius.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.core.composition": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.mantle.thickness.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.mantle.composition": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.crust.thickness.value": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.crust.thickness.unit": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "internalStructure.crust.composition": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "exploration.firstFlyby": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "exploration.firstOrbiter": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "exploration.firstLander": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "scientificSignificance.publications": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "historicalSignificance.culturalImpact": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            },
+            "historicalSignificance.namingHistory": {
+                "total": 8,
+                "filled": 8,
+                "percentage": 100.0
+            }
+        }
+    },
+    "objectType": "naturalsatellites"
+}

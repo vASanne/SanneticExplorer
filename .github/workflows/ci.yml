@@ -1,0 +1,155 @@
+# Build and test workflow for Sannetic Explorer
+#
+# [![Build Status](https://img.shields.io/github/actions/workflow/status/<OWNER>/<REPO>/ci.yml?branch=main)](https://github.com/<OWNER>/<REPO>/actions)
+# [![Backend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=backend)](https://codecov.io/gh/<OWNER>/<REPO>)
+# [![Frontend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=frontend)](https://codecov.io/gh/<OWNER>/<REPO>)
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Allow all jobs to run even if one fails for better debugging
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pre-commit:
+    name: Pre-commit checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: pre-commit/action@v3.0.1
+      - name: Run pre-commit on all files
+        run: pre-commit run --all-files
+
+  backend:
+    name: Backend Pytest & Coverage
+    runs-on: ubuntu-latest
+    needs: pre-commit
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest pytest-cov codecov
+      - name: Run pytest with coverage
+        run: |
+          pytest --cov=sannetic_explorer --cov-report=xml --cov-report=term-missing --cov-fail-under=90
+      - name: Upload backend coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./coverage.xml
+          flags: backend
+          name: backend-coverage
+          fail_ci_if_error: true
+      - name: Upload backend coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: backend-coverage
+          path: coverage.xml
+
+  frontend:
+    name: Frontend Vitest & Coverage
+    runs-on: ubuntu-latest
+    needs: pre-commit
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+      - name: Run vitest with coverage
+        run: |
+          cd frontend
+          npm run test:coverage
+      - name: Check frontend coverage threshold
+        run: |
+          cd frontend
+          npx vitest run --coverage.enabled --coverage.statements 80 --coverage.branches 80 --coverage.functions 80 --coverage.lines 80 --coverage.reporter=text
+      - name: Upload frontend coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          file: ./frontend/coverage/lcov.info
+          flags: frontend
+          name: frontend-coverage
+          fail_ci_if_error: true
+      - name: Upload frontend coverage artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/
+
+  e2e:
+    name: Playwright E2E Tests
+    runs-on: ubuntu-latest
+    needs: [backend, frontend]
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install E2E dependencies
+        run: |
+          cd e2e
+          npm ci
+          npm run test:install
+      - name: Run Playwright E2E tests
+        run: |
+          cd e2e
+          npm test
+      - name: Upload E2E test results
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-test-results
+          path: e2e/test-results/
+      - name: Upload E2E screenshots
+        uses: actions/upload-artifact@v3
+        if: always()
+        with:
+          name: e2e-screenshots
+          path: e2e/test-results/**/*.png
+
+  badges:
+    name: Export Badges
+    runs-on: ubuntu-latest
+    needs: [backend, frontend, e2e]
+    if: always()
+    timeout-minutes: 5
+    steps:
+      - name: Build Status Badge
+        run: echo "![Build Status](https://img.shields.io/github/actions/workflow/status/<OWNER>/<REPO>/ci.yml?branch=main)"
+      - name: Backend Coverage Badge
+        run: echo "![Backend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=backend)"
+      - name: Frontend Coverage Badge
+        run: echo "![Frontend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=frontend)"
+      - name: Save badge markdown
+        run: |
+          echo '# Badges for README.md' > badges.txt
+          echo '[![Build Status](https://img.shields.io/github/actions/workflow/status/<OWNER>/<REPO>/ci.yml?branch=main)](https://github.com/<OWNER>/<REPO>/actions)' >> badges.txt
+          echo '[![Backend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=backend)](https://codecov.io/gh/<OWNER>/<REPO>)' >> badges.txt
+          echo '[![Frontend Coverage](https://img.shields.io/codecov/c/github/<OWNER>/<REPO>?flag=frontend)](https://codecov.io/gh/<OWNER>/<REPO>)' >> badges.txt
+      - name: Upload badge markdown
+        uses: actions/upload-artifact@v3
+        with:
+          name: badges
+          path: badges.txt 

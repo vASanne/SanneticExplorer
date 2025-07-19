@@ -1,0 +1,170 @@
+{
+    "name": "Hegemone",
+    "type": "noValue",
+    "parentBody": "Jupiter",
+    "planet": "Jupiter",
+    "discovery": "2003",
+    "radius": 1.5,
+    "unit": "km",
+    "description": "",
+    "composition": {
+        "surface": "",
+        "atmosphere": "",
+        "interior": ""
+    },
+    "orbit": {
+        "semiMajorAxis": 0,
+        "eccentricity": 0,
+        "inclination": 0,
+        "orbitalPeriod": 0,
+        "unit": "days"
+    },
+    "physical": {
+        "mass": 0,
+        "density": 0,
+        "surfaceGravity": 0,
+        "escapeVelocity": 0,
+        "unit": "kg"
+    },
+    "exploration": {
+        "missions": [],
+        "discoverer": "",
+        "discoveryDate": "",
+        "discoveryMethod": "",
+        "firstFlyby": "noValue",
+        "firstOrbiter": "noValue",
+        "firstLander": "noValue"
+    },
+    "images": [],
+    "references": [],
+    "jplMeta": {
+        "orbitMeta": {
+            "n_obs_used": "noValue",
+            "first_obs": "noValue",
+            "last_obs": "noValue",
+            "rms": "noValue",
+            "soln_date": "noValue",
+            "condition_code": "noValue",
+            "orbit_id": "noValue",
+            "producer": "noValue",
+            "data_arc": "noValue",
+            "epoch": "noValue",
+            "equinox": "noValue"
+        },
+        "orbitElements": [],
+        "objectMeta": {
+            "fullname": "noValue",
+            "spkid": "noValue",
+            "orbit_class": {
+                "name": "noValue",
+                "code": "noValue"
+            },
+            "pha": "noValue",
+            "neo": "noValue",
+            "kind": "noValue"
+        }
+    },
+    "physicalCharacteristics": {
+        "radius": {
+            "value": "noValue",
+            "unit": "km"
+        },
+        "mass": {
+            "value": "noValue",
+            "unit": "kg"
+        },
+        "density": {
+            "value": "noValue",
+            "unit": "g/cm³"
+        },
+        "gravity": {
+            "value": "noValue",
+            "unit": "m/s²"
+        },
+        "escapeVelocity": {
+            "value": "noValue",
+            "unit": "km/s"
+        }
+    },
+    "orbitalParameters": {
+        "semiMajorAxis": {
+            "value": "noValue",
+            "unit": "km"
+        },
+        "eccentricity": "noValue",
+        "inclination": {
+            "value": "noValue",
+            "unit": "degrees"
+        },
+        "orbitalPeriod": {
+            "value": "noValue",
+            "unit": "days"
+        }
+    },
+    "surface": {
+        "type": "noValue",
+        "features": [
+            "noValue"
+        ],
+        "albedo": {
+            "value": "noValue",
+            "unit": "noValue"
+        },
+        "temperature": {
+            "min": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "max": {
+                "value": "noValue",
+                "unit": "K"
+            },
+            "average": {
+                "value": "noValue",
+                "unit": "K"
+            }
+        }
+    },
+    "atmosphere": {
+        "present": false,
+        "composition": [],
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "magneticField": {
+        "present": false,
+        "strength": {
+            "value": "noValue",
+            "unit": "T"
+        },
+        "dipoleMoment": {
+            "value": "noValue",
+            "unit": "T·m³"
+        }
+    },
+    "internalStructure": {
+        "core": {
+            "radius": {
+                "value": "noValue",
+                "unit": "km"
+            },
+            "composition": "noValue"
+        },
+        "mantle": {
+            "thickness": {
+                "value": "noValue",
+                "unit": "km"
+            },
+            "composition": "noValue"
+        }
+    },
+    "scientificSignificance": "noValue",
+    "historicalSignificance": "noValue",
+    "metadata": {
+        "lastUpdated": "2024-01-01",
+        "dataQuality": "incomplete",
+        "sources": []
+    }
+}

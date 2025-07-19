@@ -1,0 +1,31 @@
+# Sannetic Explorer Worker Service Crontab
+# Format: minute hour day_of_month month day_of_week user command
+
+# Set environment variables
+SHELL=/bin/bash
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+PYTHONPATH=/app
+
+# Start log collector on reboot
+@reboot root cd /app && python backend/scripts/log_collector.py --tail >> /var/log/log_collector.log 2>&1 &
+
+# Start script processor on reboot
+@reboot root cd /app && python backend/scripts/script_processor.py >> /var/log/script_processor.log 2>&1 &
+
+# Critical updates every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
+0 */6 * * * root cd /app && python scripts/update_critical.py >> /var/log/update.log 2>&1
+
+# Standard updates every 12 hours (02:00, 14:00 UTC)
+0 2,14 * * * root cd /app && python scripts/update_data_optimized.py >> /var/log/update.log 2>&1
+
+# Full system update daily at 01:00 UTC
+0 1 * * * root cd /app && python scripts/enhanced_delta_manager.py >> /var/log/update.log 2>&1
+
+# Health check every hour
+0 * * * * root cd /app && python scripts/ai_health_check.py >> /var/log/health.log 2>&1
+
+# Log rotation weekly on Sunday at 03:00 UTC
+0 3 * * 0 root find /var/log -name "*.log" -mtime +7 -delete >> /var/log/update.log 2>&1
+
+# Data sync every 30 minutes
+*/30 * * * * root cd /app && python backend/scripts/sync.py update >> /var/log/sync.log 2>&1 

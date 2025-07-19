@@ -1,0 +1,18 @@
+{
+    "metadata": {
+        "lastUpdated": "2025-06-18T08:29:59.292752",
+        "directory": "Data/Spacecraft",
+        "totalObjects": 0
+    },
+    "objects": [],
+    "statistics": {
+        "total_files": 0,
+        "total_fields": 0,
+        "filled_fields": 0,
+        "missing_fields": 0,
+        "completion_percentage": 0.0,
+        "last_updated": "2025-06-18T08:29:59.293245",
+        "field_statistics": {}
+    },
+    "objectType": "spacecraft"
+}

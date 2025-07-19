@@ -1,0 +1,232 @@
+{
+    "name": "Jupiter",
+    "type": "gas giant",
+    "mass": {
+        "value": 1.898e+27,
+        "unit": "kg"
+    },
+    "diameter": {
+        "value": 139820,
+        "unit": "km"
+    },
+    "surfaceTemperature": {
+        "value": -110,
+        "unit": "\u00b0C"
+    },
+    "distanceFromSun": {
+        "value": 5.203,
+        "unit": "AU"
+    },
+    "orbitalPeriod": {
+        "value": 4333,
+        "unit": "days"
+    },
+    "rotationPeriod": {
+        "value": 0.41,
+        "unit": "days"
+    },
+    "moons": {
+        "count": 95,
+        "names": [
+            "Io",
+            "Europa",
+            "Ganymede",
+            "Callisto",
+            "and 91 others"
+        ],
+        "details": [
+            {
+                "name": "Io",
+                "mass": {
+                    "value": 8.932e+22,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 3643.2,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 421800,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 1.769,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 1.769,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0041,
+                "inclination": {
+                    "value": 0.036,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 17.334,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Europa",
+                "mass": {
+                    "value": 4.8e+22,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 3121.6,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 671100,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 3.551,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 3.551,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0094,
+                "inclination": {
+                    "value": 0.466,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 13.74,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Ganymede",
+                "mass": {
+                    "value": 1.482e+23,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 5268.2,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 1070400,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 7.155,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 7.155,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0013,
+                "inclination": {
+                    "value": 0.177,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 10.88,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Callisto",
+                "mass": {
+                    "value": 1.076e+23,
+                    "unit": "kg"
+                },
+                "diameter": {
+                    "value": 4820.6,
+                    "unit": "km"
+                },
+                "distanceFromPlanet": {
+                    "value": 1882700,
+                    "unit": "km"
+                },
+                "orbitalPeriod": {
+                    "value": 16.689,
+                    "unit": "days"
+                },
+                "rotationPeriod": {
+                    "value": 16.689,
+                    "unit": "days"
+                },
+                "eccentricity": 0.0074,
+                "inclination": {
+                    "value": 0.192,
+                    "unit": "deg"
+                },
+                "orbitalSpeed": {
+                    "value": 8.204,
+                    "unit": "km/s"
+                }
+            },
+            {
+                "name": "Other moons",
+                "mass": "noValue",
+                "diameter": "noValue",
+                "distanceFromPlanet": "noValue",
+                "orbitalPeriod": "noValue",
+                "rotationPeriod": "noValue",
+                "eccentricity": "noValue",
+                "inclination": "noValue",
+                "orbitalSpeed": "noValue"
+            }
+        ]
+    },
+    "atmosphere": {
+        "composition": {
+            "hydrogen": "90%",
+            "helium": "10%",
+            "other": "trace amounts"
+        },
+        "pressure": {
+            "value": "noValue",
+            "unit": "Pa"
+        }
+    },
+    "gravity": {
+        "value": 24.79,
+        "unit": "m/s\u00b2"
+    },
+    "rings": {
+        "hasRings": true,
+        "description": "Faint ring system consisting of three main components"
+    },
+    "orbit": {
+        "semiMajorAxis": {
+            "value": 5.203,
+            "unit": "AU"
+        },
+        "eccentricity": 0.0489,
+        "inclination": {
+            "value": 1.304,
+            "unit": "deg"
+        },
+        "longitudeOfAscendingNode": {
+            "value": 100.464,
+            "unit": "deg"
+        },
+        "argumentOfPeriapsis": {
+            "value": 273.867,
+            "unit": "deg"
+        },
+        "meanAnomaly": {
+            "value": 20.02,
+            "unit": "deg"
+        },
+        "epoch": "J2000",
+        "orbitalSpeed": {
+            "value": 13.07,
+            "unit": "km/s"
+        },
+        "mutualPerturbations": [
+            "Saturn"
+        ]
+    },
+    "metadata": {
+        "lastEnriched": "2025-06-18T08:28:16.122454"
+    }
+}

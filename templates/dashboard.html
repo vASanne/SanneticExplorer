@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sannetic Explorer - System Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', 'Monaco', 'Menlo', monospace;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.4;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Starfield Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ffffff, transparent),
+                radial-gradient(1px 1px at 200px 60px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 240px 90px, #ffffff, transparent),
+                radial-gradient(1px 1px at 280px 20px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(2px 2px at 320px 70px, #ffffff, transparent),
+                radial-gradient(1px 1px at 360px 40px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(1px 1px at 400px 80px, #ffffff, transparent),
+                radial-gradient(1px 1px at 440px 50px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(2px 2px at 480px 10px, #ffffff, transparent),
+                radial-gradient(1px 1px at 520px 60px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 560px 30px, #ffffff, transparent),
+                radial-gradient(1px 1px at 600px 90px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 640px 20px, #ffffff, transparent),
+                radial-gradient(1px 1px at 680px 70px, rgba(255,255,255,0.7), transparent),
+                radial-gradient(1px 1px at 720px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 760px 80px, rgba(255,255,255,0.8), transparent);
+            background-repeat: repeat;
+            background-size: 800px 100px;
+            animation: starfield 120s linear infinite;
+            z-index: -2;
+            opacity: 0.3;
+        }
+
+        /* Nebula Effect */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(74, 158, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(0, 255, 136, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 20%, rgba(255, 170, 0, 0.06) 0%, transparent 50%);
+            animation: nebula 180s ease-in-out infinite alternate;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #111111;
+            border: 2px solid #333333;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #4a9eff, transparent);
+            animation: scan 3s linear infinite;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 8px;
+            color: #4a9eff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: normal;
+        }
+
+        .header .subtitle {
+            font-size: 1em;
+            opacity: 0.7;
+            color: #888888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .current-time {
+            font-size: 1.3em;
+            margin-top: 15px;
+            color: #00ff88;
+            font-family: 'Courier New', monospace;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333333;
+            border-radius: 0;
+            padding: 20px;
+            transition: border-color 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            border-color: #4a9eff;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #4a9eff;
+            opacity: 0.3;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #4a9eff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid #333333;
+            padding-bottom: 10px;
+        }
+
+        .card-header .icon {
+            margin-right: 12px;
+            font-size: 1em;
+            color: #00ff88;
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 0;
+            margin-left: auto;
+            position: relative;
+        }
+
+        .status-healthy { 
+            background-color: #00ff88;
+            box-shadow: 0 0 6px #00ff88;
+        }
+        .status-warning { 
+            background-color: #ffaa00;
+            box-shadow: 0 0 6px #ffaa00;
+        }
+        .status-error { 
+            background-color: #ff4444;
+            box-shadow: 0 0 6px #ff4444;
+        }
+        .status-unknown { 
+            background-color: #666666;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333333;
+            font-family: 'Courier New', monospace;
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #888888;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .metric-value {
+            color: #e0e0e0;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+        }
+
+        .error-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+
+        .error-item {
+            background: #2a1a1a;
+            border-left: 3px solid #ff4444;
+            padding: 12px;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+            font-family: 'Courier New', monospace;
+            border-top: 1px solid #333333;
+        }
+
+        .error-timestamp {
+            font-size: 0.75em;
+            color: #666666;
+            margin-bottom: 6px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .terminal-container {
+            grid-column: 1 / -1;
+            background: #0a0a0a;
+            border: 2px solid #333333;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #333333;
+        }
+
+        .terminal-title {
+            color: #4a9eff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .terminal-control {
+            width: 8px;
+            height: 8px;
+            border: 1px solid #666666;
+        }
+
+        .control-close { background-color: #ff4444; }
+        .control-minimize { background-color: #ffaa00; }
+        .control-maximize { background-color: #00ff88; }
+
+        .terminal-content {
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #0a0a0a;
+            color: #00ff88;
+        }
+
+        .log-error { color: #ff4444; }
+        .log-warning { color: #ffaa00; }
+        .log-info { color: #00ff88; }
+
+        .refresh-button {
+            background: #333333;
+            border: 1px solid #666666;
+            color: #e0e0e0;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+            margin-left: 10px;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
+        }
+
+        .refresh-button:hover {
+            background: #4a9eff;
+            border-color: #4a9eff;
+            color: #000000;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4CAF50, #8BC34A);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .api-status {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .api-badge {
+            padding: 4px 8px;
+            font-size: 0.75em;
+            border: 1px solid;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .api-available {
+            background-color: #1a2a1a;
+            color: #00ff88;
+            border-color: #00ff88;
+        }
+
+        .api-unavailable {
+            background-color: #2a1a1a;
+            color: #ff4444;
+            border-color: #ff4444;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .terminal-content {
+                font-size: 0.8em;
+                max-height: 300px;
+            }
+        }
+
+        .auto-refresh-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #1a1a1a;
+            color: #00ff88;
+            padding: 8px 12px;
+            border: 1px solid #333333;
+            font-size: 0.8em;
+            z-index: 1000;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes starfield {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-800px); }
+        }
+
+        @keyframes nebula {
+            0% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: scale(1.1) rotate(180deg);
+                opacity: 0.6;
+            }
+            100% { 
+                transform: scale(1) rotate(360deg);
+                opacity: 0.4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auto-refresh-indicator" id="refreshIndicator">
+        Auto-refresh: <span id="countdown">30</span>s
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Sannetic Explorer</h1>
+            <div class="subtitle">System Status Dashboard</div>
+            <div class="current-time" id="currentTime">Loading Time...</div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- System Health Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[SYS]</span>
+                    System Health
+                    <span class="status-indicator status-unknown" id="healthStatus"></span>
+                </div>
+                <div id="healthMetrics">
+                    <div class="metric">
+                        <span class="metric-label">Status</span>
+                        <span class="metric-value">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Statistics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[DATA]</span>
+                    Tracked Objects
+                    <button class="refresh-button" onclick="refreshData()">Refresh</button>
+                </div>
+                <div id="dataMetrics">
+                    <div class="metric">
+                        <span class="metric-label">Loading Data...</span>
+                        <span class="metric-value">---</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Summary Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[ERR]</span>
+                    System Errors
+                    <span class="status-indicator status-unknown" id="errorStatus"></span>
+                </div>
+                <div id="errorSummary">
+                    <div class="metric">
+                        <span class="metric-label">Error Count</span>
+                        <span class="metric-value">Loading...</span>
+                    </div>
+                    <div class="error-list" id="errorList"></div>
+                </div>
+            </div>
+
+            <!-- API Status Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[API]</span>
+                    API Status
+                </div>
+                <div id="apiMetrics">
+                    <div class="metric">
+                        <span class="metric-label">APIs Available</span>
+                        <span class="metric-value">Loading...</span>
+                    </div>
+                    <div class="api-status" id="apiStatus"></div>
+                </div>
+            </div>
+
+            <!-- AI Status Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[AI]</span>
+                    AI System
+                    <span class="status-indicator status-unknown" id="aiStatus"></span>
+                </div>
+                <div id="aiMetrics">
+                    <div class="metric">
+                        <span class="metric-label">AI Features</span>
+                        <span class="metric-value">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity Card -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="icon">[LOG]</span>
+                    Recent Activity
+                </div>
+                <div id="activityMetrics">
+                    <div class="metric">
+                        <span class="metric-label">Activities</span>
+                        <span class="metric-value">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal Log Viewer -->
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-title">Live System Logs</div>
+                <div class="terminal-controls">
+                    <div class="terminal-control control-close"></div>
+                    <div class="terminal-control control-minimize"></div>
+                    <div class="terminal-control control-maximize"></div>
+                </div>
+            </div>
+            <div class="terminal-content" id="terminalContent">
+                <div>Loading logs...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let refreshInterval;
+        let countdownInterval;
+        let countdownSeconds = 30;
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('de-DE', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // Fetch system status
+        async function fetchStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                updateDashboard(data);
+            } catch (error) {
+                console.error('Error fetching status:', error);
+                showError('Error loading system data');
+            }
+        }
+
+        // Fetch live logs
+        async function fetchLogs() {
+            try {
+                const response = await fetch('/api/logs?lines=30');
+                const data = await response.json();
+                updateTerminal(data.logs);
+            } catch (error) {
+                console.error('Error fetching logs:', error);
+                updateTerminal(['Error loading logs: ' + error.message]);
+            }
+        }
+
+        // Update dashboard with status data
+        function updateDashboard(data) {
+            // Update system health
+            updateSystemHealth(data.system_health);
+            
+            // Update data statistics
+            updateDataStatistics(data.data_statistics);
+            
+            // Update error summary
+            updateErrorSummary(data.error_summary);
+            
+            // Update API status
+            updateApiStatus(data.api_status);
+            
+            // Update AI status
+            updateAiStatus(data.ai_status);
+            
+            // Update recent activity
+            updateRecentActivity(data.recent_activity);
+        }
+
+        function updateSystemHealth(health) {
+            const statusElement = document.getElementById('healthStatus');
+            const metricsElement = document.getElementById('healthMetrics');
+            
+            // Update status indicator
+            statusElement.className = 'status-indicator status-' + health.overall_status;
+            
+            // Update metrics
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">Overall Status</span>
+                    <span class="metric-value">${health.overall_status === 'healthy' ? 'ONLINE' : 
+                        health.overall_status === 'warning' ? 'WARNING' : 'ERROR'}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Uptime</span>
+                    <span class="metric-value">${health.uptime || 'Unknown'}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">${health.last_check}</span>
+                </div>
+            `;
+            
+            if (health.components) {
+                html += '<div style="margin-top: 15px; font-size: 0.85em; color: #666666; text-transform: uppercase;">Components:</div>';
+                for (const [component, status] of Object.entries(health.components)) {
+                    html += `
+                        <div class="metric">
+                            <span class="metric-label">${component.replace('_', ' ')}</span>
+                            <span class="metric-value">${status ? 'OK' : 'FAIL'}</span>
+                        </div>
+                    `;
+                }
+            }
+            
+            metricsElement.innerHTML = html;
+        }
+
+        function updateDataStatistics(stats) {
+            const metricsElement = document.getElementById('dataMetrics');
+            
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">Total Objects</span>
+                    <span class="metric-value">${stats.total_objects || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Satellites</span>
+                    <span class="metric-value">${stats.satellites || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Planets</span>
+                    <span class="metric-value">${stats.planets || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Natural Satellites</span>
+                    <span class="metric-value">${stats.natural_satellites || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Spacecraft</span>
+                    <span class="metric-value">${stats.spacecraft || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Data Quality</span>
+                    <span class="metric-value">${stats.data_quality || 'Unknown'}</span>
+                </div>
+            `;
+            
+            if (stats.last_updated && stats.last_updated !== 'Unknown') {
+                html += `
+                    <div class="metric">
+                        <span class="metric-label">Last Update</span>
+                        <span class="metric-value">${new Date(stats.last_updated).toLocaleDateString('en-US')}</span>
+                    </div>
+                `;
+            }
+            
+            metricsElement.innerHTML = html;
+        }
+
+        function updateErrorSummary(errors) {
+            const statusElement = document.getElementById('errorStatus');
+            const summaryElement = document.getElementById('errorSummary');
+            
+            // Update status indicator
+            statusElement.className = 'status-indicator ' + 
+                (errors.count === 0 ? 'status-healthy' : 
+                 errors.count < 5 ? 'status-warning' : 'status-error');
+            
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">Error Count</span>
+                    <span class="metric-value">${errors.count || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">${errors.last_check}</span>
+                </div>
+            `;
+            
+            if (errors.recent_errors && errors.recent_errors.length > 0) {
+                html += '<div class="error-list">';
+                errors.recent_errors.slice(0, 3).forEach(error => {
+                    html += `
+                        <div class="error-item">
+                            <div class="error-timestamp">${error.timestamp}</div>
+                            <div><strong>${error.component}:</strong> ${error.message}</div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+            }
+            
+            summaryElement.innerHTML = html;
+        }
+
+        function updateApiStatus(api) {
+            const metricsElement = document.getElementById('apiMetrics');
+            const statusElement = document.getElementById('apiStatus');
+            
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">APIs Available</span>
+                    <span class="metric-value">${api.available_count || 0}/${api.total_count || 3}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">${api.last_check}</span>
+                </div>
+            `;
+            
+            metricsElement.innerHTML = html;
+            
+            // Update API badges
+            let badgesHtml = '';
+            if (api.openai !== undefined) {
+                badgesHtml += `<span class="api-badge ${api.openai ? 'api-available' : 'api-unavailable'}">OpenAI</span>`;
+            }
+            if (api.n2yo !== undefined) {
+                badgesHtml += `<span class="api-badge ${api.n2yo ? 'api-available' : 'api-unavailable'}">N2YO</span>`;
+            }
+            if (api.space_track !== undefined) {
+                badgesHtml += `<span class="api-badge ${api.space_track ? 'api-available' : 'api-unavailable'}">Space-Track</span>`;
+            }
+            
+            statusElement.innerHTML = badgesHtml;
+        }
+
+        function updateAiStatus(ai) {
+            const statusElement = document.getElementById('aiStatus');
+            const metricsElement = document.getElementById('aiMetrics');
+            
+            // Update status indicator
+            statusElement.className = 'status-indicator ' + (ai.enabled ? 'status-healthy' : 'status-warning');
+            
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">AI Enabled</span>
+                    <span class="metric-value">${ai.enabled ? 'YES' : 'NO'}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Features Available</span>
+                    <span class="metric-value">${ai.features_available || 0}/${ai.total_features || 3}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">${ai.last_check}</span>
+                </div>
+            `;
+            
+            metricsElement.innerHTML = html;
+        }
+
+        function updateRecentActivity(activity) {
+            const metricsElement = document.getElementById('activityMetrics');
+            
+            let html = `
+                <div class="metric">
+                    <span class="metric-label">Activities</span>
+                    <span class="metric-value">${activity.count || 0}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Last Check</span>
+                    <span class="metric-value">${activity.last_check}</span>
+                </div>
+            `;
+            
+            if (activity.activities && activity.activities.length > 0) {
+                html += '<div style="margin-top: 15px; font-size: 0.85em; color: #666666; text-transform: uppercase;">Recent Activities:</div>';
+                activity.activities.slice(0, 3).forEach(act => {
+                    const levelColor = act.level === 'ERROR' ? '#ff4444' : 
+                                     act.level === 'WARNING' ? '#ffaa00' : '#00ff88';
+                    html += `
+                        <div class="metric">
+                            <span class="metric-label" style="color: ${levelColor}">${act.component}</span>
+                            <span class="metric-value" style="font-size: 0.8em">${act.message.substring(0, 30)}...</span>
+                        </div>
+                    `;
+                });
+            }
+            
+            metricsElement.innerHTML = html;
+        }
+
+        function updateTerminal(logs) {
+            const terminalElement = document.getElementById('terminalContent');
+            
+            if (logs && logs.length > 0) {
+                terminalElement.innerHTML = logs.join('<br>');
+                // Auto-scroll to bottom
+                terminalElement.scrollTop = terminalElement.scrollHeight;
+            } else {
+                terminalElement.innerHTML = '<div style="color: #666;">No logs available</div>';
+            }
+        }
+
+        function showError(message) {
+            console.error(message);
+            // Could show a toast notification here
+        }
+
+        function refreshData() {
+            fetchStatus();
+            fetchLogs();
+            resetCountdown();
+        }
+
+        function resetCountdown() {
+            countdownSeconds = 30;
+            document.getElementById('countdown').textContent = countdownSeconds;
+        }
+
+        function startCountdown() {
+            countdownInterval = setInterval(() => {
+                countdownSeconds--;
+                document.getElementById('countdown').textContent = countdownSeconds;
+                
+                if (countdownSeconds <= 0) {
+                    refreshData();
+                }
+            }, 1000);
+        }
+
+        // Initialize dashboard
+        function init() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            refreshData();
+            startCountdown();
+            
+            // Auto-refresh every 30 seconds
+            refreshInterval = setInterval(refreshData, 30000);
+        }
+
+        // Start when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html> 

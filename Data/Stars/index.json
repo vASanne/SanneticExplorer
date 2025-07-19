@@ -1,0 +1,486 @@
+{
+    "metadata": {
+        "lastUpdated": "2025-06-18T08:29:59.294538",
+        "directory": "Data/Stars",
+        "totalObjects": 1
+    },
+    "objects": [
+        {
+            "name": "Sun",
+            "filename": "sun.json",
+            "type": "G-type main-sequence star",
+            "lastUpdated": "2025-06-18T08:29:59.295168"
+        }
+    ],
+    "statistics": {
+        "total_files": 1,
+        "total_fields": 201,
+        "filled_fields": 119,
+        "missing_fields": 82,
+        "completion_percentage": 59.20398009950249,
+        "last_updated": "2025-06-18T08:29:59.295196",
+        "field_statistics": {
+            "name": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "type": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "discovery.date": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "discovery.discoverer": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "discovery.method": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.mass.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.mass.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.radius.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.density.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.density.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.surfaceGravity.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.surfaceGravity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.escapeVelocity.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "physicalCharacteristics.escapeVelocity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.spectralType": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.luminosity.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.luminosity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.effectiveTemperature.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.effectiveTemperature.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.colorIndex.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.colorIndex.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.absoluteMagnitude.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.absoluteMagnitude.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.apparentMagnitude.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarParameters.apparentMagnitude.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.fusionType": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.coreTemperature.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.coreTemperature.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.corePressure.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.corePressure.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.coreDensity.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "nuclearCharacteristics.coreDensity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.strength.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.strength.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.dipoleMoment.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.dipoleMoment.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.tilt.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.tilt.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.activityCycle.period.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.activityCycle.period.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.activityCycle.lastMaximum": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "magneticField.activityCycle.lastMinimum": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.composition[0].element": {
+                "total": 10,
+                "filled": 10,
+                "percentage": 100.0
+            },
+            "atmosphere.composition[0].percentage.value": {
+                "total": 10,
+                "filled": 10,
+                "percentage": 100.0
+            },
+            "atmosphere.composition[0].percentage.unit": {
+                "total": 10,
+                "filled": 10,
+                "percentage": 100.0
+            },
+            "atmosphere.chromosphere.temperature.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.chromosphere.temperature.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.chromosphere.thickness.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.chromosphere.thickness.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.corona.temperature.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.corona.temperature.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.corona.density.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "atmosphere.corona.density.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.age.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.age.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.evolutionaryStage": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.expectedLifetime.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.expectedLifetime.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.hydrogen.percentage.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.hydrogen.percentage.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.helium.percentage.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.helium.percentage.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.heavierElements.percentage.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "stellarEvolution.nuclearFuel.heavierElements.percentage.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "variability.type": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "variability.period.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "variability.period.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "variability.amplitude.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "variability.amplitude.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.binarySystem.isBinary": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.binarySystem.companionType": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.binarySystem.orbitalPeriod.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.binarySystem.separation.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.planetarySystem.confirmedPlanets": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.planetarySystem.habitableZone.inner.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.planetarySystem.habitableZone.inner.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.planetarySystem.habitableZone.outer.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "companions.planetarySystem.habitableZone.outer.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.distance.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.distance.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.properMotion.ra.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.properMotion.ra.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.properMotion.dec.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.properMotion.dec.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.radialVelocity.value": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.radialVelocity.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "observationalData.parallax.unit": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "scientificSignificance.publications": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "historicalSignificance.culturalImpact": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "historicalSignificance.namingHistory": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            },
+            "metadata.lastEnriched": {
+                "total": 1,
+                "filled": 1,
+                "percentage": 100.0
+            }
+        }
+    },
+    "objectType": "stars"
+}
