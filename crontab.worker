@@ -13,16 +13,16 @@ PYTHONPATH=/app
 @reboot root cd /app && python backend/scripts/script_processor.py >> /var/log/script_processor.log 2>&1 &
 
 # Critical updates every 6 hours (00:00, 06:00, 12:00, 18:00 UTC)
-0 */6 * * * root cd /app && python scripts/update_critical.py >> /var/log/update.log 2>&1
+# Critical updates removed - script deleted
 
 # Standard updates every 12 hours (02:00, 14:00 UTC)
-0 2,14 * * * root cd /app && python scripts/update_data_optimized.py >> /var/log/update.log 2>&1
+# Data updates removed - script deleted
 
 # Full system update daily at 01:00 UTC
-0 1 * * * root cd /app && python scripts/enhanced_delta_manager.py >> /var/log/update.log 2>&1
+# Enhanced delta manager removed - script deleted
 
 # Health check every hour
-0 * * * * root cd /app && python scripts/ai_health_check.py >> /var/log/health.log 2>&1
+# AI health check removed - script deleted
 
 # Log rotation weekly on Sunday at 03:00 UTC
 0 3 * * 0 root find /var/log -name "*.log" -mtime +7 -delete >> /var/log/update.log 2>&1

@@ -49,10 +49,10 @@ class ScriptProcessor:
         
         # Script mapping
         self.script_paths = {
-            "update_critical.py": "/app/scripts/update_critical.py",
-            "update_data_optimized.py": "/app/scripts/update_data_optimized.py",
-            "enhanced_delta_manager.py": "/app/scripts/enhanced_delta_manager.py",
-            "ai_health_check.py": "/app/scripts/ai_health_check.py",
+            # "update_critical.py": "/app/scripts/update_critical.py",  # Removed - script deleted
+            # "update_data_optimized.py": "/app/scripts/update_data_optimized.py",  # Removed - script deleted
+            # "enhanced_delta_manager.py": "/app/scripts/enhanced_delta_manager.py",  # Removed - script deleted
+            # "ai_health_check.py": "/app/scripts/ai_health_check.py",  # Removed - script deleted
             "sync.py": "/app/backend/scripts/sync.py"
         }
     
