@@ -2,7 +2,7 @@
 
 // Base URL from environment variable  
 // For browser requests, use localhost since the browser runs on the host
-const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:3000';
 
 // CelestialBody interface mirroring backend DTO
 export interface CelestialBody {
@@ -153,6 +153,12 @@ export interface PlanetData {
 	atmospheric_composition?: Record<string, any>;
 	has_rings?: boolean;
 	surface_temperature_k?: number;
+	surface_temperature_min_k?: number;
+	surface_temperature_max_k?: number;
+	atmospheric_pressure_pa?: number;
+	
+	// Additional data
+	moons?: number;
 }
 
 // Build info interface

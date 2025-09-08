@@ -153,6 +153,12 @@ class PlanetResponse(BaseModel):
     atmospheric_composition: Optional[Dict[str, Any]] = None
     has_rings: Optional[bool] = None
     surface_temperature_k: Optional[float] = None
+    surface_temperature_min_k: Optional[float] = None
+    surface_temperature_max_k: Optional[float] = None
+    atmospheric_pressure_pa: Optional[float] = None
+    
+    # Additional data
+    moons: Optional[int] = None
     
     class Config:
         from_attributes = True
@@ -264,6 +270,11 @@ async def get_planets(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
             # Get physical characteristics
             physical_chars = db.query(PhysicalCharacteristics).filter(PhysicalCharacteristics.celestial_body_id == planet.id).first()
             
+            # Extract moons from data_sources
+            moons = None
+            if planet.data_sources and isinstance(planet.data_sources, dict) and 'moons' in planet.data_sources:
+                moons = planet.data_sources['moons']
+            
             # Build response
             planet_data = {
                 "id": planet.id,
@@ -286,9 +297,15 @@ async def get_planets(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
                 
                 # Physical characteristics
                 "has_atmosphere": physical_chars.has_atmosphere if physical_chars else None,
-                "atmospheric_composition": physical_chars.atmospheric_composition if physical_chars else None,
+                "atmospheric_composition": physical_chars.atmospheric_composition if physical_chars and physical_chars.atmospheric_composition != 'noValue' else None,
                 "has_rings": physical_chars.has_rings if physical_chars else None,
                 "surface_temperature_k": physical_chars.surface_temperature_k if physical_chars else None,
+                "surface_temperature_min_k": physical_chars.surface_temperature_min_k if physical_chars else None,
+                "surface_temperature_max_k": physical_chars.surface_temperature_max_k if physical_chars else None,
+                "atmospheric_pressure_pa": physical_chars.atmospheric_pressure_pa if physical_chars else None,
+                
+                # Additional data
+                "moons": moons,
             }
             
             result.append(planet_data)

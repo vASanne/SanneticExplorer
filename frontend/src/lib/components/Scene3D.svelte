@@ -4,15 +4,18 @@
 	import { getPlanets, type PlanetData } from '../api';
 	
 	// Props from parent
-	export let showStars = false; // Disabled by default since we're removing fake stars
+	export let showStars = true; // Enable starfield by default
+	export let showAxes = true; // Enable coordinate axes by default
 	export let ambientLightIntensity = 0.4;
 	export let showOrbits = true;
 	export let showPlanetNames = true;
 	export let showSunName = true;
+	export let highContrast = false; // High contrast mode for better planet visibility
 	export let isAnimationPlaying = true; // Animation play/pause state
 	export let animationSpeed = 0.5; // Animation speed (0.5 = 50% slower than original)
 	export let onReset: () => void = () => {}; // Reset callback from parent
 	export let onObjectClick: (objectData: any) => void = () => {}; // Object click callback
+	
 	
 	let container: HTMLDivElement;
 	let scene: THREE.Scene;
@@ -26,11 +29,13 @@
 	let sunLabel: THREE.Sprite | null = null;
 	let raycaster: THREE.Raycaster;
 	let mouse: THREE.Vector2;
+	let starfield: THREE.Points;
+	let coordinateAxes: THREE.Group;
 	
 	// Camera controls
-	let cameraDistance = 100;
+	let cameraDistance = 50; // Closer to see everything better
 	let cameraAngle = 0;
-	let cameraHeight = 50;
+	let cameraHeight = 30;
 	let autoRotate = true;
 	
 	// Zoom limits
@@ -56,9 +61,9 @@
 
 	// Reset function
 	export function resetScene() {
-		cameraDistance = 100;
+		cameraDistance = 50;
 		cameraAngle = 0;
-		cameraHeight = 50;
+		cameraHeight = 30;
 		autoRotate = true;
 		ambientLightIntensity = 0.4;
 		showOrbits = true;
@@ -112,29 +117,17 @@
 	}
 	
 	async function initializeScene() {
-		// Load planet data from API first
-		console.log('Starting to load planets from API...');
+		// Load planet data from API - no fallback to static data
 		try {
-			console.log('Calling getPlanets()...');
 			realPlanetsData = await getPlanets();
 			planetsLoaded = true;
-			console.log('Successfully loaded planets from API:', realPlanetsData.length, realPlanetsData);
+			console.log('Planets loaded from API:', realPlanetsData.length, 'planets');
 		} catch (error) {
 			console.error('Failed to load planets from API:', error);
-			// Fallback to hardcoded data
-			console.log('Using fallback planet data...');
-			realPlanetsData = [
-				{
-					id: "1", name: "Mercury", type: "planet", radius_km: 2439.5, 
-					mean_distance_au: 0.387, orbital_period_days: 88, 
-					color_hex: "#8c7853", data_quality: "fallback"
-				},
-				{
-					id: "2", name: "Earth", type: "planet", radius_km: 6371, 
-					mean_distance_au: 1.0, orbital_period_days: 365.25, 
-					color_hex: "#6b93d6", data_quality: "fallback"
-				}
-			];
+			// Show error message to user instead of using fallback data
+			alert('Fehler beim Laden der Planeten-Daten. Bitte überprüfen Sie, ob der Backend-Server läuft.');
+			// Initialize with empty array to prevent crashes
+			realPlanetsData = [];
 			planetsLoaded = true;
 		}
 		
@@ -150,6 +143,11 @@
 	}
 	
 	onMount(() => {
+		if (!container) {
+			console.error('Container element not found!');
+			return;
+		}
+		
 		initializeScene();
 		
 		// Handle window resize
@@ -179,20 +177,29 @@
 	
 	// React to prop changes
 	$: if (scene) updateLighting();
-	$: if (orbits.length > 0) updateOrbitsVisibility();
-	$: if (planetLabels.length > 0) updatePlanetLabelsVisibility();
-	$: if (sunLabel) updateSunLabelVisibility();
-	
-	// Debug: Log prop changes
-	$: console.log('Scene3D Props Update:', { showStars, ambientLightIntensity, showOrbits, showPlanetNames, showSunName });
-	
-	function updateOrbitsVisibility() {
-		console.log('Updating orbits visibility:', showOrbits, 'Number of orbits:', orbits.length);
+	$: if (showOrbits !== undefined && orbits.length > 0) {
 		orbits.forEach((orbit, index) => {
 			orbit.visible = showOrbits;
-			console.log(`Orbit ${index} visibility set to:`, orbit.visible);
 		});
 	}
+	$: if (showPlanetNames !== undefined && planetLabels.length > 0) {
+		planetLabels.forEach((label, index) => {
+			label.visible = showPlanetNames;
+		});
+	}
+	$: if (showSunName !== undefined && sunLabel) {
+		sunLabel.visible = showSunName;
+	}
+	$: if (showStars !== undefined && starfield) {
+		starfield.visible = showStars;
+	}
+	$: if (showAxes !== undefined && coordinateAxes) {
+		coordinateAxes.visible = showAxes;
+	}
+	$: if (highContrast !== undefined) {
+		updatePlanetContrast();
+	}
+	
 	
 	function updateLighting() {
 		const ambientLight = scene.getObjectByName('ambientLight') as THREE.AmbientLight;
@@ -201,19 +208,160 @@
 		}
 	}
 	
-	function updatePlanetLabelsVisibility() {
-		console.log('Updating planet labels visibility:', showPlanetNames, 'Number of labels:', planetLabels.length);
-		planetLabels.forEach((label, index) => {
-			label.visible = showPlanetNames;
-			console.log(`Planet label ${index} visibility set to:`, label.visible);
-		});
-	}
-	
-	function updateSunLabelVisibility() {
-		if (sunLabel) {
-			console.log('Updating sun label visibility:', showSunName);
-			sunLabel.visible = showSunName;
+	function updatePlanetContrast() {
+		try {
+			if (planets.length > 0) {
+				planets.forEach((planet) => {
+					const planetMesh = planet as THREE.Mesh;
+					if (planetMesh && planetMesh.material) {
+						if (highContrast) {
+							// High contrast mode: bright colors with strong outlines
+							if (planetMesh.material instanceof THREE.MeshPhongMaterial) {
+								// Get planet name for specific coloring
+								const planetName = (planet as any).userData?.name?.toLowerCase();
+								
+								// Set bright, distinct colors for each planet
+								let planetColor = 0xffffff; // Default white
+								if (planetName) {
+									switch (planetName) {
+										case 'mercury':
+											planetColor = 0xffaa44; // Orange
+											break;
+										case 'venus':
+											planetColor = 0xffff44; // Yellow
+											break;
+										case 'earth':
+											planetColor = 0x44aaff; // Blue
+											break;
+										case 'mars':
+											planetColor = 0xff4444; // Red
+											break;
+										case 'jupiter':
+											planetColor = 0xff8844; // Orange-red
+											break;
+										case 'saturn':
+											planetColor = 0xffff88; // Light yellow
+											break;
+										case 'uranus':
+											planetColor = 0x44ffaa; // Cyan
+											break;
+										case 'neptune':
+											planetColor = 0x4444ff; // Blue
+											break;
+										default:
+											planetColor = 0xffffff; // White for unknown planets
+									}
+								}
+								
+								// Apply bright colors
+								if (planetMesh.material.color) {
+									planetMesh.material.color.setHex(planetColor);
+								}
+								if (planetMesh.material.emissive) {
+									planetMesh.material.emissive.setHex(planetColor);
+								}
+								if (typeof planetMesh.material.emissiveIntensity !== 'undefined') {
+									planetMesh.material.emissiveIntensity = 0.4;
+								}
+								if (typeof planetMesh.material.shininess !== 'undefined') {
+									planetMesh.material.shininess = 100;
+								}
+								if (planetMesh.material.specular) {
+									planetMesh.material.specular.setHex(0xffffff);
+								}
+							}
+						} else {
+							// Normal mode: reset to original colors
+							if (planetMesh.material instanceof THREE.MeshPhongMaterial) {
+								// Reset to original planet colors
+								const planetName = (planet as any).userData?.name?.toLowerCase();
+								let originalColor = 0x888888; // Default gray
+								
+								if (planetName) {
+									switch (planetName) {
+										case 'mercury':
+											originalColor = 0x8c7853;
+											break;
+										case 'venus':
+											originalColor = 0xffc649;
+											break;
+										case 'earth':
+											originalColor = 0x6b93d6;
+											break;
+										case 'mars':
+											originalColor = 0xc1440e;
+											break;
+										case 'jupiter':
+											originalColor = 0xd8ca9d;
+											break;
+										case 'saturn':
+											originalColor = 0xfad5a5;
+											break;
+										case 'uranus':
+											originalColor = 0x4fd0e7;
+											break;
+										case 'neptune':
+											originalColor = 0x4b70dd;
+											break;
+									}
+								}
+								
+								if (planetMesh.material.color) {
+									planetMesh.material.color.setHex(originalColor);
+								}
+								if (planetMesh.material.emissive) {
+									planetMesh.material.emissive.setHex(0x000000);
+								}
+								if (typeof planetMesh.material.emissiveIntensity !== 'undefined') {
+									planetMesh.material.emissiveIntensity = 0;
+								}
+								if (typeof planetMesh.material.shininess !== 'undefined') {
+									planetMesh.material.shininess = 30;
+								}
+								if (planetMesh.material.specular) {
+									planetMesh.material.specular.setHex(0x111111);
+								}
+							}
+						}
+					}
+				});
+			}
+			
+			// Also update the sun for contrast
+			if (sun) {
+				const sunMesh = sun as THREE.Mesh;
+				if (sunMesh && sunMesh.material) {
+					if (highContrast) {
+						if (sunMesh.material instanceof THREE.MeshBasicMaterial) {
+							if (sunMesh.material.color) {
+								sunMesh.material.color.setHex(0xffff00);
+							}
+							if (sunMesh.material.emissive) {
+								sunMesh.material.emissive.setHex(0xffaa00);
+							}
+						}
+					} else {
+						if (sunMesh.material instanceof THREE.MeshBasicMaterial) {
+							if (sunMesh.material.color) {
+								sunMesh.material.color.setHex(0xffaa00);
+							}
+							if (sunMesh.material.emissive) {
+								sunMesh.material.emissive.setHex(0xff6600);
+							}
+						}
+					}
+				}
+			}
+		} catch (error) {
+			console.error('Error updating planet contrast:', error);
 		}
+	}
+
+	// Function to get planet by name for external access
+	export function getPlanetByName(name: string) {
+		return planets.find(p => 
+			(p as any).userData.name.toLowerCase() === name.toLowerCase()
+		);
 	}
 	
 	function setupMouseControls() {
@@ -239,8 +387,6 @@
 				cameraDistance *= zoomFactor;
 				cameraDistance = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, cameraDistance));
 				
-				// Update label scales immediately when zooming
-				updateLabelScales();
 				
 				// Pause auto-rotation when user is zooming
 				autoRotate = false;
@@ -492,13 +638,179 @@
 		return moons[planetName] || 'Unbekannt';
 	}
 	
+	function createStarfield() {
+		console.log('createStarfield called, scene exists:', !!scene);
+		if (!scene) {
+			console.error('Scene not available for starfield creation');
+			return;
+		}
+
+		// Create a very simple starfield with just a few visible stars
+		const vertices = [];
+		
+		// Add stars in a simple pattern around the solar system
+		for (let i = 0; i < 1000; i++) {
+			// Random position in a sphere around the solar system - closer to camera
+			const radius = Math.random() * 200 + 100; // Much closer to camera
+			const theta = Math.random() * Math.PI * 2;
+			const phi = Math.acos(2 * Math.random() - 1);
+			
+			const x = radius * Math.sin(phi) * Math.cos(theta);
+			const y = radius * Math.sin(phi) * Math.sin(theta);
+			const z = radius * Math.cos(phi);
+			
+			vertices.push(x, y, z);
+		}
+		
+		const geometry = new THREE.BufferGeometry();
+		geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+		
+		const material = new THREE.PointsMaterial({
+			color: 0xffffff,
+			size: 8,
+			sizeAttenuation: false,
+			transparent: true,
+			opacity: 1.0
+		});
+		
+		starfield = new THREE.Points(geometry, material);
+		starfield.visible = showStars;
+		scene.add(starfield);
+		
+		console.log('Starfield created with', vertices.length / 3, 'stars, visible:', showStars);
+		console.log('Scene children after adding starfield:', scene.children.length);
+	}
+
+	function createCoordinateAxes() {
+		console.log('createCoordinateAxes called, scene exists:', !!scene);
+		if (!scene) {
+			console.error('Scene not available for coordinate axes creation');
+			return;
+		}
+
+		coordinateAxes = new THREE.Group();
+		
+		// AU to scene units conversion (1 AU = 10 scene units)
+		const AU_TO_SCENE_UNITS = 10;
+		const axisLength = 100; // 10 AU in each direction - much larger
+		const tickInterval = 20; // 2 AU intervals
+		
+		// Create X-axis (bright yellow) - thicker and brighter
+		const xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+			new THREE.Vector3(-axisLength, 0, 0),
+			new THREE.Vector3(axisLength, 0, 0)
+		]);
+		const xAxisMaterial = new THREE.LineBasicMaterial({ 
+			color: 0xffff00, 
+			linewidth: 4,
+			transparent: true,
+			opacity: 1.0
+		});
+		const xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
+		coordinateAxes.add(xAxis);
+		
+		
+		// Create Z-axis (bright cyan) - thicker and brighter
+		const zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+			new THREE.Vector3(0, 0, -axisLength),
+			new THREE.Vector3(0, 0, axisLength)
+		]);
+		const zAxisMaterial = new THREE.LineBasicMaterial({ 
+			color: 0x00ffff, 
+			linewidth: 4,
+			transparent: true,
+			opacity: 1.0
+		});
+		const zAxis = new THREE.Line(zAxisGeometry, zAxisMaterial);
+		coordinateAxes.add(zAxis);
+		
+		// Add tick marks and labels for each axis
+		createAxisTicks('X', 0xffff00, axisLength, tickInterval);
+		createAxisTicks('Z', 0x00ffff, axisLength, tickInterval);
+		
+		coordinateAxes.visible = showAxes;
+		scene.add(coordinateAxes);
+		
+		
+		console.log('Coordinate axes created, visible:', showAxes);
+		console.log('Scene children after adding axes:', scene.children.length);
+		console.log('Axes group children:', coordinateAxes.children.length);
+	}
+	
+	function createAxisTicks(axis: string, color: number, length: number, interval: number) {
+		// Create tick marks with different sizes
+		for (let i = -length; i <= length; i += interval) {
+			if (i === 0) continue; // Skip center tick
+			
+			const auValue = i / 10; // Convert to AU
+			let tickLength = 1; // Default small tick
+			let showLabel = false;
+			
+			// Determine tick size and label visibility (reduced to 25% of original size)
+			if (auValue % 1 === 0) {
+				// Major ticks at 1 AU intervals
+				tickLength = 1;
+				showLabel = true;
+			} else if (auValue % 0.5 === 0) {
+				// Medium ticks at 0.5 AU intervals
+				tickLength = 0.5;
+			} else {
+				// Small ticks at 0.25 AU intervals
+				tickLength = 0.25;
+			}
+			
+			// Create tick geometry
+			const tickGeometry = new THREE.BufferGeometry();
+			const tickPositions = [];
+			
+			if (axis === 'X') {
+				// X-axis ticks
+				tickPositions.push(i, -tickLength, 0);
+				tickPositions.push(i, tickLength, 0);
+			} else if (axis === 'Y') {
+				// Y-axis ticks
+				tickPositions.push(-tickLength, i, 0);
+				tickPositions.push(tickLength, i, 0);
+			} else if (axis === 'Z') {
+				// Z-axis ticks
+				tickPositions.push(0, -tickLength, i);
+				tickPositions.push(0, tickLength, i);
+			}
+			
+			tickGeometry.setAttribute('position', new THREE.Float32BufferAttribute(tickPositions, 3));
+			const tickMaterial = new THREE.LineBasicMaterial({ 
+				color: color, 
+				linewidth: 2,
+				transparent: true,
+				opacity: 0.9
+			});
+			const ticks = new THREE.LineSegments(tickGeometry, tickMaterial);
+			coordinateAxes.add(ticks);
+			
+			// Add labels only for major ticks (1 AU intervals)
+			if (showLabel) {
+				const label = createTextLabel(`${auValue} AU`, `#${color.toString(16).padStart(6, '0')}`);
+				
+				if (axis === 'X') {
+					label.position.set(i, 2, 0);
+				} else if (axis === 'Y') {
+					label.position.set(2, i, 0);
+				} else if (axis === 'Z') {
+					label.position.set(0, 2, i);
+				}
+				
+				coordinateAxes.add(label);
+			}
+		}
+	}
+
 	function initThreeJS() {
 		// Scene with space background
 		scene = new THREE.Scene();
-		scene.background = new THREE.Color(0x000011); // Deep space color
+		scene.background = new THREE.Color(0x001122); // Brighter space color
 		
 		// Camera - positioned for solar system view
-		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 10000);
+		camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 50000);
 		updateCameraPosition();
 		
 		// Renderer - Full screen
@@ -512,6 +824,97 @@
 		// Initialize raycaster and mouse for object clicking
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
+		
+		// Create starfield directly in initThreeJS - positioned outside solar system
+		try {
+			const vertices = [];
+			const colors = [];
+			const sizes = [];
+			
+			for (let i = 0; i < 1000; i++) {
+				// Position stars outside solar system (minimum 100 AU = 1000 units)
+				const radius = Math.random() * 1000 + 1000; // 100-200 AU from center
+				const theta = Math.random() * Math.PI * 2;
+				const phi = Math.acos(2 * Math.random() - 1);
+
+				const x = radius * Math.sin(phi) * Math.cos(theta);
+				const y = radius * Math.sin(phi) * Math.sin(theta);
+				const z = radius * Math.cos(phi);
+
+				vertices.push(x, y, z);
+
+				// Random brightness for flickering effect
+				const brightness = Math.random() * 0.5 + 0.5; // 0.5 to 1.0
+				colors.push(brightness, brightness, brightness);
+
+				// Random size for variety
+				const size = Math.random() * 0.8 + 0.4; // 0.4 to 1.2
+				sizes.push(size);
+			}
+			
+			const geometry = new THREE.BufferGeometry();
+			geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+			geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+			geometry.setAttribute('size', new THREE.Float32BufferAttribute(sizes, 1));
+			
+			const material = new THREE.PointsMaterial({
+				vertexColors: true,
+				size: 1,
+				sizeAttenuation: false,
+				transparent: true,
+				opacity: 1.0,
+				alphaTest: 0.1
+			});
+			
+			starfield = new THREE.Points(geometry, material);
+			starfield.visible = showStars;
+			scene.add(starfield);
+		} catch (error) {
+			console.error('Error creating starfield:', error);
+		}
+		
+		// Create coordinate axes directly in initThreeJS
+		try {
+			coordinateAxes = new THREE.Group();
+			
+			// Create X-axis (white) - extended to Neptune distance (30 AU = 300 units)
+			const xAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+				new THREE.Vector3(-300, 0, 0),
+				new THREE.Vector3(300, 0, 0)
+			]);
+			const xAxisMaterial = new THREE.LineBasicMaterial({ 
+				color: 0xffffff, 
+				linewidth: 3,
+				transparent: true,
+				opacity: 1.0
+			});
+			const xAxis = new THREE.Line(xAxisGeometry, xAxisMaterial);
+			coordinateAxes.add(xAxis);
+			
+			// Create Z-axis (white) - extended to Neptune distance (30 AU = 300 units)
+			const zAxisGeometry = new THREE.BufferGeometry().setFromPoints([
+				new THREE.Vector3(0, 0, -300),
+				new THREE.Vector3(0, 0, 300)
+			]);
+			const zAxisMaterial = new THREE.LineBasicMaterial({ 
+				color: 0xffffff, 
+				linewidth: 3,
+				transparent: true,
+				opacity: 1.0
+			});
+			const zAxis = new THREE.Line(zAxisGeometry, zAxisMaterial);
+			coordinateAxes.add(zAxis);
+			
+			// Add tick marks and labels for distance scale - extended to Neptune
+			createAxisTicks('X', 0xffffff, 300, 2.5); // Every 0.25 AU, up to 30 AU
+			createAxisTicks('Z', 0xffffff, 300, 2.5); // Every 0.25 AU, up to 30 AU
+			
+			coordinateAxes.visible = showAxes;
+			scene.add(coordinateAxes);
+		} catch (error) {
+			console.error('Error creating coordinate axes:', error);
+		}
+		
 		
 		// Sun lighting - realistic intensity
 		const sunLight = new THREE.PointLight(0xffffff, 2, 1000);
@@ -529,6 +932,7 @@
 		const directionalLight = new THREE.DirectionalLight(0xffffff, 0.3);
 		directionalLight.position.set(20, 20, 10);
 		scene.add(directionalLight);
+		
 	}
 	
 	function updateCameraPosition() {
@@ -665,8 +1069,8 @@
 		canvas.width = 1024;
 		canvas.height = 256;
 		
-		// Set font - significantly larger for better visibility
-		context.font = 'Bold 96px Arial';
+		// Set font - reduced to 50% size
+		context.font = 'Bold 48px Arial';
 		context.fillStyle = color;
 		context.textAlign = 'center';
 		context.textBaseline = 'middle';
@@ -689,29 +1093,12 @@
 		const spriteMaterial = new THREE.SpriteMaterial({ map: texture, transparent: true });
 		const sprite = new THREE.Sprite(spriteMaterial);
 		
-		// Base scale - will be adjusted dynamically based on camera distance
-		sprite.scale.set(12, 3, 1);
+		// Base scale - reduced to 50% size
+		sprite.scale.set(8, 2, 1);
 		
 		return sprite;
 	}
 	
-	function updateLabelScales() {
-		// Calculate scale factor based on camera distance
-		// Base distance is 100, scale labels proportionally
-		const scaleFactor = cameraDistance / 100;
-		const baseScale = 12;
-		const baseHeight = 3;
-		
-		// Update all planet labels with consistent size regardless of distance
-		planetLabels.forEach((label) => {
-			label.scale.set(baseScale * scaleFactor, baseHeight * scaleFactor, 1);
-		});
-		
-		// Update sun label
-		if (sunLabel) {
-			sunLabel.scale.set(baseScale * scaleFactor, baseHeight * scaleFactor, 1);
-		}
-	}
 	
 	function createSolarSystem() {
 		// Create Sun with correct scale
@@ -784,7 +1171,7 @@
 			planets.push(planet);
 			scene.add(planet);
 			
-			// Create planet label
+			// Create planet label with same size as scale labels
 			const planetLabel = createTextLabel(planetData.name, '#ffffff');
 			planetLabel.position.set(orbitalDistance, scaledRadius + 1, 0); // Position above the planet
 			planetLabel.visible = showPlanetNames;
@@ -809,8 +1196,24 @@
 	function animate() {
 		animationId = requestAnimationFrame(animate);
 		
+		
 		// Only animate if animation is playing
 		if (isAnimationPlaying) {
+			// Rotate starfield slowly and add flickering
+			if (starfield && starfield.visible) {
+				starfield.rotation.y += 0.0001 * animationSpeed; // Much slower rotation
+				
+				// Add flickering effect
+				const colors = starfield.geometry.attributes.color.array;
+				for (let i = 0; i < colors.length; i += 3) {
+					const flicker = Math.sin(Date.now() * 0.001 + i * 0.1) * 0.2 + 0.8;
+					colors[i] = flicker;     // R
+					colors[i + 1] = flicker; // G
+					colors[i + 2] = flicker; // B
+				}
+				starfield.geometry.attributes.color.needsUpdate = true;
+			}
+			
 			// Rotate sun
 			if (sun) {
 				sun.rotation.y += 0.01 * animationSpeed;
@@ -848,8 +1251,7 @@
 		// Update camera position
 		updateCameraPosition();
 		
-		// Update label scales based on current zoom level
-		updateLabelScales();
+		
 		
 		renderer.render(scene, camera);
 	}

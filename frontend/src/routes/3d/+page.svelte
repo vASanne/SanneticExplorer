@@ -1,14 +1,15 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import Scene3D from '$lib/components/Scene3D.svelte';
-  import { getBuildInfo, getAllBuildInfo, type BuildInfo } from '$lib/api';
+  import { getBuildInfo, getAllBuildInfo, getPlanets, type BuildInfo } from '$lib/api';
   
-  let showStars = false;
+  let showStars = true;
+  let showAxes = true;
   let ambientLightIntensity = 0.4;
   let showOrbits = true;
-  let showPlanetNames = true;
-  let showSunName = true;
-  let showControls = false;
+  let showNames = true;
+  let highContrast = false;
+  let showControls = true;
   let currentTime = '';
   let buildTime = '';
   let buildTimeFromDB = '';
@@ -16,9 +17,12 @@
   let scene3DComponent: Scene3D;
   let selectedObject: any = null;
   let showInfoPanel = false;
+  let currentOrbitalData: any = null;
+  let updateInterval: number;
   let isAnimationPlaying = true;
   let animationSpeed = 0.5; // 50% slower by default
   let showBuildInfo = false; // Build info panel hidden by default
+  
   
   // Update time every second and load build info
   onMount(() => {
@@ -76,34 +80,126 @@
     // Add keyboard event listener
     window.addEventListener('keydown', handleKeyDown);
     
+    
     return () => {
       clearInterval(interval);
       window.removeEventListener('keydown', handleKeyDown);
     };
+  });
+
+  onDestroy(() => {
+    stopOrbitalDataUpdates();
   });
   
   function toggleControls() {
     showControls = !showControls;
   }
   
+  function closeOffcanvas() {
+    showControls = false;
+  }
+  
   function handleObjectClick(objectData: any) {
     selectedObject = objectData;
     showInfoPanel = true;
     console.log('Object clicked:', objectData);
+    
+    // Start updating orbital data
+    startOrbitalDataUpdates();
+  }
+
+  // Calculate current orbital position and data
+  function getCurrentOrbitalData(objectData: any) {
+    if (!objectData || !scene3DComponent) return null;
+    
+    if (objectData.type === 'star') {
+      return {
+        position: { x: 0, y: 0, z: 0 },
+        rotation: { x: 0, y: 0, z: 0 },
+        temperature: '5,778 K',
+        luminosity: '3.828 × 10²⁶ W',
+        age: '4.6 Milliarden Jahre'
+      };
+    } else if (objectData.type === 'planet') {
+      // Get current orbital angle from the 3D scene
+      const planet = scene3DComponent.getPlanetByName(objectData.name);
+      if (planet) {
+        const userData = planet.userData;
+        const currentAngle = userData.angle || 0;
+        const orbitalDistance = userData.orbitalDistance || 0;
+        
+        // Calculate current position in AU
+        const x = Math.cos(currentAngle) * (orbitalDistance / 10); // Convert to AU
+        const z = Math.sin(currentAngle) * (orbitalDistance / 10);
+        
+        // Calculate current distance to sun
+        const currentDistanceToSun = Math.sqrt(x * x + z * z);
+        
+        // Calculate orbital velocity (km/s)
+        const orbitalPeriodDays = userData.orbital_period_days || 365;
+        const orbitalPeriodSeconds = orbitalPeriodDays * 24 * 3600;
+        const orbitalCircumference = 2 * Math.PI * (orbitalDistance / 10) * 1.496e8; // Convert AU to km
+        const orbitalVelocity = orbitalCircumference / orbitalPeriodSeconds;
+        
+        // Calculate current orbital speed (km/s)
+        const currentSpeed = orbitalVelocity;
+        
+        // Calculate time since perihelion (simplified)
+        const timeSincePerihelion = (currentAngle / (2 * Math.PI)) * orbitalPeriodDays;
+        
+        return {
+          position: { 
+            x: x.toFixed(3), 
+            y: 0, 
+            z: z.toFixed(3) 
+          },
+          currentDistanceToSun: currentDistanceToSun.toFixed(3),
+          orbitalVelocity: currentSpeed.toFixed(1),
+          timeSincePerihelion: timeSincePerihelion.toFixed(1),
+          currentAngle: (currentAngle * 180 / Math.PI).toFixed(1),
+          orbitalDistance: (orbitalDistance / 10).toFixed(3),
+          orbitalPeriod: orbitalPeriodDays.toFixed(1)
+        };
+      }
+    }
+    
+    return null;
+  }
+
+  // Update current orbital data continuously
+  function startOrbitalDataUpdates() {
+    if (updateInterval) {
+      clearInterval(updateInterval);
+    }
+    
+    updateInterval = setInterval(() => {
+      if (selectedObject && showInfoPanel) {
+        currentOrbitalData = getCurrentOrbitalData(selectedObject);
+      }
+    }, 100); // Update every 100ms for smooth animation
+  }
+
+  function stopOrbitalDataUpdates() {
+    if (updateInterval) {
+      clearInterval(updateInterval);
+      updateInterval = null;
+    }
   }
   
   function closeInfoPanel() {
     showInfoPanel = false;
     selectedObject = null;
+    stopOrbitalDataUpdates();
   }
   
   function resetAll() {
     // Reset all values to defaults
-    showStars = false;
+    showStars = true;
+    showAxes = true;
     ambientLightIntensity = 0.4;
     showOrbits = true;
-    showPlanetNames = true;
-    showSunName = true;
+    showNames = true;
+    highContrast = false;
     isAnimationPlaying = true;
     animationSpeed = 0.5;
     showBuildInfo = false;
@@ -114,9 +210,94 @@
     }
   }
 
-  function focusOnObject(objectName: string) {
+  async function focusOnObject(objectName: string) {
     if (scene3DComponent) {
       scene3DComponent.focusOnObject(objectName);
+      
+      // Load object data from API for info panel
+      if (objectName === 'Sonne') {
+        // For now, use static data for the sun (could be extended to load from API)
+        selectedObject = {
+          type: 'star',
+          name: 'Sonne',
+          radius: 696340,
+          mass: '1.989 × 10³⁰ kg',
+          temperature: '5,778 K',
+          age: '4.6 Milliarden Jahre',
+          luminosity: '3.828 × 10²⁶ W',
+          composition: '73% Wasserstoff, 25% Helium, 2% andere Elemente'
+        };
+      } else {
+        // Load planet data from API
+        try {
+          const planets = await getPlanets();
+          const planetData = planets.find(p => p.name === objectName);
+          
+          if (planetData) {
+            const diameter = (planetData.radius_km || 0) * 2;
+            const distance_au = planetData.mean_distance_au || 0;
+            const orbital_period = planetData.orbital_period_days || 0;
+            
+            selectedObject = {
+              type: 'planet',
+              name: planetData.name,
+              diameter: `${diameter.toLocaleString()} km`,
+              radius: `${(planetData.radius_km || 0).toLocaleString()} km`,
+              mass: planetData.mass_kg ? `${(planetData.mass_kg / 1e24).toFixed(2)} × 10²⁴ kg` : 'N/A',
+              gravity: planetData.surface_gravity_ms2 ? `${planetData.surface_gravity_ms2} m/s²` : 'N/A',
+              distanceFromSun: `${distance_au} AU`,
+              orbitalPeriod: `${orbital_period.toFixed(1)} Tage`,
+              orbitalSpeed: planetData.orbital_speed_kms ? `${planetData.orbital_speed_kms} km/s` : 'N/A',
+              temperature: planetData.surface_temperature_k ? `${planetData.surface_temperature_k} K` : 'N/A',
+              temperatureMin: planetData.surface_temperature_min_k ? `${planetData.surface_temperature_min_k} K` : 'N/A',
+              temperatureMax: planetData.surface_temperature_max_k ? `${planetData.surface_temperature_max_k} K` : 'N/A',
+              moons: planetData.moons || 0,
+              atmosphere: planetData.has_atmosphere ? 'Ja' : 'Nein',
+              atmosphericComposition: planetData.atmospheric_composition || null,
+              atmosphericPressure: planetData.atmospheric_pressure_pa ? `${(planetData.atmospheric_pressure_pa / 1000).toFixed(1)} kPa` : 'N/A'
+            };
+          } else {
+            console.warn(`Planet data not found for: ${objectName}`);
+            selectedObject = {
+              type: 'planet',
+              name: objectName,
+              diameter: 'N/A',
+              radius: 'N/A',
+              mass: 'N/A',
+              gravity: 'N/A',
+              distanceFromSun: 'N/A',
+              orbitalPeriod: 'N/A',
+              orbitalSpeed: 'N/A',
+              temperature: 'N/A',
+              moons: 'N/A',
+              atmosphere: 'N/A'
+            };
+          }
+        } catch (error) {
+          console.error('Failed to load planet data from API:', error);
+          // Fallback to basic data
+          selectedObject = {
+            type: 'planet',
+            name: objectName,
+            diameter: 'N/A',
+            radius: 'N/A',
+            mass: 'N/A',
+            gravity: 'N/A',
+            distanceFromSun: 'N/A',
+            orbitalPeriod: 'N/A',
+            orbitalSpeed: 'N/A',
+            temperature: 'N/A',
+            moons: 'N/A',
+            atmosphere: 'N/A'
+          };
+        }
+      }
+      
+      // Open info panel
+      showInfoPanel = true;
+      
+      // Start updating orbital data
+      startOrbitalDataUpdates();
     }
   }
 
@@ -225,6 +406,7 @@
 						<div>{selectedObject.composition}</div>
 					</div>
 				{:else}
+					<!-- Basic Planet Data -->
 					<div class="grid grid-cols-2 gap-2">
 						<div class="text-gray-400">Typ:</div>
 						<div>Planet</div>
@@ -235,35 +417,97 @@
 						<div class="text-gray-400">Radius:</div>
 						<div>{selectedObject.radius}</div>
 						
-						<div class="text-gray-400">Entfernung:</div>
-						<div>{selectedObject.distanceFromSun}</div>
-						
-						<div class="text-gray-400">Umlaufzeit:</div>
-						<div>{selectedObject.orbitalPeriod}</div>
-						
-						<div class="text-gray-400">Geschwindigkeit:</div>
-						<div>{selectedObject.orbitalSpeed}</div>
-						
-						<div class="text-gray-400">Aktueller Winkel:</div>
-						<div>{selectedObject.currentAngle}</div>
-						
 						<div class="text-gray-400">Masse:</div>
 						<div>{selectedObject.mass}</div>
 						
 						<div class="text-gray-400">Schwerkraft:</div>
 						<div>{selectedObject.gravity}</div>
-						
-						<div class="text-gray-400">Temperatur:</div>
-						<div>{selectedObject.temperature}</div>
-						
-						<div class="text-gray-400">Monde:</div>
-						<div>{selectedObject.moons}</div>
 					</div>
 					
+					<!-- Current Orbital Data -->
+					{#if currentOrbitalData}
+						<div class="pt-2 border-t border-gray-700">
+							<div class="text-gray-300 font-semibold mb-2">🌍 Aktuelle Bahndaten (Live)</div>
+							<div class="grid grid-cols-2 gap-2 text-xs">
+								<div class="text-gray-400">Position (AU):</div>
+								<div class="font-mono">X: {currentOrbitalData.position.x}, Z: {currentOrbitalData.position.z}</div>
+								
+								<div class="text-gray-400">Aktuelle Entfernung:</div>
+								<div class="font-mono text-yellow-300">{currentOrbitalData.currentDistanceToSun} AU</div>
+								
+								<div class="text-gray-400">Mittlere Entfernung:</div>
+								<div class="font-mono">{currentOrbitalData.orbitalDistance} AU</div>
+								
+								<div class="text-gray-400">Orbitalgeschw.:</div>
+								<div class="font-mono">{currentOrbitalData.orbitalVelocity} km/s</div>
+								
+								<div class="text-gray-400">Umlaufzeit:</div>
+								<div class="font-mono">{currentOrbitalData.orbitalPeriod} Tage</div>
+								
+								<div class="text-gray-400">Aktueller Winkel:</div>
+								<div class="font-mono">{currentOrbitalData.currentAngle}°</div>
+								
+								<div class="text-gray-400">Zeit seit Perihel:</div>
+								<div class="font-mono">{currentOrbitalData.timeSincePerihelion} Tage</div>
+							</div>
+						</div>
+					{/if}
+					
+					<!-- Static Orbital Data -->
 					<div class="pt-2 border-t border-gray-700">
-						<div class="text-gray-400 mb-1">Atmosphäre:</div>
-						<div>{selectedObject.atmosphere}</div>
+						<div class="text-gray-300 font-semibold mb-2">📊 Bahnparameter</div>
+						<div class="grid grid-cols-2 gap-2 text-xs">
+							<div class="text-gray-400">Entfernung:</div>
+							<div>{selectedObject.distanceFromSun}</div>
+							
+							<div class="text-gray-400">Umlaufzeit:</div>
+							<div>{selectedObject.orbitalPeriod}</div>
+							
+							<div class="text-gray-400">Geschwindigkeit:</div>
+							<div>{selectedObject.orbitalSpeed}</div>
+							
+							<div class="text-gray-400">Aktueller Winkel:</div>
+							<div>{selectedObject.currentAngle}</div>
+						</div>
 					</div>
+					
+					<!-- Physical Properties -->
+					<div class="pt-2 border-t border-gray-700">
+						<div class="text-gray-300 font-semibold mb-2">🔬 Physikalische Eigenschaften</div>
+						<div class="grid grid-cols-2 gap-2 text-xs">
+							<div class="text-gray-400">Temperatur:</div>
+							<div>{selectedObject.temperature}</div>
+							
+							<div class="text-gray-400">Min. Temp:</div>
+							<div>{selectedObject.temperatureMin}</div>
+							
+							<div class="text-gray-400">Max. Temp:</div>
+							<div>{selectedObject.temperatureMax}</div>
+							
+							<div class="text-gray-400">Monde:</div>
+							<div>{selectedObject.moons}</div>
+							
+							<div class="text-gray-400">Atmosphäre:</div>
+							<div>{selectedObject.atmosphere}</div>
+							
+							<div class="text-gray-400">Druck:</div>
+							<div>{selectedObject.atmosphericPressure}</div>
+						</div>
+					</div>
+					
+					{#if selectedObject.atmosphericComposition}
+					<div class="pt-2 border-t border-gray-700">
+						<div class="text-gray-300 font-semibold mb-2">🌬️ Atmosphären-Zusammensetzung</div>
+						<div class="space-y-1 text-xs">
+							{#each Object.entries(selectedObject.atmosphericComposition) as [element, percentage]}
+								<div class="flex justify-between">
+									<span class="text-gray-400">{element}:</span>
+									<span>{percentage}</span>
+								</div>
+							{/each}
+						</div>
+					</div>
+					{/if}
 				{/if}
 			</div>
 		</div>
@@ -274,10 +518,12 @@
     <Scene3D 
       bind:this={scene3DComponent}
       {showStars}
+      {showAxes}
       {ambientLightIntensity}
       {showOrbits}
-      {showPlanetNames}
-      {showSunName}
+      showPlanetNames={showNames}
+      showSunName={showNames}
+      {highContrast}
       {isAnimationPlaying}
       {animationSpeed}
       onReset={() => {}}
@@ -294,7 +540,7 @@
 			<h2 class="text-lg font-bold text-white">🚀 Sonnensystem Navigation</h2>
 			<button 
 				class="btn btn-ghost btn-sm text-white hover:bg-white/10"
-				on:click={toggleControls}
+				on:click={closeOffcanvas}
 			>
 				<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -323,6 +569,64 @@
 							<span class="{object.color} font-medium">{object.name}</span>
 						</button>
 					{/each}
+				</div>
+			</div>
+
+			<!-- Display Controls -->
+			<div class="space-y-4">
+				<h3 class="text-md font-semibold text-gray-300 flex items-center gap-2">
+					<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+					</svg>
+					Anzeige
+				</h3>
+				
+				<div class="space-y-2">
+					<label class="flex items-center justify-between cursor-pointer">
+						<span class="text-sm text-gray-300">Sternenhimmel</span>
+						<input 
+							type="checkbox" 
+							class="toggle toggle-sm" 
+							bind:checked={showStars}
+						/>
+					</label>
+					
+					<label class="flex items-center justify-between cursor-pointer">
+						<span class="text-sm text-gray-300">Koordinatenachsen</span>
+						<input 
+							type="checkbox" 
+							class="toggle toggle-sm" 
+							bind:checked={showAxes}
+						/>
+					</label>
+					
+					<label class="flex items-center justify-between cursor-pointer">
+						<span class="text-sm text-gray-300">Umlaufbahnen</span>
+						<input 
+							type="checkbox" 
+							class="toggle toggle-sm" 
+							bind:checked={showOrbits}
+						/>
+					</label>
+					
+					<label class="flex items-center justify-between cursor-pointer">
+						<span class="text-sm text-gray-300">Namen</span>
+						<input 
+							type="checkbox" 
+							class="toggle toggle-sm" 
+							bind:checked={showNames}
+						/>
+					</label>
+					
+					<label class="flex items-center justify-between cursor-pointer">
+						<span class="text-sm text-gray-300">Hoher Kontrast</span>
+						<input 
+							type="checkbox" 
+							class="toggle toggle-sm" 
+							bind:checked={highContrast}
+						/>
+					</label>
 				</div>
 			</div>
 
@@ -393,16 +697,6 @@
 		</div>
 	</div>
 
-	<!-- Overlay backdrop when controls are open -->
-	{#if showControls}
-		<div 
-			class="fixed inset-0 bg-black/30 z-50"
-			on:click={toggleControls}
-			role="button"
-			tabindex="0"
-			on:keydown={(e) => e.key === 'Escape' && toggleControls()}
-		></div>
-	{/if}
 	
 	<!-- Build Info Panel -->
 	{#if showBuildInfo}
