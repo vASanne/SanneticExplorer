@@ -15,7 +15,7 @@ The e2e tests provide comprehensive coverage of the application's user interface
 
 - Node.js 18+ 
 - Docker and Docker Compose
-- The Sannetic Explorer application running via `docker-compose up -d`
+- The Sannetic Explorer application running via `docker compose -p sannetic-explorer up -d`
 
 ## Installation
 
@@ -82,8 +82,8 @@ npm run test:report
 ## Test Features
 
 ### Docker Integration
-- Automatically starts `docker-compose up -d` before tests
-- Waits for services to be ready (frontend:3000, backend:8000)
+- Automatically starts `docker compose -p sannetic-explorer up -d` before tests
+- Waits for services to be ready (frontend:13300, backend:13800)
 - Cleans up Docker services after tests complete
 
 ### Visual Regression Testing
@@ -134,7 +134,7 @@ npm run test:report
 ## Configuration
 
 ### Playwright Config (`playwright.config.ts`)
-- **Base URL**: `http://localhost:3000`
+- **Base URL**: `http://localhost:13300`
 - **Timeout**: 5 seconds for actions, 2 minutes for web server
 - **Screenshot threshold**: 0.2 (20% pixel difference allowed)
 - **Max diff pixels**: 100 pixels
@@ -203,10 +203,10 @@ npm run test:debug -- --grep "should trigger script execution"
 **Docker services not starting**
 ```bash
 # Check Docker status
-docker-compose ps
+docker compose -p sannetic-explorer ps
 
 # Restart services
-docker-compose down && docker-compose up -d
+docker compose -p sannetic-explorer down && docker compose -p sannetic-explorer up -d
 ```
 
 **Tests timing out**

@@ -73,6 +73,21 @@ make check-docker
 
 ## 🚀 Sannetic Explorer mit Docker starten
 
+Der Stack nutzt das Compose-Projekt **sannetic-explorer**. Container, Netzwerke und Volumes heißen dadurch `sannetic-explorer_*` und kollidieren nicht mit anderen Projekten auf derselben Maschine.
+
+Veröffentlichte Host-Ports (Container-Ports bleiben 3000 / 8000 / 5432 / 6379):
+
+| Dienst | Host | Container |
+| --- | --- | --- |
+| Frontend | 13300 | 3000 |
+| Backend / API | 13800 | 8000 |
+| PostgreSQL | 15432 | 5432 |
+| Redis | 16379 | 6379 |
+
+Dienste im Compose-Netz sprechen sich mit den Service-Namen und den Container-Ports an (`db:5432`, `redis:6379`, `backend:8000`). Nur der Browser nutzt die Host-Ports. `PUBLIC_API_URL` ist deshalb `http://localhost:13800`. SvelteKit-Loads im Frontend-Container nutzen `INTERNAL_API_URL=http://backend:8000` (Test-Stack: `http://test-backend:8000`). Der Backend-Start importiert Sonne und acht Planeten.
+
+Überschreiben in `.env` (Vorlage: `env.example`), zum Beispiel `HOST_FRONTEND_PORT=13310`. Wenn du `HOST_BACKEND_PORT` änderst, setze `PUBLIC_API_URL=http://localhost:<port>` auf denselben Wert und baue das Frontend neu (`make build`). `COMPOSE_PROJECT_NAME` in der `.env` überschreibt den Projektnamen **aller** Compose-Dateien in diesem Ordner; für einen einzelnen Aufruf `docker compose -p <name>` verwenden.
+
 ### Schritt 1: Umgebungsvariablen einrichten
 
 ```bash
@@ -89,8 +104,11 @@ nano .env
 # Alle Container bauen
 make build
 
-# Services starten
+# Services starten (Projektname sannetic-explorer, Host-Ports 13300/13800/15432/16379)
 make up
+
+# Gleichwertig ohne Make:
+docker compose -p sannetic-explorer up -d
 
 # Status prüfen
 make ps
@@ -103,9 +121,9 @@ make ps
 make logs-all
 
 # Spezifische Service-Logs
-docker compose logs backend
-docker compose logs frontend
-docker compose logs db
+docker compose -p sannetic-explorer logs backend
+docker compose -p sannetic-explorer logs frontend
+docker compose -p sannetic-explorer logs db
 ```
 
 ## 🛠️ Häufige Probleme und Lösungen
@@ -146,15 +164,18 @@ make up
 
 ### Problem: Port bereits belegt
 
-**Lösung:**
-```bash
-# Verwendete Ports prüfen
-lsof -i :8000  # Backend
-lsof -i :3000  # Frontend
-lsof -i :5432  # PostgreSQL
+Die Standardports 3000, 8000, 5432 und 6379 werden nicht mehr gebunden. Falls ein reservierter Host-Port schon belegt ist:
 
-# Prozess beenden (PID aus lsof verwenden)
-kill -9 <PID>
+```bash
+# Reservierte Ports prüfen
+lsof -i :13800  # Backend
+lsof -i :13300  # Frontend
+lsof -i :15432  # PostgreSQL
+lsof -i :16379  # Redis
+
+# In .env auf freie Ports legen (PUBLIC_API_URL an HOST_BACKEND_PORT anpassen)
+# HOST_BACKEND_PORT=13810
+# PUBLIC_API_URL=http://localhost:13810
 ```
 
 ## 📊 Verfügbare Make-Befehle
@@ -186,31 +207,40 @@ kill -9 <PID>
 
 Nach dem Start sind folgende Services verfügbar:
 
-- **Frontend:** http://localhost:3000
-- **Backend API:** http://localhost:8000
-- **API Docs:** http://localhost:8000/docs
-- **PostgreSQL:** localhost:5432
-- **Redis:** localhost:6379
+- **Frontend:** http://localhost:13300
+- **Backend API:** http://localhost:13800
+- **API Docs:** http://localhost:13800/docs
+- **Planeten:** http://localhost:13800/planets
+- **PostgreSQL:** localhost:15432
+- **Redis:** localhost:16379
+
+Beim Start lädt das Backend Sonne und Planeten aus `Data/Stars/sun.json` und `Data/Planets/*.json`, falls diese Namen noch nicht in Postgres stehen. Derselbe Import erneut:
+
+```bash
+make db-seed
+```
+
+Der Browser spricht die API über `PUBLIC_API_URL` (http://localhost:13800) an. SvelteKit-Load-Funktionen im Frontend-Container nutzen `INTERNAL_API_URL` (http://backend:8000).
 
 ## 📝 Nützliche Docker Befehle
 
 ```bash
 # Service-spezifische Logs
-docker compose logs -f backend
-docker compose logs -f frontend
+docker compose -p sannetic-explorer logs -f backend
+docker compose -p sannetic-explorer logs -f frontend
 
 # Container Status
-docker compose ps
+docker compose -p sannetic-explorer ps
 
 # In laufenden Container einsteigen
-docker compose exec backend bash
-docker compose exec db psql -U postgres -d sannetic_explorer
+docker compose -p sannetic-explorer exec backend bash
+docker compose -p sannetic-explorer exec db psql -U postgres -d sannetic_explorer
 
 # Container neu starten
-docker compose restart backend
+docker compose -p sannetic-explorer restart backend
 
 # Einzelnen Service neu bauen
-docker compose build backend
+docker compose -p sannetic-explorer build backend
 
 # Volumes auflisten
 docker volume ls

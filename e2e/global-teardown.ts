@@ -1,8 +1,23 @@
 import { FullConfig } from '@playwright/test'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import fs from 'fs'
+import path from 'path'
 
 const execAsync = promisify(exec)
+
+function findRepoRoot(start: string): string {
+  let dir = start
+  for (let i = 0; i < 4; i++) {
+    if (fs.existsSync(path.join(dir, 'docker-compose.yml'))) {
+      return dir
+    }
+    const parent = path.dirname(dir)
+    if (parent === dir) break
+    dir = parent
+  }
+  return start
+}
 
 async function globalTeardown(config: FullConfig) {
   console.log('🧹 Starting global teardown...')
@@ -10,7 +25,9 @@ async function globalTeardown(config: FullConfig) {
   // Stop Docker Compose services
   console.log('🛑 Stopping Docker Compose services...')
   try {
-    await execAsync('docker-compose down')
+    await execAsync('docker compose -p sannetic-explorer down', {
+      cwd: findRepoRoot(process.cwd()),
+    })
     console.log('✅ Docker Compose services stopped')
   } catch (error) {
     console.error('❌ Failed to stop Docker Compose services:', error)

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('API Integration', () => {
-  const baseURL = 'http://localhost:8000'
+  const baseURL = process.env.PUBLIC_API_URL || 'http://localhost:13800'
 
   test('should return health status', async ({ request }) => {
     const response = await request.get(`${baseURL}/health`)
@@ -180,7 +180,7 @@ test.describe('API Integration', () => {
 })
 
 test.describe('API Performance', () => {
-  const baseURL = 'http://localhost:8000'
+  const baseURL = process.env.PUBLIC_API_URL || 'http://localhost:13800'
 
   test('should respond within reasonable time', async ({ request }) => {
     const startTime = Date.now()

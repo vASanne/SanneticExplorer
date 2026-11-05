@@ -17,17 +17,22 @@ from typing import Dict, List, Any, Optional
 class InfrastructureTester:
     def __init__(self):
         self.test_results = []
-        self.base_url = "http://localhost:8001"  # Test backend port
+        self.db_port = int(os.getenv("HOST_TEST_POSTGRES_PORT", "15433"))
+        self.redis_port = int(os.getenv("HOST_TEST_REDIS_PORT", "16380"))
+        self.backend_port = int(os.getenv("HOST_TEST_BACKEND_PORT", "13801"))
+        self.frontend_port = int(os.getenv("HOST_TEST_FRONTEND_PORT", "13301"))
+        self.base_url = os.getenv("PUBLIC_TEST_API_URL", f"http://localhost:{self.backend_port}")
+        self.frontend_url = os.getenv("TEST_FRONTEND_URL", f"http://localhost:{self.frontend_port}")
         self.db_config = {
             'host': 'localhost',
-            'port': 5433,  # Test database port
+            'port': self.db_port,
             'database': 'sannetic_explorer_test',
             'user': 'postgres',
             'password': 'postgres'
         }
         self.redis_config = {
             'host': 'localhost',
-            'port': 6380,  # Test Redis port
+            'port': self.redis_port,
             'db': 0
         }
 
@@ -54,20 +59,20 @@ class InfrastructureTester:
         try:
             # Test if containers are accessible via their ports
             containers = [
-                ('test-db', 5433),
-                ('test-redis', 6380),
-                ('test-backend', 8001),
-                ('test-frontend', 3001)
+                ('test-db', self.db_port),
+                ('test-redis', self.redis_port),
+                ('test-backend', self.backend_port),
+                ('test-frontend', self.frontend_port)
             ]
             
             all_running = True
             for container_name, port in containers:
                 try:
-                    if port == 5433:  # PostgreSQL
+                    if port == self.db_port:  # PostgreSQL
                         conn = psycopg2.connect(**self.db_config)
                         conn.close()
                         self.log_test(f"Container {container_name}", True, f"PostgreSQL accessible on port {port}")
-                    elif port == 6380:  # Redis
+                    elif port == self.redis_port:  # Redis
                         r = redis.Redis(**self.redis_config)
                         r.ping()
                         self.log_test(f"Container {container_name}", True, f"Redis accessible on port {port}")
@@ -184,7 +189,7 @@ class InfrastructureTester:
         print("\n🎨 Testing Frontend Accessibility...")
         
         try:
-            response = requests.get("http://localhost:3001", timeout=10)
+            response = requests.get(self.frontend_url, timeout=10)
             if response.status_code == 200:
                 self.log_test("Frontend", True, "Frontend is accessible")
                 return True

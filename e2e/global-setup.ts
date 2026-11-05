@@ -1,8 +1,25 @@
 import { chromium, FullConfig } from '@playwright/test'
 import { exec } from 'child_process'
 import { promisify } from 'util'
+import fs from 'fs'
+import path from 'path'
 
 const execAsync = promisify(exec)
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:13300'
+const backendUrl = process.env.PUBLIC_API_URL || 'http://localhost:13800'
+
+function findRepoRoot(start: string): string {
+  let dir = start
+  for (let i = 0; i < 4; i++) {
+    if (fs.existsSync(path.join(dir, 'docker-compose.yml'))) {
+      return dir
+    }
+    const parent = path.dirname(dir)
+    if (parent === dir) break
+    dir = parent
+  }
+  return start
+}
 
 async function globalSetup(config: FullConfig) {
   console.log('🚀 Starting global setup...')
@@ -10,7 +27,9 @@ async function globalSetup(config: FullConfig) {
   // Start Docker Compose services
   console.log('📦 Starting Docker Compose services...')
   try {
-    await execAsync('docker-compose up -d')
+    await execAsync('docker compose -p sannetic-explorer up -d', {
+      cwd: findRepoRoot(process.cwd()),
+    })
     console.log('✅ Docker Compose services started')
   } catch (error) {
     console.error('❌ Failed to start Docker Compose services:', error)
@@ -27,11 +46,11 @@ async function globalSetup(config: FullConfig) {
   const page = await browser.newPage()
   
   try {
-    await page.goto('http://localhost:3000', { waitUntil: 'networkidle' })
+    await page.goto(frontendUrl, { waitUntil: 'networkidle' })
     console.log('✅ Frontend is accessible')
     
     // Test backend health
-    const response = await page.request.get('http://localhost:8000/health')
+    const response = await page.request.get(`${backendUrl}/health`)
     if (response.ok()) {
       console.log('✅ Backend is healthy')
     } else {
@@ -56,13 +75,13 @@ async function waitForServices(): Promise<void> {
     
     try {
       // Check if frontend is responding
-      const frontendResponse = await fetch('http://localhost:3000')
+      const frontendResponse = await fetch(frontendUrl)
       if (!frontendResponse.ok) {
         throw new Error('Frontend not ready')
       }
 
       // Check if backend is responding
-      const backendResponse = await fetch('http://localhost:8000/health')
+      const backendResponse = await fetch(`${backendUrl}/health`)
       if (!backendResponse.ok) {
         throw new Error('Backend not ready')
       }
