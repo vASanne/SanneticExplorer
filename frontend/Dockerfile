@@ -71,6 +71,8 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
+# SSR default. Compose overrides this for the test stack.
+ENV INTERNAL_API_URL=http://backend:8000
 
 # Database connection environment variables
 ENV POSTGRES_HOST=postgres

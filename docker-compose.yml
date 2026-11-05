@@ -79,6 +79,8 @@ services:
     environment:
       PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
       VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
+      # SSR and load functions run in this container. localhost:13800 is the host, not the API.
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://backend:8000}
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/static:/app/static

@@ -45,7 +45,8 @@ help:
 	@echo "  make test-all       - Run all tests"
 	@echo ""
 	@echo "🗄️ Database Commands:"
-	@echo "  make db-migrate     - Import planet data to database"
+	@echo "  make db-seed        - Import Sun and planets from Data/ into Postgres"
+	@echo "  make db-migrate     - Same as db-seed"
 	@echo "  make db-shell       - Connect to PostgreSQL shell"
 	@echo ""
 	@echo "🧹 Maintenance Commands:"
@@ -127,11 +128,14 @@ sh-worker: check-docker
 	@$(DOCKER_COMPOSE) exec $(WORKER_SERVICE) bash
 
 # Database Commands
+.PHONY: db-seed
+db-seed: check-docker
+	@echo "Seeding Sun and planets from Data/ into Postgres (skips names that already exist)..."
+	@$(DOCKER_COMPOSE) exec $(BACKEND_SERVICE) python -m sannetic_explorer.services.seed_planets
+	@echo "Seed complete. Planets: http://localhost:$(HOST_BACKEND_PORT)/planets"
+
 .PHONY: db-migrate
-db-migrate: check-docker
-	@echo "Importing planet data to database..."
-	@$(DOCKER_COMPOSE) exec $(BACKEND_SERVICE) python import_planets_simple.py
-	@echo "Planet data import complete!"
+db-migrate: db-seed
 
 .PHONY: db-shell
 db-shell: check-docker

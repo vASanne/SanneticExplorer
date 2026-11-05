@@ -210,8 +210,17 @@ Nach dem Start sind folgende Services verfügbar:
 - **Frontend:** http://localhost:13300
 - **Backend API:** http://localhost:13800
 - **API Docs:** http://localhost:13800/docs
+- **Planeten:** http://localhost:13800/planets
 - **PostgreSQL:** localhost:15432
 - **Redis:** localhost:16379
+
+Beim Start lädt das Backend Sonne und Planeten aus `Data/Stars/sun.json` und `Data/Planets/*.json`, falls diese Namen noch nicht in Postgres stehen. Derselbe Import erneut:
+
+```bash
+make db-seed
+```
+
+Der Browser spricht die API über `PUBLIC_API_URL` (http://localhost:13800) an. SvelteKit-Load-Funktionen im Frontend-Container nutzen `INTERNAL_API_URL` (http://backend:8000).
 
 ## 📝 Nützliche Docker Befehle
 

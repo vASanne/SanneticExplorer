@@ -75,6 +75,7 @@ services:
     environment:
       PUBLIC_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
       VITE_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
+      INTERNAL_API_URL: ${TEST_INTERNAL_API_URL:-http://test-backend:8000}
     depends_on: 
       test-backend:
         condition: service_healthy

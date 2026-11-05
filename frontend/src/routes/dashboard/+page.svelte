@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
   import { browser } from '$app/environment';
+  import { getApiBaseUrl } from '$lib/api';
   import type { PageData } from './$types';
 
   export let data: PageData;
@@ -31,11 +32,9 @@
   let refreshInterval: number;
   let lastRefresh = new Date();
 
-  const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-
   async function fetchScriptStatus() {
     try {
-      const response = await fetch(`${API_BASE}/updates/status`);
+      const response = await fetch(`${getApiBaseUrl()}/updates/status`);
       if (!response.ok) throw new Error('Failed to fetch script status');
       scriptStatuses = await response.json();
     } catch (err) {
@@ -46,7 +45,7 @@
 
   async function fetchLatestUpdates() {
     try {
-      const response = await fetch(`${API_BASE}/updates/latest?limit=50`);
+      const response = await fetch(`${getApiBaseUrl()}/updates/latest?limit=50`);
       if (!response.ok) throw new Error('Failed to fetch latest updates');
       latestUpdates = await response.json();
     } catch (err) {
@@ -63,7 +62,7 @@
         button.textContent = 'Running...';
       }
 
-      const response = await fetch(`${API_BASE}/updates/trigger/${scriptName}`, {
+      const response = await fetch(`${getApiBaseUrl()}/updates/trigger/${scriptName}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

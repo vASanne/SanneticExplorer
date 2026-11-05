@@ -1,8 +1,25 @@
 // API configuration and functions for Sannetic Explorer frontend
 
-// Base URL from environment variable  
-// For browser requests, use localhost since the browser runs on the host
-const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
+import { browser } from '$app/environment';
+
+/**
+ * Browser calls the published host port (PUBLIC_API_URL).
+ * SvelteKit load functions run inside the frontend container, where localhost
+ * is the container itself. Those requests use INTERNAL_API_URL (http://backend:8000).
+ */
+export function getApiBaseUrl(): string {
+	if (browser) {
+		const pub = import.meta.env.PUBLIC_API_URL || import.meta.env.VITE_API_URL;
+		return String(pub || 'http://localhost:13800').replace(/\/$/, '');
+	}
+	const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process
+		?.env;
+	const internal = env?.INTERNAL_API_URL;
+	if (internal) {
+		return internal.replace(/\/$/, '');
+	}
+	return 'http://localhost:8000';
+}
 
 // CelestialBody interface mirroring backend DTO
 export interface CelestialBody {
@@ -72,14 +89,18 @@ interface ApiResponse<T> {
  */
 export async function getBodies(): Promise<CelestialBody[]> {
 	try {
-		const response = await fetch(`${API_BASE_URL}/bodies`);
+		const response = await fetch(`${getApiBaseUrl()}/celestial-bodies`);
 		
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 		
-		const result: ApiResponse<CelestialBody[]> = await response.json();
-		return result.data || result;
+		const result: ApiResponse<CelestialBody[]> | CelestialBody[] = await response.json();
+		const list = Array.isArray(result) ? result : result.data || [];
+		return list.map((body) => ({
+			...body,
+			body_type: body.body_type || (body as CelestialBody & { type?: string }).type || 'unknown'
+		}));
 	} catch (error) {
 		console.error('Error fetching celestial bodies:', error);
 		throw new Error(`Failed to fetch celestial bodies: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -93,7 +114,7 @@ export async function getBodies(): Promise<CelestialBody[]> {
  */
 export async function getBody(id: number): Promise<CelestialBody> {
 	try {
-		const response = await fetch(`${API_BASE_URL}/bodies/${id}`);
+		const response = await fetch(`${getApiBaseUrl()}/celestial-bodies/${id}`);
 		
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
@@ -114,14 +135,20 @@ export async function getBody(id: number): Promise<CelestialBody> {
  */
 export async function getBodiesByType(bodyType: string): Promise<CelestialBody[]> {
 	try {
-		const response = await fetch(`${API_BASE_URL}/bodies?body_type=${encodeURIComponent(bodyType)}`);
+		const response = await fetch(
+			`${getApiBaseUrl()}/celestial-bodies?type=${encodeURIComponent(bodyType)}`
+		);
 		
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
 		}
 		
-		const result: ApiResponse<CelestialBody[]> = await response.json();
-		return result.data || result;
+		const result: ApiResponse<CelestialBody[]> | CelestialBody[] = await response.json();
+		const list = Array.isArray(result) ? result : result.data || [];
+		return list.map((body) => ({
+			...body,
+			body_type: body.body_type || (body as CelestialBody & { type?: string }).type || 'unknown'
+		}));
 	} catch (error) {
 		console.error(`Error fetching ${bodyType} bodies:`, error);
 		throw new Error(`Failed to fetch ${bodyType} bodies: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -168,7 +195,7 @@ export interface BuildInfo {
  */
 export async function getPlanets(): Promise<PlanetData[]> {
 	try {
-		const response = await fetch(`${API_BASE_URL}/planets`);
+		const response = await fetch(`${getApiBaseUrl()}/planets`);
 		
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
@@ -189,7 +216,9 @@ export async function getPlanets(): Promise<PlanetData[]> {
  */
 export async function getBuildInfo(component: string = 'frontend'): Promise<BuildInfo> {
 	try {
-		const response = await fetch(`${API_BASE_URL}/build-info?component=${encodeURIComponent(component)}`);
+		const response = await fetch(
+			`${getApiBaseUrl()}/build-info?component=${encodeURIComponent(component)}`
+		);
 		
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
