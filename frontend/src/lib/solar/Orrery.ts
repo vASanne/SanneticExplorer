@@ -8,13 +8,18 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { OutputPass } from "three/examples/jsm/postprocessing/OutputPass.js";
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 import { UnrealBloomPass } from "three/examples/jsm/postprocessing/UnrealBloomPass.js";
+import { bodyName } from "$lib/i18n/copy";
+import { locale as localeStore } from "svelte-i18n";
 import { MOON, SUN } from "./catalog";
 import { heliocentricEcliptic, keplerState, moonGeocentricAu } from "./kepler";
 import type { ResolvedBody } from "./resolve";
 import {
   EARTH_YEAR_SECONDS,
+  bloomFor,
   eclipticToScene,
   moonSceneOffset,
+  pickRadius,
+  solarCorona,
   sunSceneRadius,
   visualRadiusKm,
   type ScaleMode,
@@ -33,6 +38,8 @@ interface MoonNode {
   spin: THREE.Group;
   mesh: THREE.Mesh;
   material: THREE.MeshStandardMaterial;
+  pick: THREE.Mesh;
+  reticle: THREE.Sprite;
   label: CSS2DObject;
   orbit: THREE.LineLoop;
   orbitPositions: Float32Array;
@@ -47,6 +54,8 @@ interface BodyNode {
   spin: THREE.Group;
   mesh: THREE.Mesh;
   material: THREE.MeshStandardMaterial;
+  pick: THREE.Mesh;
+  reticle: THREE.Sprite;
   clouds?: THREE.Mesh;
   rings?: THREE.Mesh;
   ringSun?: { value: THREE.Vector3 };
@@ -60,6 +69,7 @@ interface BodyNode {
   moon?: MoonNode;
 }
 
+const SKY_RADIUS = 2200;
 const ORBIT_SAMPLES = 160;
 const MOON_SAMPLES = 96;
 /** Earth spin while time is compressed, radians per real second. Other planets keep their sidereal ratio. */
@@ -95,10 +105,16 @@ export class Orrery {
   private planets = new Map<string, BodyNode>();
   private signature = "";
   private sunMesh: THREE.Mesh;
+  private sunMaterial: THREE.MeshBasicMaterial;
   private sunGlow: THREE.Sprite;
   private sunHalo: THREE.Sprite;
+  private sunPick: THREE.Mesh;
+  private sunReticle: THREE.Sprite;
   private starfield: THREE.Mesh;
   private starMaterial: THREE.MeshBasicMaterial;
+  private starPointTexture: THREE.Texture | null = null;
+  private reticleTexture: THREE.Texture | null = null;
+  private localeUnsub: () => void = () => {};
   private playing = false;
   private speed = 1;
   private showOrbits = true;
@@ -186,8 +202,11 @@ export class Orrery {
     this.starMaterial = sky.material;
     const sun = this.addSun();
     this.sunMesh = sun.mesh;
+    this.sunMaterial = sun.material;
     this.sunGlow = sun.glow;
     this.sunHalo = sun.halo;
+    this.sunPick = sun.pick;
+    this.sunReticle = sun.reticle;
     this.layoutSun();
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -198,6 +217,11 @@ export class Orrery {
     );
     this.renderer.domElement.addEventListener("pointerup", this.onPointerUp);
     this.animate = this.animate.bind(this);
+    this.localeUnsub = localeStore.subscribe(() => {
+      queueMicrotask(() => {
+        if (!this.disposed) this.refreshLabels();
+      });
+    });
     this.animation = requestAnimationFrame(this.animate);
     this.pumpTextures();
     this.onTime(this.julianDay);
@@ -310,6 +334,7 @@ export class Orrery {
   dispose() {
     if (this.disposed) return;
     this.disposed = true;
+    this.localeUnsub();
     cancelAnimationFrame(this.animation);
     this.resizeObserver.disconnect();
     this.renderer.domElement.removeEventListener(
@@ -321,6 +346,8 @@ export class Orrery {
     this.controls.dispose();
     this.textureCache.forEach((texture) => texture.dispose());
     this.blankRing.dispose();
+    this.reticleTexture?.dispose();
+    this.starPointTexture?.dispose();
     this.scene.traverse((object) => {
       const mesh = object as THREE.Mesh;
       mesh.geometry?.dispose();
@@ -349,26 +376,160 @@ export class Orrery {
     mesh: THREE.Mesh;
     material: THREE.MeshBasicMaterial;
   } {
-    const geometry = new THREE.SphereGeometry(1600, 48, 32);
+    const geometry = new THREE.SphereGeometry(SKY_RADIUS, 256, 128);
     const material = new THREE.MeshBasicMaterial({
       color: 0x07080e,
       side: THREE.BackSide,
       depthWrite: false,
+      toneMapped: false,
     });
     const mesh = new THREE.Mesh(geometry, material);
+    mesh.frustumCulled = false;
+    mesh.renderOrder = -2;
+    mesh.add(this.makeStarPoints());
     this.scene.add(mesh);
     this.enqueueMap(SUN.starfield, THREE.SRGBColorSpace, (texture) => {
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      texture.magFilter = THREE.LinearFilter;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      texture.generateMipmaps = true;
+      texture.anisotropy = this.maxAnisotropy();
+      texture.needsUpdate = true;
       material.map = texture;
-      material.color.setRGB(2.5, 2.5, 2.85);
+      material.color.setRGB(1.45, 1.5, 1.7);
       material.needsUpdate = true;
     });
     return { mesh, material };
   }
 
+  private maxAnisotropy() {
+    return Math.min(16, this.renderer.capabilities.getMaxAnisotropy());
+  }
+
+  private makeStarPoints() {
+    const count = 2200;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
+    let seed = 0x51a77e;
+    const rand = () => {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      return seed / 4294967296;
+    };
+    const radius = SKY_RADIUS - 40;
+    for (let i = 0; i < count; i += 1) {
+      const theta = Math.PI * 2 * rand();
+      const phi = Math.acos(2 * rand() - 1);
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.cos(phi);
+      positions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
+      const tone = rand();
+      const warm = tone > 0.84;
+      const cool = tone < 0.1;
+      colors[i * 3] = warm ? 1 : cool ? 0.72 : 0.94;
+      colors[i * 3 + 1] = warm ? 0.88 : cool ? 0.84 : 0.95;
+      colors[i * 3 + 2] = warm ? 0.72 : cool ? 1 : 1;
+    }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
+    this.starPointTexture = this.makeCanvasTexture(64, (context, size) => {
+      const gradient = context.createRadialGradient(
+        size / 2,
+        size / 2,
+        0,
+        size / 2,
+        size / 2,
+        size / 2
+      );
+      gradient.addColorStop(0, "rgba(255,255,255,1)");
+      gradient.addColorStop(0.18, "rgba(255,255,255,0.9)");
+      gradient.addColorStop(0.42, "rgba(214,226,255,0.28)");
+      gradient.addColorStop(1, "rgba(255,255,255,0)");
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, size, size);
+    });
+    const material = new THREE.PointsMaterial({
+      map: this.starPointTexture,
+      size: 3.2,
+      sizeAttenuation: false,
+      transparent: true,
+      depthWrite: false,
+      toneMapped: false,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      opacity: 0.85,
+    });
+    const points = new THREE.Points(geometry, material);
+    points.frustumCulled = false;
+    points.renderOrder = -1;
+    return points;
+  }
+
+  private makeCanvasTexture(
+    size: number,
+    draw: (context: CanvasRenderingContext2D, size: number) => void
+  ) {
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const context = canvas.getContext("2d");
+    if (context) draw(context, size);
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.magFilter = THREE.LinearFilter;
+    texture.minFilter = THREE.LinearFilter;
+    texture.generateMipmaps = false;
+    return texture;
+  }
+
+  private reticleMap() {
+    if (!this.reticleTexture) {
+      this.reticleTexture = this.makeCanvasTexture(128, (context, size) => {
+        context.strokeStyle = "rgba(240, 215, 164, 0.92)";
+        context.lineWidth = size * 0.028;
+        context.beginPath();
+        context.arc(size / 2, size / 2, size * 0.36, 0, Math.PI * 2);
+        context.stroke();
+      });
+    }
+    return this.reticleTexture;
+  }
+
+  private makeReticle() {
+    const sprite = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: this.reticleMap(),
+        transparent: true,
+        depthWrite: false,
+        depthTest: false,
+        toneMapped: false,
+      })
+    );
+    sprite.visible = false;
+    sprite.renderOrder = 3;
+    return sprite;
+  }
+
+  private makePick(name: string) {
+    const material = new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    });
+    material.colorWrite = false;
+    const mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 10, 8), material);
+    mesh.userData.name = name;
+    return mesh;
+  }
+
   private addSun(): {
     mesh: THREE.Mesh;
+    material: THREE.MeshBasicMaterial;
     glow: THREE.Sprite;
     halo: THREE.Sprite;
+    pick: THREE.Mesh;
+    reticle: THREE.Sprite;
   } {
     const geometry = new THREE.SphereGeometry(1, 64, 48);
     const material = new THREE.MeshBasicMaterial({
@@ -377,6 +538,10 @@ export class Orrery {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.userData.name = "Sun";
     this.scene.add(mesh);
+    const pick = this.makePick("Sun");
+    this.scene.add(pick);
+    const reticle = this.makeReticle();
+    this.scene.add(reticle);
     this.enqueueMap(SUN.texture, THREE.SRGBColorSpace, (texture) => {
       material.map = texture;
       material.needsUpdate = true;
@@ -395,11 +560,11 @@ export class Orrery {
     this.scene.add(glow);
     this.scene.add(halo);
 
-    const label = this.makeLabel("Sun");
+    const label = this.makeLabel(bodyName("Sun"));
     label.position.set(0, 1.85, 0);
     mesh.add(label);
     mesh.userData.label = label;
-    return { mesh, glow, halo };
+    return { mesh, material, glow, halo, pick, reticle };
   }
 
   private makeGlow(innerAlpha: number, mid: string, edge: string) {
@@ -547,7 +712,11 @@ export class Orrery {
       anchor.add(atmosphere);
     }
 
-    const label = this.makeLabel(body.name);
+    const pick = this.makePick(body.name);
+    anchor.add(pick);
+    const reticle = this.makeReticle();
+    anchor.add(reticle);
+    const label = this.makeLabel(bodyName(body.name));
     anchor.add(label);
     const orbit = this.createOrbitLine(ORBIT_SAMPLES, 0.38);
     this.scene.add(orbit.line);
@@ -563,6 +732,8 @@ export class Orrery {
       clouds,
       rings,
       ringSun,
+      pick,
+      reticle,
       label,
       orbit: orbit.line,
       orbitPositions: orbit.positions,
@@ -595,7 +766,11 @@ export class Orrery {
       material.color.set(0xffffff);
       material.needsUpdate = true;
     });
-    const label = this.makeLabel("Moon");
+    const pick = this.makePick("Moon");
+    anchor.add(pick);
+    const reticle = this.makeReticle();
+    anchor.add(reticle);
+    const label = this.makeLabel(bodyName("Moon"));
     anchor.add(label);
     const orbit = this.createOrbitLine(MOON_SAMPLES, 0.45);
     earth.add(anchor);
@@ -606,6 +781,8 @@ export class Orrery {
       spin,
       mesh,
       material,
+      pick,
+      reticle,
       label,
       orbit: orbit.line,
       orbitPositions: orbit.positions,
@@ -692,9 +869,16 @@ export class Orrery {
 
   private layoutSun() {
     const radius = sunSceneRadius(this.scaleMode);
+    const corona = solarCorona(this.scaleMode);
+    const bloom = bloomFor(this.scaleMode);
     this.sunMesh.scale.setScalar(radius);
-    this.sunGlow.scale.set(radius * 4.4, radius * 4.4, 1);
-    this.sunHalo.scale.set(radius * 8.5, radius * 8.5, 1);
+    this.sunPick.scale.setScalar(pickRadius(radius, this.scaleMode));
+    this.sunGlow.scale.set(radius * corona.glow, radius * corona.glow, 1);
+    this.sunHalo.scale.set(radius * corona.halo, radius * corona.halo, 1);
+    if (this.scaleMode === "true") this.sunMaterial.color.setRGB(1, 0.97, 0.9);
+    else this.sunMaterial.color.setRGB(1.9, 1.55, 1.15);
+    this.bloom.strength = bloom.strength;
+    this.bloom.threshold = bloom.threshold;
     const sky = this.scaleMode === "true" ? 50 : 1;
     this.starfield.scale.setScalar(sky);
   }
@@ -704,6 +888,7 @@ export class Orrery {
     for (const node of this.planets.values()) {
       node.radius = visualRadiusKm(node.body.radiusKm, this.scaleMode);
       node.mesh.scale.setScalar(node.radius);
+      node.pick.scale.setScalar(pickRadius(node.radius, this.scaleMode));
       if (node.clouds) node.clouds.scale.setScalar(node.radius * 1.015);
       node.label.position.set(0, node.radius * 2.35, 0);
       const air = node.anchor.getObjectByName("earth-air");
@@ -712,6 +897,9 @@ export class Orrery {
       if (node.moon) {
         node.moon.radius = visualRadiusKm(MOON.radiusKm, this.scaleMode);
         node.moon.mesh.scale.setScalar(node.moon.radius);
+        node.moon.pick.scale.setScalar(
+          pickRadius(node.moon.radius, this.scaleMode)
+        );
         node.moon.label.position.set(0, node.moon.radius * 2.8, 0);
       }
     }
@@ -829,6 +1017,64 @@ export class Orrery {
     moon.spin.rotation.y = wrapAngle(pose.spinRadians);
   }
 
+  private refreshLabels() {
+    const sunLabel = this.sunMesh?.userData.label as CSS2DObject | undefined;
+    if (sunLabel) sunLabel.element.textContent = bodyName("Sun");
+    for (const node of this.planets.values()) {
+      node.label.element.textContent = bodyName(node.body.name);
+      if (node.moon) node.moon.label.element.textContent = bodyName("Moon");
+    }
+  }
+
+  private updateReticles() {
+    const show = this.scaleMode === "true";
+    const height = Math.max(this.renderer.domElement.clientHeight, 1);
+    const vFov = (this.camera.fov * Math.PI) / 180;
+    const place = (
+      object: THREE.Object3D,
+      sprite: THREE.Sprite,
+      visual: number,
+      active: boolean
+    ) => {
+      if (!show || !active) {
+        sprite.visible = false;
+        return;
+      }
+      object.getWorldPosition(this.worldPoint);
+      const distance = Math.max(
+        this.camera.position.distanceTo(this.worldPoint),
+        1e-4
+      );
+      const worldPerPixel = (2 * Math.tan(vFov / 2) * distance) / height;
+      const ringRadius = Math.max(visual * 1.22, worldPerPixel * 7);
+      const spriteSize = ringRadius / 0.36;
+      sprite.scale.set(spriteSize, spriteSize, 1);
+      sprite.visible = true;
+    };
+    place(
+      this.sunMesh,
+      this.sunReticle,
+      sunSceneRadius(this.scaleMode),
+      this.selected === "Sun"
+    );
+    for (const node of this.planets.values()) {
+      place(
+        node.anchor,
+        node.reticle,
+        node.radius,
+        this.selected === node.body.name
+      );
+      if (node.moon) {
+        place(
+          node.moon.anchor,
+          node.moon.reticle,
+          node.moon.radius,
+          this.selected === "Moon"
+        );
+      }
+    }
+  }
+
   private makeLabel(text: string) {
     const element = document.createElement("div");
     element.className = "sx-label";
@@ -856,10 +1102,10 @@ export class Orrery {
         if (!this.disposed) assign(texture);
       });
       texture.colorSpace = colorSpace;
-      texture.anisotropy = Math.min(
-        4,
-        this.renderer.capabilities.getMaxAnisotropy()
-      );
+      texture.magFilter = THREE.LinearFilter;
+      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      texture.generateMipmaps = true;
+      texture.anisotropy = this.maxAnisotropy();
       this.textureCache.set(url, texture);
     });
   }
@@ -938,11 +1184,11 @@ export class Orrery {
     this.pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     this.pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
     this.raycaster.setFromCamera(this.pointer, this.camera);
-    const targets: THREE.Object3D[] = [this.sunMesh];
+    const targets: THREE.Object3D[] = [this.sunMesh, this.sunPick];
     for (const node of this.planets.values()) {
-      targets.push(node.mesh);
+      targets.push(node.mesh, node.pick);
       if (node.clouds) targets.push(node.clouds);
-      if (node.moon) targets.push(node.moon.mesh);
+      if (node.moon) targets.push(node.moon.mesh, node.moon.pick);
     }
     const hit = this.raycaster.intersectObjects(targets, false)[0];
     const name = (hit?.object.userData.name as string | undefined) ?? null;
@@ -1013,6 +1259,7 @@ export class Orrery {
     this.placeBodies(this.julianDay, delta, simDays);
     if (Math.abs(simDays) > 2) this.sampleOrbits(this.julianDay);
     this.followTarget();
+    this.updateReticles();
     this.updateClipping();
     this.controls.update();
     this.composer.render();

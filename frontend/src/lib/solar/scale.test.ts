@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { CATALOG } from "./catalog";
+import { CATALOG, MOON } from "./catalog";
 import {
   SUN_SCENE_RADIUS,
   auToScene,
+  bloomFor,
   orbitalOmega,
+  pickRadius,
   positionFromEccentricAnomaly,
   sceneRadius,
+  solarCorona,
   sunSceneRadius,
   visualRadiusKm,
 } from "./scale";
@@ -37,6 +40,32 @@ describe("orrery scale", () => {
     expect(
       auToScene(30, "showcase") / auToScene(0.387, "showcase")
     ).toBeLessThan(40);
+  });
+
+  it("keeps showcase enlargement out of true-scale radii", () => {
+    const sun = sunSceneRadius("true");
+    for (const body of CATALOG) {
+      const visual = visualRadiusKm(body.radiusKm, "true");
+      expect(visual / sun).toBeCloseTo(body.radiusKm / 696340, 5);
+      expect(visualRadiusKm(body.radiusKm, "showcase")).toBeGreaterThan(
+        visual * 20
+      );
+    }
+    const moon = visualRadiusKm(MOON.radiusKm, "true");
+    expect(moon / visualRadiusKm(6371, "true")).toBeCloseTo(1737.4 / 6371, 5);
+    const dust = visualRadiusKm(40, "true");
+    expect(dust / visualRadiusKm(6371, "true")).toBeCloseTo(40 / 6371, 5);
+    expect(pickRadius(dust, "true")).toBeGreaterThan(dust);
+    expect(pickRadius(sun, "true")).toBeCloseTo(sun, 8);
+    expect(pickRadius(visualRadiusKm(6371, "showcase"), "showcase")).toBe(
+      visualRadiusKm(6371, "showcase")
+    );
+    expect(solarCorona("true").glow).toBeLessThan(1.5);
+    expect(solarCorona("true").halo).toBeLessThan(1.6);
+    expect(solarCorona("showcase").glow).toBeGreaterThan(4);
+    expect(bloomFor("true").strength).toBeLessThan(
+      bloomFor("showcase").strength
+    );
   });
 
   it("moves inner planets faster than outer planets", () => {

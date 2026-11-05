@@ -1,21 +1,9 @@
+import { t } from "$lib/i18n/copy";
+
 /** J2000.0 = 2000-01-01 12:00 TT ≈ JD 2451545.0. Playback treats UTC as TDB; the difference is about a minute. */
 export const J2000_JD = 2451545.0;
 
 const UNIX_JD = 2440587.5;
-const MONTHS = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
 
 export function julianDayFromUnixMs(ms: number): number {
   return ms / 86400000 + UNIX_JD;
@@ -70,10 +58,17 @@ export function calendarFromJulian(jd: number): CalendarStamp {
 export function formatSimDate(jd: number): string {
   if (!Number.isFinite(jd)) return "—";
   const stamp = calendarFromJulian(jd);
-  const month = MONTHS[stamp.month - 1] ?? "—";
+  const month = t(`date.month.${stamp.month}`);
   const hh = String(stamp.hours).padStart(2, "0");
   const mm = String(stamp.minutes).padStart(2, "0");
   const year =
-    stamp.year > 0 ? String(stamp.year) : `${Math.abs(stamp.year)} BC`;
-  return `${stamp.day} ${month} ${year} · ${hh}:${mm} UTC`;
+    stamp.year > 0
+      ? String(stamp.year)
+      : t("date.bc", { year: Math.abs(stamp.year) });
+  return t("date.stamp", {
+    day: stamp.day,
+    month,
+    year,
+    time: `${hh}:${mm}`,
+  });
 }

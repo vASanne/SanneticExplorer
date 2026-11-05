@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { locale } from "svelte-i18n";
 import {
   AU_IN_KM,
   distanceAu,
@@ -104,7 +105,11 @@ describe("simulation clock", () => {
       2451545,
       6
     );
+    locale.set("de");
+    expect(formatSimDate(2461349.5)).toBe("5. Nov. 2026 · 00:00 UTC");
+    locale.set("en");
     expect(formatSimDate(2461349.5)).toBe("5 Nov 2026 · 00:00 UTC");
+    locale.set("de");
     expect(calendarFromJulian(2451545).year).toBe(2000);
   });
 

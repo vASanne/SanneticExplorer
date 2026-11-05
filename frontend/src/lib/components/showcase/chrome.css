@@ -62,8 +62,42 @@
 .sx-rail,
 .sx-dock,
 .sx-panel,
-.sx-status {
+.sx-status,
+.sx-top-actions,
+.sx-locales {
   pointer-events: auto;
+}
+
+.sx-top-actions,
+.sx-status-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sx-status-head {
+  justify-content: space-between;
+}
+
+.sx-locales {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.sx-locales button {
+  font: inherit;
+  color: #b7b1a8;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  padding: 8px 8px;
+}
+
+.sx-locales button[aria-pressed="true"] {
+  color: #f0d7a4;
 }
 
 .sx-brand {

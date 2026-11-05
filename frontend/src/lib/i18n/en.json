@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "title": "Sannetic Explorer",
+    "description": "A live orrery of the solar system. Sun and eight planets, fed by the Sannetic Explorer API."
+  },
+  "brand": {
+    "lead": "Sannetic",
+    "mark": "Explorer",
+    "eyebrow": "Solar system"
+  },
+  "locale": {
+    "de": "DE",
+    "en": "EN"
+  },
+  "aria": {
+    "bodies": "Celestial bodies",
+    "language": "Language"
+  },
+  "status": {
+    "open": "Open live data status",
+    "live": "Live · {count, plural, one {# planet} other {# planets}}",
+    "partial": "Partial · {count} live",
+    "reference": "Reference catalog",
+    "pageTitle": "Live data · Sannetic Explorer",
+    "eyebrow": "Live data",
+    "backend": "Backend",
+    "heading": "System status",
+    "note": "The orrery reads <code>/planets</code>. An empty database used to leave only the Sun, so the backend imports the eight planets on startup. Run <code>make db-migrate</code> to import again.",
+    "browserApi": "Browser API",
+    "serverApi": "Server API",
+    "health": "Health",
+    "bodies": "Bodies",
+    "planets": "Planets",
+    "unreachable": "unreachable",
+    "empty": "No planet rows yet. The showcase still draws the reference solar system.",
+    "openSystem": "Open the solar system",
+    "apiDocs": "API docs"
+  },
+  "health": {
+    "healthy": "healthy",
+    "ok": "ok"
+  },
+  "errors": {
+    "api_unavailable": "API unavailable",
+    "request_failed": "Request failed"
+  },
+  "dock": {
+    "today": "Today",
+    "play": "Play",
+    "pause": "Pause",
+    "playAria": "Play orbit animation",
+    "pauseAria": "Pause orbit animation",
+    "slower": "Slower, including reverse",
+    "faster": "Faster",
+    "orbits": "Orbits",
+    "labels": "Labels",
+    "showcase": "Showcase",
+    "trueScale": "True scale",
+    "inner": "Inner",
+    "system": "System"
+  },
+  "panels": {
+    "star": "Star",
+    "close": "Close",
+    "live": "Live /planets",
+    "reference": "Reference catalog",
+    "moon": "Earth's moon",
+    "liveNote": "Sizes and J2000 elements follow the API. Missing angles use the JPL tables, with secular rates. Tilt and spin follow the IAU poles.",
+    "referenceNote": "This body is not in the current API payload, so the JPL reference elements are shown.",
+    "sunSummary": "The Sun is drawn in the scene. Planet sizes and orbital elements come from the live /planets API when the database has rows. Missing elements fall back to the JPL J2000 tables.",
+    "moonSummary": "Distance, size, eccentricity, inclination and sidereal period follow Data/Planets/earth.json. Node, perigee and the main perturbations are the reference model, because those angles are not in Data/."
+  },
+  "facts": {
+    "distance": "Distance",
+    "period": "Period",
+    "eccentricity": "Eccentricity",
+    "inclination": "Inclination",
+    "tilt": "Axial tilt",
+    "sidereal": "Sidereal day",
+    "radius": "Radius",
+    "mass": "Mass",
+    "gravity": "Gravity",
+    "temperature": "Temperature",
+    "atmosphere": "Atmosphere",
+    "rings": "Rings",
+    "class": "Class",
+    "none": "None",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "atmosphere": {
+    "nitrogen": "nitrogen",
+    "oxygen": "oxygen",
+    "argon": "argon",
+    "carbonDioxide": "carbon dioxide",
+    "helium": "helium",
+    "hydrogen": "hydrogen",
+    "methane": "methane",
+    "other": "other"
+  },
+  "atmosphereValues": {
+    "trace amounts": "trace amounts"
+  },
+  "bodies": {
+    "Sun": "Sun",
+    "Moon": "Moon",
+    "Mercury": "Mercury",
+    "Venus": "Venus",
+    "Earth": "Earth",
+    "Mars": "Mars",
+    "Jupiter": "Jupiter",
+    "Saturn": "Saturn",
+    "Uranus": "Uranus",
+    "Neptune": "Neptune"
+  },
+  "subtypes": {
+    "terrestrial planet": "terrestrial planet",
+    "gas giant": "gas giant",
+    "ice giant": "ice giant",
+    "G2V star": "G2V star",
+    "planet": "planet",
+    "star": "star",
+    "moon": "moon",
+    "satellite": "satellite",
+    "dwarf planet": "dwarf planet",
+    "asteroid": "asteroid",
+    "comet": "comet",
+    "spacecraft": "spacecraft"
+  },
+  "units": {
+    "earthMasses": "{value} Earth masses",
+    "earthYear": "Earth year ≈ {seconds} s",
+    "reverse": "reverse",
+    "days": "{days} days",
+    "daysYears": "{days} days · {years} yr",
+    "au": "{value} AU",
+    "km": "{value} km",
+    "hours": "{value} h",
+    "siderealDays": "{value} days",
+    "gravity": "{value} m/s²",
+    "temperature": "{kelvin} K · {celsius} °C"
+  },
+  "date": {
+    "stamp": "{day} {month} {year} · {time} UTC",
+    "bc": "{year} BC",
+    "month": {
+      "1": "Jan",
+      "2": "Feb",
+      "3": "Mar",
+      "4": "Apr",
+      "5": "May",
+      "6": "Jun",
+      "7": "Jul",
+      "8": "Aug",
+      "9": "Sep",
+      "10": "Oct",
+      "11": "Nov",
+      "12": "Dec"
+    }
+  }
+}

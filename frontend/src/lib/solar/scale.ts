@@ -21,12 +21,25 @@ export function auToScene(au: number, mode: ScaleMode = "showcase"): number {
   return AU_SCALE * Math.pow(Math.max(safe, 0.02), DISTANCE_POWER);
 }
 
-/** Planet radii are enlarged versus true scale so maps read in an orrery. */
+/**
+ * Kilometres to scene units when distances and radii are both linear.
+ * Showcase mode must not use this factor.
+ */
+const TRUE_KM = TRUE_AU / AU_KM;
+
+/**
+ * Planet radii are enlarged versus true scale so maps read in an orrery.
+ * True mode is the physical radius in the same units as auToScene: no power
+ * curve and no minimum that would make a small body look larger than it is.
+ */
 export function visualRadiusKm(
   radiusKm: number,
   mode: ScaleMode = "showcase"
 ): number {
-  if (mode === "true") return (Math.max(radiusKm, 1) / AU_KM) * TRUE_AU;
+  if (mode === "true") {
+    const radius = Number.isFinite(radiusKm) && radiusKm > 0 ? radiusKm : 0;
+    return radius * TRUE_KM;
+  }
   const earthKm = 6371;
   return 0.7 * Math.pow(Math.max(radiusKm, 200) / earthKm, 0.5);
 }
@@ -35,8 +48,35 @@ export const SUN_SCENE_RADIUS = 3.35;
 const SUN_RADIUS_KM = 696340;
 
 export function sunSceneRadius(mode: ScaleMode = "showcase"): number {
-  if (mode === "true") return (SUN_RADIUS_KM / AU_KM) * TRUE_AU;
+  if (mode === "true") return SUN_RADIUS_KM * TRUE_KM;
   return SUN_SCENE_RADIUS;
+}
+
+/**
+ * Showcase draws a wide corona so the Sun reads as a star.
+ * True mode keeps that glow inside a thin limb so the photosphere stays the visual radius.
+ */
+export function solarCorona(mode: ScaleMode): { glow: number; halo: number } {
+  if (mode === "true") return { glow: 1.16, halo: 1.38 };
+  return { glow: 4.4, halo: 8.5 };
+}
+
+/** Screen-space bloom inflates a bright disc. True mode keeps it from painting a larger Sun. */
+export function bloomFor(mode: ScaleMode): {
+  strength: number;
+  threshold: number;
+} {
+  if (mode === "true") return { strength: 0.045, threshold: 1.25 };
+  return { strength: 0.22, threshold: 1.55 };
+}
+
+/**
+ * Raycast radius. True mode may grow a tiny body so it can be clicked.
+ * The mesh scale stays on visualRadiusKm.
+ */
+export function pickRadius(visualRadius: number, mode: ScaleMode): number {
+  if (mode !== "true") return visualRadius;
+  return Math.max(visualRadius, 0.02);
 }
 
 /** Ecliptic J2000 (x, y, z) to scene Y-up, scaled so the semi-major axis matches auToScene. */
