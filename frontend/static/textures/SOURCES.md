@@ -23,6 +23,9 @@ public domain; keep this credit if you redistribute them.
 | `saturn_ring.png` | Saturn rings | `2k_saturn_ring_alpha.png` |
 | `uranus.jpg` | Uranus | `2k_uranus.jpg` |
 | `neptune.jpg` | Neptune | `2k_neptune.jpg` |
-| `stars.jpg` | Starfield | `2k_stars_milky_way.jpg` |
+| `moon.jpg` | Moon | `2k_moon.jpg` |
+| `stars.jpg` | Milky Way starfield | `2k_stars_milky_way.jpg` |
+
+`stars.jpg` is the Milky Way panorama used as the sky background. `moon.jpg` is the same 2K set.
 
 The Sun’s corona glow is drawn in the scene. It is not a photographed texture.
