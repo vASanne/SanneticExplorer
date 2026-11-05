@@ -38,10 +38,30 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+def _cors_origins():
+    """Origins allowed to call the API from a browser.
+
+    Docker publishes the UI on port 13300. Local Vite stays on port 3000.
+    Set CORS_ORIGINS to a comma-separated list to override both.
+    """
+    configured = os.getenv("CORS_ORIGINS", "").strip()
+    if configured:
+        return [origin.strip() for origin in configured.split(",") if origin.strip()]
+    origins = []
+    for origin in (
+        os.getenv("FRONTEND_URL", "http://localhost:13300"),
+        "http://localhost:13300",
+        "http://localhost:3000",
+    ):
+        if origin and origin not in origins:
+            origins.append(origin)
+    return origins
+
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Frontend URL
+    allow_origins=_cors_origins(),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
@@ -56,7 +76,7 @@ redis_client = redis.Redis(
 )
 
 # Pydantic models for API responses
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from uuid import UUID
@@ -82,6 +102,7 @@ class CelestialBodyResponse(BaseModel):
     id: UUID
     name: str
     type: str
+    body_type: Optional[str] = None
     subtype: Optional[str] = None
     parent_id: Optional[UUID] = None
     mass_kg: Optional[float] = None
@@ -99,6 +120,13 @@ class CelestialBodyResponse(BaseModel):
     created_at: datetime
     updated_at: Optional[datetime] = None
     
+    @model_validator(mode="after")
+    def fill_body_type(self):
+        """Frontend reads body_type; the column is type."""
+        if not self.body_type:
+            self.body_type = self.type
+        return self
+
     class Config:
         from_attributes = True
 
@@ -179,6 +207,10 @@ async def startup_event() -> None:
     """Initialize application on startup"""
     try:
         init_database()
+        from ..services.seed_planets import seed_solar_system
+
+        added = seed_solar_system()
+        logger.info("Solar-system seed finished (%s new bodies)", added)
         logger.info("Application started successfully")
     except Exception as e:
         logger.error(f"Failed to initialize application: {e}")
@@ -224,30 +256,62 @@ async def get_system_statistics(db: Session = Depends(get_db)) -> Dict[str, Any]
         logger.error(f"Error getting system statistics: {e}")
         raise HTTPException(status_code=500, detail="Failed to get system statistics")
 
-# Celestial bodies endpoints
+def _list_celestial_bodies(
+    db: Session,
+    type_filter: Optional[str],
+    parent_id: Optional[str],
+    limit: int,
+    offset: int,
+) -> List[CelestialBody]:
+    query = db.query(CelestialBody)
+    if type_filter:
+        query = query.filter(CelestialBody.type == type_filter)
+    if parent_id:
+        query = query.filter(CelestialBody.parent_id == parent_id)
+    return query.offset(offset).limit(limit).all()
+
+
+def _get_celestial_body(db: Session, body_id: UUID) -> CelestialBody:
+    celestial_body = db.query(CelestialBody).filter(CelestialBody.id == body_id).first()
+    if not celestial_body:
+        raise HTTPException(status_code=404, detail="Celestial body not found")
+    return celestial_body
+
+
+# Celestial bodies endpoints.
+# /bodies is the path the frontend already calls; /celestial-bodies is the canonical name.
 @app.get("/celestial-bodies", response_model=List[CelestialBodyResponse], tags=["Celestial Bodies"])
+@app.get("/bodies", response_model=List[CelestialBodyResponse], tags=["Celestial Bodies"])
 async def get_celestial_bodies(
     db: Session = Depends(get_db),
     type: Optional[str] = Query(None, description="Filter by celestial body type"),
+    body_type: Optional[str] = Query(None, description="Alias of type, used by the frontend"),
     parent_id: Optional[str] = Query(None, description="Filter by parent ID"),
     limit: int = Query(100, le=1000, description="Maximum number of results"),
     offset: int = Query(0, ge=0, description="Number of results to skip")
 ) -> List[CelestialBody]:
     """Get celestial bodies with optional filtering"""
     try:
-        query = db.query(CelestialBody)
-        
-        if type:
-            query = query.filter(CelestialBody.type == type)
-        
-        if parent_id:
-            query = query.filter(CelestialBody.parent_id == parent_id)
-        
-        celestial_bodies = query.offset(offset).limit(limit).all()
-        return celestial_bodies
+        return _list_celestial_bodies(db, type or body_type, parent_id, limit, offset)
     except Exception as e:
         logger.error(f"Error getting celestial bodies: {e}")
         raise HTTPException(status_code=500, detail="Failed to get celestial bodies")
+
+
+@app.get("/celestial-bodies/{body_id}", response_model=CelestialBodyResponse, tags=["Celestial Bodies"])
+@app.get("/bodies/{body_id}", response_model=CelestialBodyResponse, tags=["Celestial Bodies"])
+async def get_celestial_body(
+    body_id: UUID = Path(..., description="Celestial body ID"),
+    db: Session = Depends(get_db),
+) -> CelestialBody:
+    """Get one celestial body by id"""
+    try:
+        return _get_celestial_body(db, body_id)
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting celestial body {body_id}: {e}")
+        raise HTTPException(status_code=500, detail="Failed to get celestial body")
 
 @app.get("/planets", response_model=List[PlanetResponse], tags=["Celestial Bodies"])
 async def get_planets(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:

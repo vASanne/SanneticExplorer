@@ -39,6 +39,8 @@ Create a `.env` file in the frontend directory with:
 PUBLIC_API_URL=http://localhost:8000
 ```
 
+Use `http://localhost:8000` when the API is running on the host. The Docker stack publishes the API on **http://localhost:13800** and the UI on **http://localhost:13300** (`make up`). `npm run dev:front` still uses port 3000.
+
 **Note**: All environment variables prefixed with `PUBLIC_` are exposed to the client and can be accessed via `import.meta.env.PUBLIC_*`.
 
 ## Getting Started

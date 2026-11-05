@@ -28,8 +28,8 @@ make docker-clean    # Cleanup
 ### 2. Manual Testing
 
 ```bash
-# Start test environment
-docker-compose -f docker-compose.test.yml up -d
+# Start test environment (project sannetic-explorer-test)
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml up -d
 
 # Check container health
 make docker-health
@@ -38,16 +38,21 @@ make docker-health
 python scripts/test_infrastructure.py
 
 # Stop and cleanup
-docker-compose -f docker-compose.test.yml down -v
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml down -v
 ```
 
 ## Test Configuration
 
 ### Ports Used
-- **Database**: `5433` (PostgreSQL)
-- **Redis**: `6380` (Cache)
-- **Backend**: `8001` (API)
-- **Frontend**: `3001` (Web UI)
+
+Host ports are in the reserved range so this stack does not bind 5432, 6379, 8000, or 3000. Container ports are unchanged.
+
+- **Database**: `15433` → container `5432` (PostgreSQL)
+- **Redis**: `16380` → container `6379` (Cache)
+- **Backend**: `13801` → container `8000` (API)
+- **Frontend**: `13301` → container `3000` (Web UI)
+
+Compose project name: `sannetic-explorer-test`. Override host ports with `HOST_TEST_POSTGRES_PORT`, `HOST_TEST_REDIS_PORT`, `HOST_TEST_BACKEND_PORT`, and `HOST_TEST_FRONTEND_PORT`.
 
 ### Environment Variables
 The test environment uses simplified configuration:
@@ -122,8 +127,8 @@ Tests generate a detailed JSON report (`infrastructure_test_report.json`):
 ### Console Output
 Real-time test results with emojis and status indicators:
 ```
-✅ Container test-db: PostgreSQL accessible on port 5433
-❌ Container test-backend: Not accessible on port 8001
+✅ Container test-db: PostgreSQL accessible on port 15433
+❌ Container test-backend: Not accessible on port 13801
    Details: Connection refused
 ```
 
@@ -134,10 +139,10 @@ Real-time test results with emojis and status indicators:
 #### 1. Port Conflicts
 ```bash
 # Check if ports are in use
-lsof -i :5433
-lsof -i :6380
-lsof -i :8001
-lsof -i :3001
+lsof -i :15433
+lsof -i :16380
+lsof -i :13801
+lsof -i :13301
 
 # Kill processes using ports
 sudo kill -9 <PID>
@@ -149,25 +154,25 @@ sudo kill -9 <PID>
 docker system prune -a
 
 # Rebuild without cache
-docker-compose -f docker-compose.test.yml build --no-cache
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml build --no-cache
 ```
 
 #### 3. Database Connection Issues
 ```bash
 # Check database logs
-docker-compose -f docker-compose.test.yml logs test-db
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml logs test-db
 
 # Test database connection manually
-psql -h localhost -p 5433 -U postgres -d sannetic_explorer_test
+psql -h localhost -p 15433 -U postgres -d sannetic_explorer_test
 ```
 
 #### 4. API Timeout Issues
 ```bash
 # Check backend logs
-docker-compose -f docker-compose.test.yml logs test-backend
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml logs test-backend
 
 # Test API manually
-curl http://localhost:8001/health
+curl http://localhost:13801/health
 ```
 
 ### Performance Optimization
@@ -199,7 +204,7 @@ docker exec -it <redis_container> redis-cli monitor
 docker stats
 
 # Check container logs
-docker-compose -f docker-compose.test.yml logs -f
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml logs -f
 ```
 
 ## Continuous Integration
@@ -229,9 +234,9 @@ Add infrastructure validation to pre-commit:
 ## Monitoring and Alerting
 
 ### Health Check Endpoints
-- Backend: `http://localhost:8001/health`
-- Database: `pg_isready -h localhost -p 5433`
-- Redis: `redis-cli -h localhost -p 6380 ping`
+- Backend: `http://localhost:13801/health`
+- Database: `pg_isready -h localhost -p 15433`
+- Redis: `redis-cli -h localhost -p 16380 ping`
 
 ### Metrics Collection
 ```bash
@@ -239,7 +244,7 @@ Add infrastructure validation to pre-commit:
 docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 
 # Application metrics
-curl http://localhost:8001/stats
+curl http://localhost:13801/stats
 ```
 
 ## Security Considerations
@@ -293,15 +298,15 @@ curl http://localhost:8001/stats
 sudo apt-get install apache2-utils
 
 # Test API endpoints
-ab -n 1000 -c 10 http://localhost:8001/health
-ab -n 1000 -c 10 http://localhost:8001/bodies
+ab -n 1000 -c 10 http://localhost:13801/health
+ab -n 1000 -c 10 http://localhost:13801/bodies
 ```
 
 ### Stress Testing
 ```bash
 # Test database connections
 for i in {1..50}; do
-  psql -h localhost -p 5433 -U postgres -d sannetic_explorer_test -c "SELECT 1;" &
+  psql -h localhost -p 15433 -U postgres -d sannetic_explorer_test -c "SELECT 1;" &
 done
 wait
 ```
@@ -309,9 +314,9 @@ wait
 ### Chaos Testing
 ```bash
 # Simulate container failures
-docker-compose -f docker-compose.test.yml kill test-backend
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml kill test-backend
 sleep 5
-docker-compose -f docker-compose.test.yml start test-backend
+docker compose -p sannetic-explorer-test -f docker-compose.test.yml start test-backend
 ```
 
 ## Conclusion

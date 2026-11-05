@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import type { CelestialBody } from '$lib/api';
+	import { getApiBaseUrl, type CelestialBody } from '$lib/api';
 	import { writable } from 'svelte/store';
 	
 	// Props
@@ -19,8 +19,6 @@
 		color_hex: '#aaaaaa'
 	};
 	
-	// API base URL
-	const API_BASE_URL = import.meta.env.PUBLIC_API_URL || 'http://localhost:8000';
 	
 	// Group bodies by type
 	$: groupedBodies = bodies.reduce((groups, body) => {
@@ -62,7 +60,7 @@
 			};
 			
 			// Call API
-			const response = await fetch(`${API_BASE_URL}/bodies/${editingBody.id}`, {
+			const response = await fetch(`${getApiBaseUrl()}/bodies/${editingBody.id}`, {
 				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json',

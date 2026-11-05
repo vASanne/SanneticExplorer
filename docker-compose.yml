@@ -1,3 +1,7 @@
+# Namespaces containers, networks, and volumes away from other Compose projects.
+# Override with: docker compose -p <name> ...   or   COMPOSE_PROJECT_NAME=<name>
+name: ${COMPOSE_PROJECT_NAME:-sannetic-explorer}
+
 services:
   db:
     image: postgres:16
@@ -9,7 +13,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5432:5432"
+      - "${HOST_POSTGRES_PORT:-15432}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
@@ -19,7 +23,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "${HOST_REDIS_PORT:-16379}:6379"
     volumes:
       - redis_data:/data
     healthcheck:
@@ -39,15 +43,19 @@ services:
       redis:
         condition: service_healthy
     ports: 
-      - "8000:8000"
+      - "${HOST_BACKEND_PORT:-13800}:8000"
     volumes:
       - ./Data:/app/Data:ro
       - ./logs:/app/logs
     environment:
+      # Inside the Compose network: service DNS and container ports.
       DATABASE_URL: postgresql://postgres:postgres@db:5432/sannetic_explorer
-      PUBLIC_API_URL: http://localhost:8000
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      # Browser on the host uses the published ports. Keep PUBLIC_API_URL aligned with HOST_BACKEND_PORT.
+      PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:13300}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:13300,http://localhost:3000}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
@@ -58,14 +66,21 @@ services:
     build: 
       context: .
       dockerfile: frontend/Dockerfile
+      args:
+        # Baked into the client bundle. Rebuild the frontend after changing it.
+        PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
+        VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
     env_file: .env
     depends_on: 
       backend:
         condition: service_healthy
     ports: 
-      - "3000:3000"
+      - "${HOST_FRONTEND_PORT:-13300}:3000"
     environment:
-      PUBLIC_API_URL: http://localhost:8000
+      PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
+      VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
+      # SSR and load functions run in this container. localhost:13800 is the host, not the API.
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://backend:8000}
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/static:/app/static

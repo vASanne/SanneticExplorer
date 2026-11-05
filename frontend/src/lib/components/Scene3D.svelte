@@ -111,32 +111,38 @@
 		}
 	}
 	
+	function fallbackPlanets(): PlanetData[] {
+		return [
+			{ id: '1', name: 'Mercury', type: 'planet', radius_km: 2439.5, mean_distance_au: 0.387, orbital_period_days: 88, color_hex: '#8c7853', data_quality: 'fallback' },
+			{ id: '2', name: 'Venus', type: 'planet', radius_km: 6052, mean_distance_au: 0.723, orbital_period_days: 225, color_hex: '#e7cdcd', data_quality: 'fallback' },
+			{ id: '3', name: 'Earth', type: 'planet', radius_km: 6371, mean_distance_au: 1.0, orbital_period_days: 365.25, color_hex: '#6b93d6', data_quality: 'fallback' },
+			{ id: '4', name: 'Mars', type: 'planet', radius_km: 3389.5, mean_distance_au: 1.524, orbital_period_days: 687, color_hex: '#c1440e', data_quality: 'fallback' },
+			{ id: '5', name: 'Jupiter', type: 'planet', radius_km: 69911, mean_distance_au: 5.203, orbital_period_days: 4333, color_hex: '#d8ca9d', data_quality: 'fallback' },
+			{ id: '6', name: 'Saturn', type: 'planet', radius_km: 58232, mean_distance_au: 9.537, orbital_period_days: 10759, color_hex: '#fad5a5', has_rings: true, data_quality: 'fallback' },
+			{ id: '7', name: 'Uranus', type: 'planet', radius_km: 25362, mean_distance_au: 19.191, orbital_period_days: 30687, color_hex: '#4fd0e7', data_quality: 'fallback' },
+			{ id: '8', name: 'Neptune', type: 'planet', radius_km: 24622, mean_distance_au: 30.069, orbital_period_days: 60190, color_hex: '#4b70dd', data_quality: 'fallback' }
+		];
+	}
+
 	async function initializeScene() {
-		// Load planet data from API first
+		// Load planet data from API first. An empty list is not a usable solar system.
 		console.log('Starting to load planets from API...');
 		try {
 			console.log('Calling getPlanets()...');
-			realPlanetsData = await getPlanets();
-			planetsLoaded = true;
-			console.log('Successfully loaded planets from API:', realPlanetsData.length, realPlanetsData);
+			const loaded = await getPlanets();
+			if (!loaded || loaded.length === 0) {
+				console.warn('Planet API returned no planets; using the eight-planet fallback');
+				realPlanetsData = fallbackPlanets();
+			} else {
+				realPlanetsData = loaded;
+				console.log('Successfully loaded planets from API:', realPlanetsData.length, realPlanetsData);
+			}
 		} catch (error) {
 			console.error('Failed to load planets from API:', error);
-			// Fallback to hardcoded data
 			console.log('Using fallback planet data...');
-			realPlanetsData = [
-				{
-					id: "1", name: "Mercury", type: "planet", radius_km: 2439.5, 
-					mean_distance_au: 0.387, orbital_period_days: 88, 
-					color_hex: "#8c7853", data_quality: "fallback"
-				},
-				{
-					id: "2", name: "Earth", type: "planet", radius_km: 6371, 
-					mean_distance_au: 1.0, orbital_period_days: 365.25, 
-					color_hex: "#6b93d6", data_quality: "fallback"
-				}
-			];
-			planetsLoaded = true;
+			realPlanetsData = fallbackPlanets();
 		}
+		planetsLoaded = true;
 		
 		initThreeJS();
 		createSolarSystem();
