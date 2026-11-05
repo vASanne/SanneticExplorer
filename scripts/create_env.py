@@ -64,13 +64,9 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=postgres
 DATABASE_URL=postgresql://postgres:postgres@db:5432/sannetic_explorer
 
-# Redis Configuration for Docker
+# Redis Configuration for Docker (container port; host publish is HOST_REDIS_PORT)
 REDIS_HOST=redis
 REDIS_PORT=6379
-
-# Application URLs for Docker
-PUBLIC_API_URL=http://localhost:8000
-FRONTEND_URL=http://localhost:3000
 """
         
         content += docker_vars

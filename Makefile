@@ -1,9 +1,19 @@
 # Sannetic Explorer Makefile
 
-# Variables
-DOCKER_COMPOSE = docker compose
+# Isolated Compose project: containers, networks, and volumes are prefixed
+# with this name. Override with: make up COMPOSE_PROJECT=my-name
+COMPOSE_PROJECT ?= sannetic-explorer
+DOCKER_COMPOSE = docker compose -p $(COMPOSE_PROJECT)
 BACKEND_SERVICE = backend
 WORKER_SERVICE = worker
+DB_SERVICE = db
+
+# Published host ports. Container ports stay 3000/8000/5432/6379.
+# Override with: make up HOST_FRONTEND_PORT=13310
+# If you change HOST_BACKEND_PORT, also set PUBLIC_API_URL=http://localhost:<port>
+# and rebuild the frontend (the browser URL is baked into the image).
+HOST_FRONTEND_PORT ?= 13300
+HOST_BACKEND_PORT ?= 13800
 
 # Check if Docker is available
 .PHONY: check-docker
@@ -21,7 +31,7 @@ help:
 	@echo "  make check-docker   - Check if Docker is available and running"
 	@echo "  make build          - Build all Docker containers"
 	@echo "  make rebuild        - Rebuild all containers without cache and restart"
-	@echo "  make up             - Start all services"
+	@echo "  make up             - Start all services (project: $(COMPOSE_PROJECT))"
 	@echo "  make down           - Stop all services"
 	@echo "  make restart        - Restart all services"
 	@echo "  make ps             - Show service status"
@@ -74,9 +84,14 @@ rebuild: check-docker
 
 .PHONY: up
 up: check-docker
-	@echo "Starting all services..."
+	@echo "Starting all services (project: $(COMPOSE_PROJECT))..."
 	@$(DOCKER_COMPOSE) up -d
-	@echo "Services started! Frontend: http://localhost:3000, Backend: http://localhost:8000"
+	@echo "Services started! Project: $(COMPOSE_PROJECT)"
+	@frontend_port=$$($(DOCKER_COMPOSE) port frontend 3000 2>/dev/null | head -n 1 | awk -F: '{print $$NF}'); \
+	backend_port=$$($(DOCKER_COMPOSE) port backend 8000 2>/dev/null | head -n 1 | awk -F: '{print $$NF}'); \
+	echo "  Frontend: http://localhost:$${frontend_port:-13300}"; \
+	echo "  Backend:  http://localhost:$${backend_port:-13800}"; \
+	echo "  API docs: http://localhost:$${backend_port:-13800}/docs"
 
 .PHONY: down
 down: check-docker
@@ -121,7 +136,7 @@ db-migrate: check-docker
 .PHONY: db-shell
 db-shell: check-docker
 	@echo "Connecting to PostgreSQL shell..."
-	@$(DOCKER_COMPOSE) exec postgres psql -U postgres sannetic_explorer
+	@$(DOCKER_COMPOSE) exec $(DB_SERVICE) psql -U postgres sannetic_explorer
 
 # Testing
 .PHONY: test-backend

@@ -5,8 +5,10 @@ Sannetic Explorer is a solar system simulation platform with a FastAPI backend a
 ## Quick Start
 
 ```sh
-docker-compose up --build
+docker compose -p sannetic-explorer up --build
 ```
+
+The UI is at http://localhost:13300 and the API at http://localhost:13800. Host ports 3000, 8000, 5432, and 6379 are not published. See `DOCKER_SETUP_GUIDE.md`.
 
 ## Development Workflow
 

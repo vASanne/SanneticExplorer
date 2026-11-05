@@ -266,7 +266,7 @@ def main():
         logger.info("🎉 Automation setup completed successfully!")
         logger.info("📋 Next steps:")
         logger.info("  1. Rebuild container: make build")
-        logger.info("  2. Start automation: docker-compose -f docker-compose.yml -f docker-compose.automation.yml up -d")
+        logger.info("  2. Start automation: docker compose -p sannetic-explorer -f docker-compose.yml -f docker-compose.automation.yml up -d")
         logger.info("  3. Monitor logs: make tail-logs")
         return 0
     else:

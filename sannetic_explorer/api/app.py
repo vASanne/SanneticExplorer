@@ -38,10 +38,30 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+def _cors_origins():
+    """Origins allowed to call the API from a browser.
+
+    Docker publishes the UI on port 13300. Local Vite stays on port 3000.
+    Set CORS_ORIGINS to a comma-separated list to override both.
+    """
+    configured = os.getenv("CORS_ORIGINS", "").strip()
+    if configured:
+        return [origin.strip() for origin in configured.split(",") if origin.strip()]
+    origins = []
+    for origin in (
+        os.getenv("FRONTEND_URL", "http://localhost:13300"),
+        "http://localhost:13300",
+        "http://localhost:3000",
+    ):
+        if origin and origin not in origins:
+            origins.append(origin)
+    return origins
+
+
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Frontend URL
+    allow_origins=_cors_origins(),
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],

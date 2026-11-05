@@ -57,6 +57,23 @@ pre-commit install
 
 ## Running the Project
 
+### Web stack (Docker)
+
+The Compose project name is `sannetic-explorer`, so containers, networks, and volumes stay namespaced when other web projects are running. Published host ports are 13300 (UI), 13800 (API), 15432 (Postgres), and 16379 (Redis). Container ports stay 3000 / 8000 / 5432 / 6379, and services talk to each other on the Docker network (`db:5432`, `redis:6379`).
+
+```bash
+cp env.example .env   # then add API keys; do not commit real secrets
+make up
+# or:
+docker compose -p sannetic-explorer up -d
+```
+
+- Frontend: http://localhost:13300
+- API: http://localhost:13800
+- API docs: http://localhost:13800/docs
+
+Override a host port in `.env` (`HOST_FRONTEND_PORT`, `HOST_BACKEND_PORT`, `HOST_POSTGRES_PORT`, `HOST_REDIS_PORT`). If you change `HOST_BACKEND_PORT`, set `PUBLIC_API_URL` to the same host port and rebuild the frontend. Leave `COMPOSE_PROJECT_NAME` unset so `docker-compose.backend.yml` (`sannetic-explorer-backend`) and `docker-compose.test.yml` (`sannetic-explorer-test`) keep their own project names. The test stack uses 13301 / 13801 / 15433 / 16380. The backend variant also publishes Flower on host port 15555.
+
 All Python scripts must be run within the Sannetic Explorer Docker container to ensure consistent dependencies and environment.
 
 ### Quick Commands (Makefile)
