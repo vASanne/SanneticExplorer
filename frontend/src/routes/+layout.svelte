@@ -1,10 +1,11 @@
 <script lang="ts">
-	import '../app.css';
-	import type { LayoutData } from './$types';
+  import { browser } from "$app/environment";
+  import { locale } from "$lib/i18n";
+  import "../app.css";
 
-	export let data: LayoutData;
+  $: if (browser && $locale) document.documentElement.lang = $locale;
 </script>
 
-<div class="min-h-screen bg-base-100">
-	<slot />
-</div> 
+<div class="min-h-screen" style="background:#05060a;color:#ece8e1">
+  <slot />
+</div>

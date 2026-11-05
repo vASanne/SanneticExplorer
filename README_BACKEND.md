@@ -27,6 +27,7 @@ A comprehensive FastAPI backend for solar system simulation with PostgreSQL data
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   FastAPI App   │    │   PostgreSQL    │    │     Redis       │
 │   (Port 8000)   │◄──►│   (Port 5432)   │    │   (Port 6379)   │
+│ host: 13800     │    │ host: 15432     │    │ host: 16379     │
 └─────────────────┘    └─────────────────┘    └─────────────────┘
          │                       │                       │
          ▼                       ▼                       ▼
@@ -234,8 +235,8 @@ make -f Makefile.backend db-maintenance
 make -f Makefile.backend logs
 
 # View specific service logs
-docker compose -f docker-compose.backend.yml logs backend
-docker compose -f docker-compose.backend.yml logs postgres
+docker compose -p sannetic-explorer-backend -f docker-compose.backend.yml logs backend
+docker compose -p sannetic-explorer-backend -f docker-compose.backend.yml logs postgres
 ```
 
 ## 🚀 Production Deployment
@@ -352,10 +353,12 @@ make -f Makefile.backend emergency-restart
 
 ## 📚 API Documentation
 
-Once the backend is running, visit:
-- **Interactive Docs**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
-- **Celery Monitoring**: http://localhost:5555
+Once the backend is running (`docker compose -p sannetic-explorer-backend -f docker-compose.backend.yml up -d`), visit:
+- **Interactive Docs**: http://localhost:13800/docs
+- **ReDoc**: http://localhost:13800/redoc
+- **Celery Monitoring**: http://localhost:15555
+
+Those are the published host ports. Inside the Compose network the API still listens on 8000, Postgres on 5432, Redis on 6379, and Flower on 5555. The main web stack (`make up`) uses the same host ports for API, Postgres, and Redis under project name `sannetic-explorer`; do not run both stacks together.
 
 ## 🤝 Contributing
 

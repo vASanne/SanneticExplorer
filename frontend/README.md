@@ -8,7 +8,7 @@ A modern SvelteKit frontend for the Sannetic Explorer solar system simulation pr
 - **TypeScript** - Type-safe development
 - **TailwindCSS** - Utility-first CSS framework
 - **daisyUI** - Beautiful component library
-- **Threlte** - Three.js integration for 3D graphics
+- **Three.js** - Orrery with mapped planet textures
 - **Vite** - Fast build tool with hot module replacement
 
 ## Project Structure
@@ -35,11 +35,15 @@ frontend/
 Create a `.env` file in the frontend directory with:
 
 ```bash
-# API Configuration
-PUBLIC_API_URL=http://localhost:8000
+# Browser-facing API. Docker publishes the API on 13800, not 8000.
+PUBLIC_API_URL=http://localhost:13800
+# Only for `npm run dev` on the host. Inside Compose this is http://backend:8000.
+INTERNAL_API_URL=http://localhost:13800
 ```
 
-**Note**: All environment variables prefixed with `PUBLIC_` are exposed to the client and can be accessed via `import.meta.env.PUBLIC_*`.
+`make up` serves the showcase at **http://localhost:13300** (`/` and `/3d`) and the API at **http://localhost:13800**. `npm run dev:front` still uses port 3000. Server loads must not call `http://backend:8000` unless that DNS name exists; on the host, point `INTERNAL_API_URL` at the published port.
+
+**Note**: `PUBLIC_*` is exposed to the browser via `$env/dynamic/public`. `INTERNAL_API_URL` stays on the server.
 
 ## Getting Started
 
@@ -68,13 +72,7 @@ PUBLIC_API_URL=http://localhost:8000
    npm run dev:front
    ```
 
-The app will be available at `http://localhost:3000` with:
-- Beautiful daisyUI components
-- Interactive 3D scene at `/3d`
-- Theme switching capabilities
-- Responsive design
-- TypeScript support throughout
-- Real-time data from the FastAPI backend
+The app will be available at `http://localhost:3000`. `/` and `/3d` are the orrery. `/dashboard` is the live data status.
 
 ### Available Scripts
 
@@ -103,9 +101,9 @@ The project uses TailwindCSS with daisyUI for beautiful, accessible components. 
 - cyberpunk
 - synthwave
 
-### Threlte (Three.js)
+### Three.js orrery
 
-The project includes Threlte for 3D graphics. See `src/lib/components/SolarSystemCanvas.svelte` for the main 3D scene.
+`src/lib/solar/Orrery.ts` draws the Sun and eight planets with the maps in `static/textures/`. Sources and the CC BY 4.0 credit are in `static/textures/SOURCES.md`. Empty `/planets` falls back to the reference catalog instead of a Sun-only scene.
 
 ### API Integration
 
@@ -149,7 +147,7 @@ The built files will be in the `dist/` directory.
 
 This frontend is designed to work with the Sannetic Explorer backend API. The backend provides:
 
-- Celestial body data via `/bodies` endpoint
+- Planet data via `/planets` (and `/celestial-bodies`, with `/bodies` kept as an alias)
 - Orbital calculations
 - Real-time spacecraft tracking
 - Historical exploration data

@@ -1,3 +1,7 @@
+# Test stack. Own project name and host ports so it can run beside the main stack
+# without sharing volumes or binding 3000/8000/5432/6379.
+name: ${COMPOSE_PROJECT_NAME:-sannetic-explorer-test}
+
 version: '3.8'
 
 services:
@@ -9,7 +13,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "5433:5432"  # Different port to avoid conflicts
+      - "${HOST_TEST_POSTGRES_PORT:-15433}:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -22,7 +26,7 @@ services:
   test-redis:
     image: redis:7-alpine
     ports:
-      - "6380:6379"  # Different port to avoid conflicts
+      - "${HOST_TEST_REDIS_PORT:-16380}:6379"
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -40,6 +44,8 @@ services:
       DATABASE_URL: postgresql://postgres:postgres@test-db:5432/sannetic_explorer_test
       REDIS_HOST: test-redis
       REDIS_PORT: 6379
+      PUBLIC_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
+      CORS_ORIGINS: ${TEST_CORS_ORIGINS:-http://localhost:13301,http://localhost:3001}
       LOG_LEVEL: DEBUG
       DEBUG_MODE: true
     depends_on: 
@@ -48,7 +54,7 @@ services:
       test-redis:
         condition: service_healthy
     ports: 
-      - "8001:8000"  # Different port to avoid conflicts
+      - "${HOST_TEST_BACKEND_PORT:-13801}:8000"
     volumes:
       - ./Data:/app/Data:ro
       - ./logs:/app/logs
@@ -61,15 +67,20 @@ services:
   # Test Frontend
   test-frontend:
     build: 
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        PUBLIC_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
+        VITE_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
     environment:
-      PUBLIC_API_URL: http://localhost:8001
+      PUBLIC_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
+      VITE_API_URL: ${PUBLIC_TEST_API_URL:-http://localhost:13801}
+      INTERNAL_API_URL: ${TEST_INTERNAL_API_URL:-http://test-backend:8000}
     depends_on: 
       test-backend:
         condition: service_healthy
     ports: 
-      - "3001:3000"  # Different port to avoid conflicts
+      - "${HOST_TEST_FRONTEND_PORT:-13301}:3000"
     volumes:
       - ./frontend/src:/app/src
       - ./frontend/static:/app/static

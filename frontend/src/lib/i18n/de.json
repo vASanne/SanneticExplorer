@@ -1,0 +1,161 @@
+{
+  "meta": {
+    "title": "Sannetic Explorer",
+    "description": "Ein lebendes Modell des Sonnensystems. Sonne und acht Planeten, gespeist von der Sannetic-Explorer-API."
+  },
+  "brand": {
+    "lead": "Sannetic",
+    "mark": "Explorer",
+    "eyebrow": "Sonnensystem"
+  },
+  "locale": {
+    "de": "DE",
+    "en": "EN"
+  },
+  "aria": {
+    "bodies": "Himmelskörper",
+    "language": "Sprache"
+  },
+  "status": {
+    "open": "Live-Datenstatus öffnen",
+    "live": "Live · {count, plural, one {# Planet} other {# Planeten}}",
+    "partial": "Teilweise · {count} live",
+    "reference": "Referenzkatalog",
+    "pageTitle": "Live-Daten · Sannetic Explorer",
+    "eyebrow": "Live-Daten",
+    "backend": "Backend",
+    "heading": "Systemstatus",
+    "note": "Die Ansicht liest <code>/planets</code>. Eine leere Datenbank zeigte früher nur die Sonne, deshalb importiert das Backend die acht Planeten beim Start. Zum erneuten Import <code>make db-migrate</code> ausführen.",
+    "browserApi": "Browser-API",
+    "serverApi": "Server-API",
+    "health": "Zustand",
+    "bodies": "Körper",
+    "planets": "Planeten",
+    "unreachable": "nicht erreichbar",
+    "empty": "Noch keine Planetenzeilen. Die Ansicht zeigt weiter das Referenz-Sonnensystem.",
+    "openSystem": "Zum Sonnensystem",
+    "apiDocs": "API-Dokumentation"
+  },
+  "health": {
+    "healthy": "gesund",
+    "ok": "in Ordnung"
+  },
+  "errors": {
+    "api_unavailable": "API nicht erreichbar",
+    "request_failed": "Anfrage fehlgeschlagen"
+  },
+  "dock": {
+    "today": "Heute",
+    "play": "Start",
+    "pause": "Pause",
+    "playAria": "Umlaufbahn abspielen",
+    "pauseAria": "Animation anhalten",
+    "slower": "Langsamer, auch rückwärts",
+    "faster": "Schneller",
+    "orbits": "Bahnen",
+    "labels": "Namen",
+    "showcase": "Schaustück",
+    "trueScale": "Echtmaß",
+    "inner": "Innen",
+    "system": "System"
+  },
+  "panels": {
+    "star": "Stern",
+    "close": "Schließen",
+    "live": "Live-API",
+    "reference": "Referenzkatalog",
+    "moon": "Erdmond",
+    "liveNote": "Größen und J2000-Elemente folgen der API. Fehlende Winkel nutzen die JPL-Tabellen mit säkularen Raten. Achsneigung und Drehung folgen den IAU-Polen.",
+    "referenceNote": "Dieser Körper fehlt in der aktuellen API-Antwort, daher werden die JPL-Referenzelemente gezeigt.",
+    "sunSummary": "Die Sonne wird in der Szene gezeichnet. Größen und Bahnelemente der Planeten kommen von der Live-API /planets, sobald die Datenbank Einträge enthält. Fehlende Elemente fallen auf die JPL-J2000-Tabellen zurück.",
+    "moonSummary": "Abstand, Größe, Exzentrizität, Bahnneigung und siderische Periode folgen Data/Planets/earth.json. Knoten, Perigäum und die wichtigsten Störungen stammen aus dem Referenzmodell, weil diese Winkel nicht in Data/ stehen."
+  },
+  "facts": {
+    "distance": "Entfernung",
+    "period": "Umlaufzeit",
+    "eccentricity": "Exzentrizität",
+    "inclination": "Bahnneigung",
+    "tilt": "Achsneigung",
+    "sidereal": "Siderischer Tag",
+    "radius": "Radius",
+    "mass": "Masse",
+    "gravity": "Schwere",
+    "temperature": "Temperatur",
+    "atmosphere": "Atmosphäre",
+    "rings": "Ringe",
+    "class": "Klasse",
+    "none": "Keine",
+    "yes": "Ja",
+    "no": "Nein"
+  },
+  "atmosphere": {
+    "nitrogen": "Stickstoff",
+    "oxygen": "Sauerstoff",
+    "argon": "Argon",
+    "carbonDioxide": "Kohlenstoffdioxid",
+    "helium": "Helium",
+    "hydrogen": "Wasserstoff",
+    "methane": "Methan",
+    "other": "Sonstiges"
+  },
+  "atmosphereValues": {
+    "trace amounts": "Spuren"
+  },
+  "bodies": {
+    "Sun": "Sonne",
+    "Moon": "Mond",
+    "Mercury": "Merkur",
+    "Venus": "Venus",
+    "Earth": "Erde",
+    "Mars": "Mars",
+    "Jupiter": "Jupiter",
+    "Saturn": "Saturn",
+    "Uranus": "Uranus",
+    "Neptune": "Neptun"
+  },
+  "subtypes": {
+    "terrestrial planet": "Gesteinsplanet",
+    "gas giant": "Gasriese",
+    "ice giant": "Eisriese",
+    "G2V star": "G2V-Stern",
+    "planet": "Planet",
+    "star": "Stern",
+    "moon": "Mond",
+    "satellite": "Satellit",
+    "dwarf planet": "Zwergplanet",
+    "asteroid": "Asteroid",
+    "comet": "Komet",
+    "spacecraft": "Raumsonde"
+  },
+  "units": {
+    "earthMasses": "{value} Erdmassen",
+    "earthYear": "Erdjahr ≈ {seconds} s",
+    "reverse": "rückwärts",
+    "days": "{days} Tage",
+    "daysYears": "{days} Tage · {years} Jahre",
+    "au": "{value} AE",
+    "km": "{value} km",
+    "hours": "{value} h",
+    "siderealDays": "{value} Tage",
+    "gravity": "{value} m/s²",
+    "temperature": "{kelvin} K · {celsius} °C"
+  },
+  "date": {
+    "stamp": "{day}. {month} {year} · {time} UTC",
+    "bc": "{year} v. Chr.",
+    "month": {
+      "1": "Jan.",
+      "2": "Feb.",
+      "3": "März",
+      "4": "Apr.",
+      "5": "Mai",
+      "6": "Juni",
+      "7": "Juli",
+      "8": "Aug.",
+      "9": "Sep.",
+      "10": "Okt.",
+      "11": "Nov.",
+      "12": "Dez."
+    }
+  }
+}

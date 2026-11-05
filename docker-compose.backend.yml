@@ -1,10 +1,14 @@
+# Backend-only stack. Separate project name so its volumes and network
+# do not mix with docker-compose.yml. Host ports match the main stack;
+# do not run both stacks at once.
+name: ${COMPOSE_PROJECT_NAME:-sannetic-explorer-backend}
+
 version: '3.8'
 
 services:
   # PostgreSQL Database
   postgres:
     image: postgres:15-alpine
-    container_name: sannetic-postgres
     environment:
       POSTGRES_DB: sannetic_explorer
       POSTGRES_USER: postgres
@@ -14,7 +18,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./init-db.sql:/docker-entrypoint-initdb.d/init-db.sql
     ports:
-      - "5432:5432"
+      - "${HOST_POSTGRES_PORT:-15432}:5432"
     networks:
       - sannetic-network
     healthcheck:
@@ -26,9 +30,8 @@ services:
   # Redis (for caching and background tasks)
   redis:
     image: redis:7-alpine
-    container_name: sannetic-redis
     ports:
-      - "6379:6379"
+      - "${HOST_REDIS_PORT:-16379}:6379"
     volumes:
       - redis_data:/data
     networks:
@@ -44,7 +47,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: sannetic-backend
     environment:
       # Database configuration
       DB_HOST: postgres
@@ -64,7 +66,7 @@ services:
       API_RELOAD: "true"
       
       # CORS configuration
-      CORS_ORIGINS: "*"
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:13300,http://localhost:3000}
       
       # Logging
       LOG_LEVEL: INFO
@@ -81,7 +83,7 @@ services:
       - .:/app
       - ./Data:/app/Data:ro
     ports:
-      - "8000:8000"
+      - "${HOST_BACKEND_PORT:-13800}:8000"
     depends_on:
       postgres:
         condition: service_healthy
@@ -101,7 +103,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: sannetic-celery-worker
     environment:
       # Database configuration
       DB_HOST: postgres
@@ -138,7 +139,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: sannetic-celery-beat
     environment:
       # Database configuration
       DB_HOST: postgres
@@ -175,7 +175,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.backend
-    container_name: sannetic-flower
     environment:
       # Redis configuration
       REDIS_HOST: redis
@@ -185,7 +184,7 @@ services:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
     ports:
-      - "5555:5555"
+      - "${HOST_FLOWER_PORT:-15555}:5555"
     depends_on:
       redis:
         condition: service_healthy
