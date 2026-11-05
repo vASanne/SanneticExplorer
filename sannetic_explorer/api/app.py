@@ -175,6 +175,11 @@ class PlanetResponse(BaseModel):
     semi_major_axis_km: Optional[float] = None
     eccentricity: Optional[float] = None
     inclination_degrees: Optional[float] = None
+    longitude_ascending_node_degrees: Optional[float] = None
+    argument_periapsis_degrees: Optional[float] = None
+    mean_anomaly_degrees: Optional[float] = None
+    axial_tilt_degrees: Optional[float] = None
+    rotation_period_hours: Optional[float] = None
     
     # Physical characteristics
     has_atmosphere: Optional[bool] = None
@@ -347,6 +352,11 @@ async def get_planets(db: Session = Depends(get_db)) -> List[Dict[str, Any]]:
                 "semi_major_axis_km": orbital_params.semi_major_axis_km if orbital_params else None,
                 "eccentricity": orbital_params.eccentricity if orbital_params else None,
                 "inclination_degrees": orbital_params.inclination_degrees if orbital_params else None,
+                "longitude_ascending_node_degrees": orbital_params.longitude_ascending_node_degrees if orbital_params else None,
+                "argument_periapsis_degrees": orbital_params.argument_periapsis_degrees if orbital_params else None,
+                "mean_anomaly_degrees": orbital_params.mean_anomaly_degrees if orbital_params else None,
+                "axial_tilt_degrees": orbital_params.axial_tilt_degrees if orbital_params else None,
+                "rotation_period_hours": orbital_params.rotation_period_hours if orbital_params else None,
                 
                 # Physical characteristics
                 "has_atmosphere": physical_chars.has_atmosphere if physical_chars else None,

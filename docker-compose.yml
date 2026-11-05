@@ -60,7 +60,8 @@ services:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s
       timeout: 10s
-      retries: 3
+      retries: 5
+      start_period: 25s
 
   frontend:
     build: 
@@ -77,6 +78,7 @@ services:
     ports: 
       - "${HOST_FRONTEND_PORT:-13300}:3000"
     environment:
+      # Browser bundle and client fetches. Published host port, not the container port.
       PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
       VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:13800}
       # SSR and load functions run in this container. localhost:13800 is the host, not the API.

@@ -90,9 +90,13 @@ up: check-docker
 	@echo "Services started! Project: $(COMPOSE_PROJECT)"
 	@frontend_port=$$($(DOCKER_COMPOSE) port frontend 3000 2>/dev/null | head -n 1 | awk -F: '{print $$NF}'); \
 	backend_port=$$($(DOCKER_COMPOSE) port backend 8000 2>/dev/null | head -n 1 | awk -F: '{print $$NF}'); \
-	echo "  Frontend: http://localhost:$${frontend_port:-13300}"; \
+	echo "  Showcase: http://localhost:$${frontend_port:-13300}/"; \
+	echo "  Same view: http://localhost:$${frontend_port:-13300}/3d"; \
+	echo "  Live data: http://localhost:$${frontend_port:-13300}/dashboard"; \
 	echo "  Backend:  http://localhost:$${backend_port:-13800}"; \
-	echo "  API docs: http://localhost:$${backend_port:-13800}/docs"
+	echo "  Planets:  http://localhost:$${backend_port:-13800}/planets"; \
+	echo "  API docs: http://localhost:$${backend_port:-13800}/docs"; \
+	echo "  Sun and planets load from Data/ when the backend starts. Re-import with: make db-seed"
 
 .PHONY: down
 down: check-docker

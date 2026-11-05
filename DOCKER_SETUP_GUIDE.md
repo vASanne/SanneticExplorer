@@ -84,7 +84,7 @@ Veröffentlichte Host-Ports (Container-Ports bleiben 3000 / 8000 / 5432 / 6379):
 | PostgreSQL | 15432 | 5432 |
 | Redis | 16379 | 6379 |
 
-Dienste im Compose-Netz sprechen sich mit den Service-Namen und den Container-Ports an (`db:5432`, `redis:6379`). Nur der Browser nutzt die Host-Ports. `PUBLIC_API_URL` ist deshalb `http://localhost:13800`.
+Dienste im Compose-Netz sprechen sich mit den Service-Namen und den Container-Ports an (`db:5432`, `redis:6379`, `backend:8000`). Nur der Browser nutzt die Host-Ports. `PUBLIC_API_URL` ist deshalb `http://localhost:13800`. SvelteKit-Loads im Frontend-Container nutzen `INTERNAL_API_URL=http://backend:8000` (Test-Stack: `http://test-backend:8000`). Der Backend-Start importiert Sonne und acht Planeten.
 
 Überschreiben in `.env` (Vorlage: `env.example`), zum Beispiel `HOST_FRONTEND_PORT=13310`. Wenn du `HOST_BACKEND_PORT` änderst, setze `PUBLIC_API_URL=http://localhost:<port>` auf denselben Wert und baue das Frontend neu (`make build`). `COMPOSE_PROJECT_NAME` in der `.env` überschreibt den Projektnamen **aller** Compose-Dateien in diesem Ordner; für einen einzelnen Aufruf `docker compose -p <name>` verwenden.
 
