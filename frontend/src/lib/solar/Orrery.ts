@@ -72,6 +72,9 @@ interface BodyNode {
 const SKY_RADIUS = 2200;
 const ORBIT_SAMPLES = 160;
 const MOON_SAMPLES = 96;
+/** Sphere tessellation. A filled-frame close-up stays round at this density. */
+const SURFACE_WIDTH = 256;
+const SURFACE_HEIGHT = 192;
 /** Earth spin while time is compressed, radians per real second. Other planets keep their sidereal ratio. */
 const EARTH_VISUAL_SPIN = 0.55;
 const EARTH_SIDEREAL_HOURS = 23.9344696;
@@ -531,7 +534,7 @@ export class Orrery {
     pick: THREE.Mesh;
     reticle: THREE.Sprite;
   } {
-    const geometry = new THREE.SphereGeometry(1, 64, 48);
+    const geometry = new THREE.SphereGeometry(1, SURFACE_WIDTH, SURFACE_HEIGHT);
     const material = new THREE.MeshBasicMaterial({
       color: new THREE.Color(1.9, 1.55, 1.15),
     });
@@ -606,7 +609,10 @@ export class Orrery {
       roughness: body.roughness,
       metalness: 0.02,
     });
-    const mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 64, 48), material);
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(1, SURFACE_WIDTH, SURFACE_HEIGHT),
+      material
+    );
     mesh.userData.name = body.name;
     spin.add(mesh);
     this.enqueueMap(body.texture, THREE.SRGBColorSpace, (texture) => {
@@ -614,6 +620,7 @@ export class Orrery {
       material.color.set(0xffffff);
       material.needsUpdate = true;
     });
+    this.applySurfaceDetail(material, body);
 
     let nightUniform: { value: THREE.Vector3 } | undefined;
     if (body.night) {
@@ -657,7 +664,7 @@ export class Orrery {
         metalness: 0,
       });
       clouds = new THREE.Mesh(
-        new THREE.SphereGeometry(1, 64, 48),
+        new THREE.SphereGeometry(1, SURFACE_WIDTH, SURFACE_HEIGHT),
         cloudMaterial
       );
       clouds.userData.name = body.name;
@@ -680,7 +687,7 @@ export class Orrery {
 
     if (body.name === "Earth") {
       const atmosphere = new THREE.Mesh(
-        new THREE.SphereGeometry(1.08, 48, 32),
+        new THREE.SphereGeometry(1.08, 128, 96),
         new THREE.ShaderMaterial({
           transparent: true,
           side: THREE.BackSide,
@@ -758,7 +765,10 @@ export class Orrery {
       roughness: 0.95,
       metalness: 0.02,
     });
-    const mesh = new THREE.Mesh(new THREE.SphereGeometry(1, 48, 32), material);
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(1, SURFACE_WIDTH, SURFACE_HEIGHT),
+      material
+    );
     mesh.userData.name = "Moon";
     spin.add(mesh);
     this.enqueueMap(MOON.texture, THREE.SRGBColorSpace, (texture) => {
@@ -766,6 +776,7 @@ export class Orrery {
       material.color.set(0xffffff);
       material.needsUpdate = true;
     });
+    this.applySurfaceDetail(material, MOON);
     const pick = this.makePick("Moon");
     anchor.add(pick);
     const reticle = this.makeReticle();
@@ -1082,6 +1093,28 @@ export class Orrery {
     return new CSS2DObject(element);
   }
 
+  private applySurfaceDetail(
+    material: THREE.MeshStandardMaterial,
+    detail: { normal?: string; roughnessMap?: string; normalScale?: number }
+  ) {
+    if (detail.normal) {
+      const scale = detail.normalScale ?? 1;
+      this.enqueueMap(detail.normal, THREE.NoColorSpace, (texture) => {
+        material.normalMap = texture;
+        material.normalScale.set(scale, scale);
+        material.needsUpdate = true;
+      });
+    }
+    if (detail.roughnessMap) {
+      this.enqueueMap(detail.roughnessMap, THREE.NoColorSpace, (texture) => {
+        material.roughnessMap = texture;
+        // The map stores absolute roughness (ocean ~0.22, land ~0.92).
+        material.roughness = 1;
+        material.needsUpdate = true;
+      });
+    }
+  }
+
   private enqueueMap(
     url: string,
     colorSpace: THREE.ColorSpace,
@@ -1102,6 +1135,8 @@ export class Orrery {
         if (!this.disposed) assign(texture);
       });
       texture.colorSpace = colorSpace;
+      texture.wrapS = THREE.RepeatWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
       texture.magFilter = THREE.LinearFilter;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.generateMipmaps = true;

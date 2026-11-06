@@ -29,6 +29,12 @@ export interface CatalogBody {
   texture: string;
   clouds?: string;
   night?: string;
+  /** Tangent-space normal, linear (not sRGB). */
+  normal?: string;
+  /** Linear roughness. White is rough. Multiplies the scalar roughness once loaded. */
+  roughnessMap?: string;
+  /** Scales the normal map's xy. Defaults to 1. */
+  normalScale?: number;
   ringTexture?: string;
   roughness: number;
 }
@@ -40,13 +46,17 @@ export const TEXTURE_FILES = [
   "earth_day.jpg",
   "earth_clouds.jpg",
   "earth_night.jpg",
+  "earth_normal.png",
+  "earth_roughness.png",
   "mars.jpg",
+  "mars_normal.png",
   "jupiter.jpg",
   "saturn.jpg",
   "saturn_ring.png",
   "uranus.jpg",
   "neptune.jpg",
   "moon.jpg",
+  "moon_normal.png",
   "stars.jpg",
 ] as const;
 
@@ -83,6 +93,7 @@ export const MOON = {
   eccentricity: 0.0549,
   inclinationDeg: 5.145,
   texture: "/textures/moon.jpg",
+  normal: "/textures/moon_normal.png",
   summary:
     "Distance, size, eccentricity, inclination and sidereal period follow Data/Planets/earth.json. Node, perigee and the main perturbations are the reference model, because those angles are not in Data/.",
 };
@@ -154,6 +165,8 @@ export const CATALOG: CatalogBody[] = [
     texture: "/textures/earth_day.jpg",
     clouds: "/textures/earth_clouds.jpg",
     night: "/textures/earth_night.jpg",
+    normal: "/textures/earth_normal.png",
+    roughnessMap: "/textures/earth_roughness.png",
     roughness: 0.72,
   },
   {
@@ -176,6 +189,7 @@ export const CATALOG: CatalogBody[] = [
     hasRings: false,
     colorHex: "#c1440e",
     texture: "/textures/mars.jpg",
+    normal: "/textures/mars_normal.png",
     roughness: 0.94,
   },
   {
