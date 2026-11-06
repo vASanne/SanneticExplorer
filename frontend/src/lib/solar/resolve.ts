@@ -35,6 +35,9 @@ export interface ResolvedBody {
   texture: string;
   clouds?: string;
   night?: string;
+  normal?: string;
+  roughnessMap?: string;
+  normalScale?: number;
   ringTexture?: string;
   roughness: number;
   /** J2000 elements from the live payload. Null fields fall back to the JPL reference table. */
@@ -101,6 +104,9 @@ function fromCatalog(
     texture: body.texture,
     clouds: body.clouds,
     night: body.night,
+    normal: body.normal,
+    roughnessMap: body.roughnessMap,
+    normalScale: body.normalScale,
     ringTexture: body.ringTexture,
     roughness: body.roughness,
     epoch: { ...EMPTY_EPOCH },

@@ -50,6 +50,13 @@ describe("resolvePlanets", () => {
     expect(earth?.eccentricity).toBe(0.02);
     expect(mercury?.origin).toBe("reference");
     expect(resolved.planets).toHaveLength(8);
+    expect(earth?.normal).toBe("/textures/earth_normal.png");
+    expect(earth?.roughnessMap).toBe("/textures/earth_roughness.png");
+    expect(earth?.night).toBe("/textures/earth_night.jpg");
+    expect(earth?.clouds).toBe("/textures/earth_clouds.jpg");
+    expect(resolved.planets.find((body) => body.name === "Mars")?.normal).toBe(
+      "/textures/mars_normal.png"
+    );
   });
 
   it("marks a full classical set as live and derives AU from kilometres", () => {
