@@ -87,9 +87,6 @@ const MOON_SAMPLES = 96;
 /** Sphere tessellation. A filled-frame close-up stays round at this density. */
 const SURFACE_WIDTH = 256;
 const SURFACE_HEIGHT = 192;
-/** Earth spin while time is compressed, radians per real second. Other planets keep their sidereal ratio. */
-const EARTH_VISUAL_SPIN = 0.55;
-const EARTH_SIDEREAL_HOURS = 23.9344696;
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
 
 const MOON_EPOCH = {
@@ -274,7 +271,7 @@ export class Orrery {
     this.sampleOrbits(this.julianDay);
     this.applyVisibility();
     this.applySelection();
-    this.placeBodies(this.julianDay, 0, 0);
+    this.placeBodies(this.julianDay);
     this.refreshTextureDemand();
     if (!this.framed) {
       this.frame("inner");
@@ -990,14 +987,7 @@ export class Orrery {
     );
   }
 
-  private placeBodies(jd: number, delta: number, simDays: number) {
-    const earthRadPerDay = (Math.PI * 2) / (EARTH_SIDEREAL_HOURS / 24);
-    const trueRate =
-      delta > 0 ? (Math.abs(simDays) * earthRadPerDay) / delta : 0;
-    const gear =
-      !this.playing || this.snapSpin
-        ? 1
-        : Math.min(1, EARTH_VISUAL_SPIN / Math.max(trueRate, 1e-6));
+  private placeBodies(jd: number) {
     const sunPose = spinPose("Sun", jd);
     this.sunMesh.rotation.y = wrapAngle(sunPose.spinRadians);
 
@@ -1020,11 +1010,7 @@ export class Orrery {
       });
       this.poleTarget.set(pose.pole.x, pose.pole.y, pose.pole.z);
       node.tilt.quaternion.setFromUnitVectors(Y_AXIS, this.poleTarget);
-      if (this.snapSpin || !this.playing) node.displaySpin = pose.spinRadians;
-      else
-        node.displaySpin +=
-          simDays * Math.PI * 2 * (24 / pose.siderealHours) * gear;
-      node.displaySpin = wrapAngle(node.displaySpin);
+      node.displaySpin = wrapAngle(pose.spinRadians);
       node.spin.rotation.y = node.displaySpin;
       if (node.clouds) node.clouds.rotation.y = node.displaySpin * 1.04;
       if (node.nightUniform) {
@@ -1228,7 +1214,7 @@ export class Orrery {
   private frameEarthMoon() {
     const earth = this.earthNode();
     if (!earth) return;
-    this.placeBodies(this.julianDay, 0, 0);
+    this.placeBodies(this.julianDay);
     this.follow = null;
     earth.anchor.getWorldPosition(this.worldPoint);
     let reach = 0.05;
@@ -1390,7 +1376,7 @@ export class Orrery {
     }
     const simDays = this.julianDay - before;
     if (this.playing || this.snapSpin) this.onTime(this.julianDay);
-    this.placeBodies(this.julianDay, delta, simDays);
+    this.placeBodies(this.julianDay);
     if (Math.abs(simDays) > 2) this.sampleOrbits(this.julianDay);
     this.textureTick += 1;
     if (this.textureTick % 15 === 0) this.refreshTextureDemand();
