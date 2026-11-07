@@ -13,6 +13,8 @@ import {
 } from "./kepler";
 import { spinPose, spinSummary } from "./spin";
 import {
+  EARTH_YEAR_SECONDS,
+  SIDEREAL_YEAR_DAYS,
   calendarFromJulian,
   formatSimDate,
   julianDayFromUnixMs,
@@ -203,6 +205,28 @@ describe("simulation clock", () => {
     expect(forward).toBeGreaterThan(2451545);
     expect(reverse).toBeLessThan(2451545);
     expect(forward - 2451545).toBeCloseTo(2451545 - reverse, 8);
+  });
+
+  it("covers one sidereal year in 180 seconds at rate 1, whatever the frame size", () => {
+    const start = 2451545;
+    const whole = stepJulianDay(start, EARTH_YEAR_SECONDS, 1);
+    expect(EARTH_YEAR_SECONDS).toBe(180);
+    expect(whole - start).toBeCloseTo(SIDEREAL_YEAR_DAYS, 8);
+
+    let coarse = start;
+    coarse = stepJulianDay(coarse, 90, 1);
+    coarse = stepJulianDay(coarse, 90, 1);
+    expect(coarse).toBeCloseTo(whole, 8);
+
+    const frame = 1 / 60;
+    const frames = Math.round(EARTH_YEAR_SECONDS / frame);
+    let fine = start;
+    for (let i = 0; i < frames; i += 1) fine = stepJulianDay(fine, frame, 1);
+    expect(fine - start).toBeCloseTo(
+      SIDEREAL_YEAR_DAYS * ((frames * frame) / EARTH_YEAR_SECONDS),
+      5
+    );
+    expect(stepJulianDay(whole, EARTH_YEAR_SECONDS, -1)).toBeCloseTo(start, 8);
   });
 });
 

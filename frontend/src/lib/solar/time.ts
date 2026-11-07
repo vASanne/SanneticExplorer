@@ -3,6 +3,16 @@ import { t } from "$lib/i18n/copy";
 /** J2000.0 = 2000-01-01 12:00 TT ≈ JD 2451545.0. Playback treats UTC as TDB; the difference is about a minute. */
 export const J2000_JD = 2451545.0;
 
+/**
+ * Mean sidereal year at J2000, in days: one Earth revolution relative to the stars.
+ * IAU value 365.256363 d. Earth's JPL mean motion in kepler.ts
+ * (35999.37244981° per Julian century) is 365.25636 d, the same year.
+ */
+export const SIDEREAL_YEAR_DAYS = 365.256363;
+
+/** Real seconds for one sidereal year at playback rate 1. One Earth year lasts three minutes. */
+export const EARTH_YEAR_SECONDS = 180;
+
 const UNIX_JD = 2440587.5;
 
 export function julianDayFromUnixMs(ms: number): number {
@@ -13,14 +23,18 @@ export function julianNow(): number {
   return julianDayFromUnixMs(Date.now());
 }
 
-/** Advance the simulation clock. Negative speed runs time backwards. */
+/**
+ * Advance the simulation clock. Rate 1 covers one sidereal year in
+ * EARTH_YEAR_SECONDS. The step is linear in real seconds, so the elapsed
+ * simulation time does not depend on the frame size. Negative speed runs backwards.
+ */
 export function stepJulianDay(
   jd: number,
   deltaSeconds: number,
   speed: number,
-  earthYearSeconds = 48
+  earthYearSeconds = EARTH_YEAR_SECONDS
 ): number {
-  const days = deltaSeconds * speed * (365.25 / earthYearSeconds);
+  const days = deltaSeconds * speed * (SIDEREAL_YEAR_DAYS / earthYearSeconds);
   return jd + days;
 }
 

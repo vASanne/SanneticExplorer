@@ -1,5 +1,6 @@
-/** One Earth year at 1× playback. Higher speeds divide this. Negative speed runs backwards. */
-export const EARTH_YEAR_SECONDS = 48;
+import { EARTH_YEAR_SECONDS, SIDEREAL_YEAR_DAYS } from "./time";
+
+export { EARTH_YEAR_SECONDS };
 
 const AU_KM = 149597870.7;
 const AU_SCALE = 16;
@@ -138,7 +139,7 @@ export function moonShownInScene(mode: ScaleMode): boolean {
 }
 
 export function orbitalOmega(periodDays: number): number {
-  const years = Math.max(periodDays, 1) / 365.25;
+  const years = Math.max(periodDays, 1) / SIDEREAL_YEAR_DAYS;
   return (Math.PI * 2) / (years * EARTH_YEAR_SECONDS);
 }
 

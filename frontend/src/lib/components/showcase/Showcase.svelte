@@ -46,8 +46,18 @@
   $: selected =
     model.planets.find((body) => body.name === selectedName) ?? null;
   $: speed = speedSteps[speedIndex];
-  $: speedLabel = speed < 0 ? `−${Math.abs(speed)}×` : `${speed}×`;
-  $: yearCaption = $locale ? earthYearCaption(speed, EARTH_YEAR_SECONDS) : "";
+  $: speedLabel =
+    Math.abs(speed) === 1
+      ? speed < 0
+        ? `${$_("units.yearRate")} · ${$_("units.reverse")}`
+        : $_("units.yearRate")
+      : speed < 0
+      ? `−${Math.abs(speed)}×`
+      : `${speed}×`;
+  $: yearCaption =
+    $locale && Math.abs(speed) !== 1
+      ? earthYearCaption(speed, EARTH_YEAR_SECONDS)
+      : "";
   $: simLabel = $locale ? formatJulian(simJd) : "—";
   $: originLabel =
     model.origin === "live"

@@ -133,6 +133,7 @@
   "units": {
     "earthMasses": "{value} Earth masses",
     "earthYear": "Earth year ≈ {seconds} s",
+    "yearRate": "1 Earth year / 3 min.",
     "reverse": "reverse",
     "days": "{days} days",
     "daysYears": "{days} days · {years} yr",
