@@ -1,5 +1,6 @@
-/** One Earth year at 1× playback. Higher speeds divide this. Negative speed runs backwards. */
-export const EARTH_YEAR_SECONDS = 48;
+import { EARTH_YEAR_SECONDS, SIDEREAL_YEAR_DAYS } from "./time";
+
+export { EARTH_YEAR_SECONDS };
 
 const AU_KM = 149597870.7;
 const AU_SCALE = 16;
@@ -9,13 +10,19 @@ export const TRUE_AU = 50;
 
 export type ScaleMode = "showcase" | "true";
 
+/** The scene the visitor sees first. Illustrative sizes are an explicit opt-in. */
+export const DEFAULT_SCALE_MODE: ScaleMode = "true";
+
 /**
  * Map astronomical units into the scene.
  * A power below 1 keeps true order and a wide Neptune/Mercury ratio while
  * leaving the inner planets outside the Sun and inside one camera frame.
  * Real AU ratio Neptune/Mercury is ~78; this curve is ~23.
  */
-export function auToScene(au: number, mode: ScaleMode = "showcase"): number {
+export function auToScene(
+  au: number,
+  mode: ScaleMode = DEFAULT_SCALE_MODE
+): number {
   const safe = Math.max(au, 0);
   if (mode === "true") return safe * TRUE_AU;
   return AU_SCALE * Math.pow(Math.max(safe, 0.02), DISTANCE_POWER);
@@ -34,7 +41,7 @@ const TRUE_KM = TRUE_AU / AU_KM;
  */
 export function visualRadiusKm(
   radiusKm: number,
-  mode: ScaleMode = "showcase"
+  mode: ScaleMode = DEFAULT_SCALE_MODE
 ): number {
   if (mode === "true") {
     const radius = Number.isFinite(radiusKm) && radiusKm > 0 ? radiusKm : 0;
@@ -47,7 +54,7 @@ export function visualRadiusKm(
 export const SUN_SCENE_RADIUS = 3.35;
 const SUN_RADIUS_KM = 696340;
 
-export function sunSceneRadius(mode: ScaleMode = "showcase"): number {
+export function sunSceneRadius(mode: ScaleMode = DEFAULT_SCALE_MODE): number {
   if (mode === "true") return SUN_RADIUS_KM * TRUE_KM;
   return SUN_SCENE_RADIUS;
 }
@@ -79,14 +86,24 @@ export function pickRadius(visualRadius: number, mode: ScaleMode): number {
   return Math.max(visualRadius, 0.02);
 }
 
-/** Ecliptic J2000 (x, y, z) to scene Y-up, scaled so the semi-major axis matches auToScene. */
+/**
+ * Scene units per astronomical unit for one body's orbit.
+ * True scale is linear for every body. Showcase compresses each semi-major
+ * axis on its own curve, then keeps that body's ellipse linear in those units.
+ */
+export function linearAuScale(semiMajorAu: number, mode: ScaleMode): number {
+  if (mode === "true") return TRUE_AU;
+  const axis = Math.max(semiMajorAu, 1e-8);
+  return auToScene(axis, "showcase") / axis;
+}
+
+/** Ecliptic J2000 (x, y, z) to scene Y-up, in the same units as auToScene. */
 export function eclipticToScene(
   ecliptic: { x: number; y: number; z: number },
   semiMajorAu: number,
   mode: ScaleMode
 ): ScenePoint {
-  const a = Math.max(semiMajorAu, 1e-8);
-  const scale = mode === "true" ? TRUE_AU : auToScene(a) / a;
+  const scale = linearAuScale(semiMajorAu, mode);
   return {
     x: ecliptic.x * scale,
     y: ecliptic.z * scale,
@@ -95,29 +112,34 @@ export function eclipticToScene(
 }
 
 /**
- * Moon offset around an enlarged Earth. True scale keeps the real AU offset.
- * Showcase scale keeps the direction, eccentricity and inclination, and places
- * the Moon a few visual Earth radii out so the orbit reads when Earth is in frame.
+ * Geocentric ecliptic offset of the Moon, in the same scene units as Earth.
+ * The length is the physical distance. It is not stretched toward a visual
+ * Earth radius — that stretch reached Venus in the illustrative scale.
  */
 export function moonSceneOffset(
   ecliptic: { x: number; y: number; z: number },
-  earthRadiusScene: number,
-  mode: ScaleMode
+  mode: ScaleMode = DEFAULT_SCALE_MODE,
+  earthSemiMajorAu = 1
 ): ScenePoint {
-  const axes = { x: ecliptic.x, y: ecliptic.z, z: -ecliptic.y };
-  const distAu = Math.hypot(ecliptic.x, ecliptic.y, ecliptic.z);
-  const earthRadii = (distAu * AU_KM) / 6378.14;
-  const length = Math.hypot(axes.x, axes.y, axes.z) || 1;
-  const distance =
-    mode === "true"
-      ? distAu * TRUE_AU
-      : earthRadiusScene * 1.15 * Math.pow(Math.max(earthRadii, 1), 0.34);
-  const k = distance / length;
-  return { x: axes.x * k, y: axes.y * k, z: axes.z * k };
+  const scale = linearAuScale(earthSemiMajorAu, mode);
+  return {
+    x: ecliptic.x * scale,
+    y: ecliptic.z * scale,
+    z: -ecliptic.y * scale,
+  };
+}
+
+/**
+ * Showcase enlarges Earth by hundreds of times, so a real lunar distance sits
+ * inside that mesh. Drawing the Moon there would be a false collision.
+ * The Moon is part of the physical scene only.
+ */
+export function moonShownInScene(mode: ScaleMode): boolean {
+  return mode === "true";
 }
 
 export function orbitalOmega(periodDays: number): number {
-  const years = Math.max(periodDays, 1) / 365.25;
+  const years = Math.max(periodDays, 1) / SIDEREAL_YEAR_DAYS;
   return (Math.PI * 2) / (years * EARTH_YEAR_SECONDS);
 }
 
@@ -152,10 +174,11 @@ function solveEccentricAnomaly(
 /** Position from eccentric anomaly so orbit lines are evenly sampled. */
 export function positionFromEccentricAnomaly(
   elements: OrbitElements,
-  eccentricAnomaly: number
+  eccentricAnomaly: number,
+  mode: ScaleMode = DEFAULT_SCALE_MODE
 ): ScenePoint {
   const eccentricity = Math.min(Math.max(elements.eccentricity, 0), 0.95);
-  const semiMajor = auToScene(elements.distanceAu);
+  const semiMajor = auToScene(elements.distanceAu, mode);
   const cosE = Math.cos(eccentricAnomaly);
   const sinE = Math.sin(eccentricAnomaly);
   const xOrb = semiMajor * (cosE - eccentricity);
@@ -179,21 +202,23 @@ export function positionFromEccentricAnomaly(
 
 export function orbitalPosition(
   elements: OrbitElements,
-  meanAnomaly: number
+  meanAnomaly: number,
+  mode: ScaleMode = DEFAULT_SCALE_MODE
 ): ScenePoint {
   const eccentricity = Math.min(Math.max(elements.eccentricity, 0), 0.95);
   const eccentric = solveEccentricAnomaly(meanAnomaly, eccentricity);
-  return positionFromEccentricAnomaly(elements, eccentric);
+  return positionFromEccentricAnomaly(elements, eccentric, mode);
 }
 
 export function orbitSamples(
   elements: OrbitElements,
-  count = 192
+  count = 192,
+  mode: ScaleMode = DEFAULT_SCALE_MODE
 ): ScenePoint[] {
   const samples: ScenePoint[] = [];
   for (let i = 0; i <= count; i += 1) {
     const eccentric = (i / count) * Math.PI * 2;
-    samples.push(positionFromEccentricAnomaly(elements, eccentric));
+    samples.push(positionFromEccentricAnomaly(elements, eccentric, mode));
   }
   return samples;
 }

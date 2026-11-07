@@ -56,6 +56,9 @@
     "labels": "Namen",
     "showcase": "Schaustück",
     "trueScale": "Echtmaß",
+    "physicalHint": "Echtmaß: Bahnen und Radien in einer Einheit.",
+    "showcaseHint": "Schaustück: vergrößerte Körper, gestauchte Abstände, keine echte Geometrie. Der Mond nur im Echtmaß.",
+    "local": "Erde–Mond",
     "inner": "Innen",
     "system": "System"
   },
@@ -68,7 +71,7 @@
     "liveNote": "Größen und J2000-Elemente folgen der API. Fehlende Winkel nutzen die JPL-Tabellen mit säkularen Raten. Achsneigung und Drehung folgen den IAU-Polen.",
     "referenceNote": "Dieser Körper fehlt in der aktuellen API-Antwort, daher werden die JPL-Referenzelemente gezeigt.",
     "sunSummary": "Die Sonne wird in der Szene gezeichnet. Größen und Bahnelemente der Planeten kommen von der Live-API /planets, sobald die Datenbank Einträge enthält. Fehlende Elemente fallen auf die JPL-J2000-Tabellen zurück.",
-    "moonSummary": "Abstand, Größe, Exzentrizität, Bahnneigung und siderische Periode folgen Data/Planets/earth.json. Knoten, Perigäum und die wichtigsten Störungen stammen aus dem Referenzmodell, weil diese Winkel nicht in Data/ stehen."
+    "moonSummary": "Abstand, Größe, Exzentrizität, Bahnneigung und siderische Periode folgen Data/Planets/earth.json. Knoten, Perigäum und die wichtigsten Störungen stammen aus dem Referenzmodell (Epoche 1999-12-31), weil diese Winkel nicht in Data/ stehen. Die gezeichnete Bahn ist erdzentriert und benutzt denselben Maßstab wie die Planeten."
   },
   "facts": {
     "distance": "Entfernung",
@@ -130,6 +133,7 @@
   "units": {
     "earthMasses": "{value} Erdmassen",
     "earthYear": "Erdjahr ≈ {seconds} s",
+    "yearRate": "1 Erdjahr / 3 Min.",
     "reverse": "rückwärts",
     "days": "{days} Tage",
     "daysYears": "{days} Tage · {years} Jahre",

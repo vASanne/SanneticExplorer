@@ -14,16 +14,28 @@ import { MOON, SUN } from "./catalog";
 import { heliocentricEcliptic, keplerState, moonGeocentricAu } from "./kepler";
 import type { ResolvedBody } from "./resolve";
 import {
+  DEFAULT_SCALE_MODE,
   EARTH_YEAR_SECONDS,
   bloomFor,
   eclipticToScene,
   moonSceneOffset,
+  moonShownInScene,
   pickRadius,
   solarCorona,
   sunSceneRadius,
   visualRadiusKm,
   type ScaleMode,
 } from "./scale";
+import {
+  FULL_RES_PIXELS,
+  TextureDemand,
+  apparentPixels,
+  loadTextureSource,
+  orreryTextureJobs,
+  textureJobId,
+  type TextureJob,
+  type TextureTier,
+} from "./textures";
 import { spinPose } from "./spin";
 import { julianNow, stepJulianDay } from "./time";
 
@@ -75,9 +87,6 @@ const MOON_SAMPLES = 96;
 /** Sphere tessellation. A filled-frame close-up stays round at this density. */
 const SURFACE_WIDTH = 256;
 const SURFACE_HEIGHT = 192;
-/** Earth spin while time is compressed, radians per real second. Other planets keep their sidereal ratio. */
-const EARTH_VISUAL_SPIN = 0.55;
-const EARTH_SIDEREAL_HOURS = 23.9344696;
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
 
 const MOON_EPOCH = {
@@ -102,9 +111,14 @@ export class Orrery {
   private disposed = false;
   private resizeObserver: ResizeObserver;
   private textureCache = new Map<string, THREE.Texture>();
-  private loader = new THREE.TextureLoader();
-  private textureQueue: Array<() => void> = [];
-  private pumping = false;
+  private textureAssigners = new Map<
+    string,
+    (texture: THREE.Texture) => void
+  >();
+  private readyTextures = new Map<string, THREE.Texture>();
+  private demand: TextureDemand | null = null;
+  private framed = false;
+  private textureTick = 0;
   private planets = new Map<string, BodyNode>();
   private signature = "";
   private sunMesh: THREE.Mesh;
@@ -127,7 +141,7 @@ export class Orrery {
   private snap = false;
   private snapSpin = true;
   private lastFrame: "inner" | "system" = "inner";
-  private scaleMode: ScaleMode = "showcase";
+  private scaleMode: ScaleMode = DEFAULT_SCALE_MODE;
   private julianDay = julianNow();
   private pointerDown = { x: 0, y: 0 };
   private onSelect: (name: string | null) => void;
@@ -226,7 +240,7 @@ export class Orrery {
       });
     });
     this.animation = requestAnimationFrame(this.animate);
-    this.pumpTextures();
+    this.startTextureDemand();
     this.onTime(this.julianDay);
   }
 
@@ -257,7 +271,12 @@ export class Orrery {
     this.sampleOrbits(this.julianDay);
     this.applyVisibility();
     this.applySelection();
-    this.pumpTextures();
+    this.placeBodies(this.julianDay);
+    this.refreshTextureDemand();
+    if (!this.framed) {
+      this.frame("inner");
+      this.framed = true;
+    }
   }
 
   setPlaying(playing: boolean) {
@@ -272,8 +291,12 @@ export class Orrery {
   setScale(mode: ScaleMode) {
     if (this.scaleMode === mode) return;
     this.scaleMode = mode;
+    if (!moonShownInScene(mode) && this.follow === "Moon")
+      this.follow = "Earth";
     this.layoutBodies();
     this.sampleOrbits(this.julianDay);
+    this.applyVisibility();
+    this.refreshTextureDemand();
     if (this.follow) this.snap = true;
     else this.frame(this.lastFrame);
   }
@@ -308,9 +331,14 @@ export class Orrery {
     this.snap = true;
     this.selected = name;
     this.applySelection();
+    this.refreshTextureDemand();
   }
 
-  frame(mode: "inner" | "system") {
+  frame(mode: "inner" | "system" | "local") {
+    if (mode === "local") {
+      this.frameEarthMoon();
+      return;
+    }
     this.lastFrame = mode;
     this.follow = null;
     const span = this.sceneSpan(mode === "system" ? 42 : 2.6);
@@ -347,6 +375,7 @@ export class Orrery {
     this.renderer.domElement.removeEventListener("pointerup", this.onPointerUp);
     this.clearPlanets();
     this.controls.dispose();
+    this.demand?.dispose();
     this.textureCache.forEach((texture) => texture.dispose());
     this.blankRing.dispose();
     this.reticleTexture?.dispose();
@@ -391,14 +420,7 @@ export class Orrery {
     mesh.renderOrder = -2;
     mesh.add(this.makeStarPoints());
     this.scene.add(mesh);
-    this.enqueueMap(SUN.starfield, THREE.SRGBColorSpace, (texture) => {
-      texture.wrapS = THREE.RepeatWrapping;
-      texture.wrapT = THREE.ClampToEdgeWrapping;
-      texture.magFilter = THREE.LinearFilter;
-      texture.minFilter = THREE.LinearMipmapLinearFilter;
-      texture.generateMipmaps = true;
-      texture.anisotropy = this.maxAnisotropy();
-      texture.needsUpdate = true;
+    this.bindMap(textureJobId("starfield", "starfield"), (texture) => {
       material.map = texture;
       material.color.setRGB(1.45, 1.5, 1.7);
       material.needsUpdate = true;
@@ -545,7 +567,7 @@ export class Orrery {
     this.scene.add(pick);
     const reticle = this.makeReticle();
     this.scene.add(reticle);
-    this.enqueueMap(SUN.texture, THREE.SRGBColorSpace, (texture) => {
+    this.bindMap(textureJobId("Sun", "color"), (texture) => {
       material.map = texture;
       material.needsUpdate = true;
     });
@@ -615,12 +637,12 @@ export class Orrery {
     );
     mesh.userData.name = body.name;
     spin.add(mesh);
-    this.enqueueMap(body.texture, THREE.SRGBColorSpace, (texture) => {
+    this.bindMap(textureJobId(body.name, "color"), (texture) => {
       material.map = texture;
       material.color.set(0xffffff);
       material.needsUpdate = true;
     });
-    this.applySurfaceDetail(material, body);
+    this.applySurfaceDetail(body.name, material, body);
 
     let nightUniform: { value: THREE.Vector3 } | undefined;
     if (body.night) {
@@ -645,7 +667,7 @@ export class Orrery {
           );
       };
       material.customProgramCacheKey = () => "night-side";
-      this.enqueueMap(body.night, THREE.SRGBColorSpace, (texture) => {
+      this.bindMap(textureJobId(body.name, "night"), (texture) => {
         material.emissiveMap = texture;
         material.emissive.set(0xffffff);
         material.emissiveIntensity = 2.1;
@@ -669,7 +691,7 @@ export class Orrery {
       );
       clouds.userData.name = body.name;
       spin.add(clouds);
-      this.enqueueMap(body.clouds, THREE.NoColorSpace, (texture) => {
+      this.bindMap(textureJobId(body.name, "clouds"), (texture) => {
         cloudMaterial.alphaMap = texture;
         cloudMaterial.opacity = 0.88;
         cloudMaterial.needsUpdate = true;
@@ -771,12 +793,12 @@ export class Orrery {
     );
     mesh.userData.name = "Moon";
     spin.add(mesh);
-    this.enqueueMap(MOON.texture, THREE.SRGBColorSpace, (texture) => {
+    this.bindMap(textureJobId("Moon", "color"), (texture) => {
       material.map = texture;
       material.color.set(0xffffff);
       material.needsUpdate = true;
     });
-    this.applySurfaceDetail(material, MOON);
+    this.applySurfaceDetail("Moon", material, MOON);
     const pick = this.makePick("Moon");
     anchor.add(pick);
     const reticle = this.makeReticle();
@@ -852,7 +874,7 @@ export class Orrery {
 			`,
     });
     if (body.ringTexture) {
-      this.enqueueMap(body.ringTexture, THREE.SRGBColorSpace, (texture) => {
+      this.bindMap(textureJobId(body.name, "ring"), (texture) => {
         material.uniforms.map.value = texture;
         material.uniformsNeedUpdate = true;
       });
@@ -934,13 +956,12 @@ export class Orrery {
       });
       node.orbit.geometry.attributes.position.needsUpdate = true;
       if (node.moon) {
-        const earthRadius = node.radius;
         writeOrbit(node.moon.orbitPositions, MOON_SAMPLES, (index) => {
           const sample = jd + (index / MOON_SAMPLES) * MOON.periodDays;
           return moonSceneOffset(
             moonGeocentricAu(sample, MOON_EPOCH),
-            earthRadius,
-            this.scaleMode
+            this.scaleMode,
+            state.semiMajorAu
           );
         });
         node.moon.orbit.geometry.attributes.position.needsUpdate = true;
@@ -966,14 +987,7 @@ export class Orrery {
     );
   }
 
-  private placeBodies(jd: number, delta: number, simDays: number) {
-    const earthRadPerDay = (Math.PI * 2) / (EARTH_SIDEREAL_HOURS / 24);
-    const trueRate =
-      delta > 0 ? (Math.abs(simDays) * earthRadPerDay) / delta : 0;
-    const gear =
-      !this.playing || this.snapSpin
-        ? 1
-        : Math.min(1, EARTH_VISUAL_SPIN / Math.max(trueRate, 1e-6));
+  private placeBodies(jd: number) {
     const sunPose = spinPose("Sun", jd);
     this.sunMesh.rotation.y = wrapAngle(sunPose.spinRadians);
 
@@ -996,11 +1010,7 @@ export class Orrery {
       });
       this.poleTarget.set(pose.pole.x, pose.pole.y, pose.pole.z);
       node.tilt.quaternion.setFromUnitVectors(Y_AXIS, this.poleTarget);
-      if (this.snapSpin || !this.playing) node.displaySpin = pose.spinRadians;
-      else
-        node.displaySpin +=
-          simDays * Math.PI * 2 * (24 / pose.siderealHours) * gear;
-      node.displaySpin = wrapAngle(node.displaySpin);
+      node.displaySpin = wrapAngle(pose.spinRadians);
       node.spin.rotation.y = node.displaySpin;
       if (node.clouds) node.clouds.rotation.y = node.displaySpin * 1.04;
       if (node.nightUniform) {
@@ -1008,18 +1018,18 @@ export class Orrery {
       }
       if (node.ringSun)
         node.ringSun.value.set(-place.x, -place.y, -place.z).normalize();
-      if (node.moon) this.placeMoon(node, jd);
+      if (node.moon) this.placeMoon(node, jd, state.semiMajorAu);
     }
     this.snapSpin = false;
   }
 
-  private placeMoon(earth: BodyNode, jd: number) {
+  private placeMoon(earth: BodyNode, jd: number, semiMajorAu: number) {
     const moon = earth.moon;
     if (!moon) return;
     const offset = moonSceneOffset(
       moonGeocentricAu(jd, MOON_EPOCH),
-      earth.radius,
-      this.scaleMode
+      this.scaleMode,
+      semiMajorAu
     );
     moon.anchor.position.set(offset.x, offset.y, offset.z);
     const pose = spinPose("Moon", jd);
@@ -1094,19 +1104,20 @@ export class Orrery {
   }
 
   private applySurfaceDetail(
+    bodyName: string,
     material: THREE.MeshStandardMaterial,
     detail: { normal?: string; roughnessMap?: string; normalScale?: number }
   ) {
     if (detail.normal) {
       const scale = detail.normalScale ?? 1;
-      this.enqueueMap(detail.normal, THREE.NoColorSpace, (texture) => {
+      this.bindMap(textureJobId(bodyName, "normal"), (texture) => {
         material.normalMap = texture;
         material.normalScale.set(scale, scale);
         material.needsUpdate = true;
       });
     }
     if (detail.roughnessMap) {
-      this.enqueueMap(detail.roughnessMap, THREE.NoColorSpace, (texture) => {
+      this.bindMap(textureJobId(bodyName, "roughness"), (texture) => {
         material.roughnessMap = texture;
         // The map stores absolute roughness (ocean ~0.22, land ~0.92).
         material.roughness = 1;
@@ -1115,49 +1126,121 @@ export class Orrery {
     }
   }
 
-  private enqueueMap(
-    url: string,
-    colorSpace: THREE.ColorSpace,
-    assign: (texture: THREE.Texture) => void
-  ) {
-    const cached = this.textureCache.get(url);
-    if (cached) {
-      assign(cached);
-      return;
-    }
-    this.textureQueue.push(() => {
-      if (this.disposed || this.textureCache.has(url)) {
-        const existing = this.textureCache.get(url);
-        if (existing) assign(existing);
-        return;
-      }
-      const texture = this.loader.load(url, () => {
-        if (!this.disposed) assign(texture);
-      });
-      texture.colorSpace = colorSpace;
+  private bindMap(id: string, assign: (texture: THREE.Texture) => void) {
+    this.textureAssigners.set(id, assign);
+    const ready = this.readyTextures.get(id);
+    if (ready) assign(ready);
+  }
+
+  private startTextureDemand() {
+    if (this.demand) return;
+    this.demand = new TextureDemand(orreryTextureJobs(), {
+      load: (url, signal) => loadTextureSource(url, signal),
+      apply: (job, tier, image) => this.acceptTexture(job, tier, image),
+    });
+    this.refreshTextureDemand();
+  }
+
+  private acceptTexture(job: TextureJob, tier: TextureTier, image: unknown) {
+    if (this.disposed) return;
+    const url =
+      tier === "preview" && job.previewUrl ? job.previewUrl : job.fullUrl;
+    let texture = this.textureCache.get(url);
+    if (!texture) {
+      texture = new THREE.Texture(image as TexImageSource);
+      texture.colorSpace =
+        job.colorSpace === "srgb" ? THREE.SRGBColorSpace : THREE.NoColorSpace;
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.ClampToEdgeWrapping;
       texture.magFilter = THREE.LinearFilter;
       texture.minFilter = THREE.LinearMipmapLinearFilter;
       texture.generateMipmaps = true;
       texture.anisotropy = this.maxAnisotropy();
+      texture.needsUpdate = true;
       this.textureCache.set(url, texture);
-    });
+    }
+    this.readyTextures.set(job.id, texture);
+    this.textureAssigners.get(job.id)?.(texture);
   }
 
-  private pumpTextures() {
-    if (this.pumping) return;
-    this.pumping = true;
-    const step = () => {
-      if (this.disposed) return;
-      const first = this.textureQueue.shift();
-      const second = this.textureQueue.shift();
-      first?.();
-      second?.();
-      if (this.textureQueue.length) requestAnimationFrame(step);
-      else this.pumping = false;
-    };
-    requestAnimationFrame(step);
+  private refreshTextureDemand() {
+    if (!this.demand || this.disposed) return;
+    const height = Math.max(this.renderer.domElement.clientHeight, 1);
+    const visible: string[] = ["starfield"];
+    const sunDistance = Math.max(this.camera.position.length(), 1e-4);
+    if (
+      apparentPixels(
+        sunSceneRadius(this.scaleMode),
+        sunDistance,
+        height,
+        this.camera.fov
+      ) >= FULL_RES_PIXELS
+    ) {
+      visible.push("Sun");
+    }
+    for (const node of this.planets.values()) {
+      node.anchor.getWorldPosition(this.worldPoint);
+      const distance = Math.max(
+        this.camera.position.distanceTo(this.worldPoint),
+        1e-4
+      );
+      if (
+        apparentPixels(node.radius, distance, height, this.camera.fov) >=
+        FULL_RES_PIXELS
+      ) {
+        visible.push(node.body.name);
+      }
+      if (node.moon?.anchor.visible) {
+        node.moon.anchor.getWorldPosition(this.worldPoint);
+        const moonDistance = Math.max(
+          this.camera.position.distanceTo(this.worldPoint),
+          1e-4
+        );
+        if (
+          apparentPixels(
+            node.moon.radius,
+            moonDistance,
+            height,
+            this.camera.fov
+          ) >= FULL_RES_PIXELS
+        ) {
+          visible.push("Moon");
+        }
+      }
+    }
+    this.demand.update(this.follow, visible);
+  }
+
+  private frameEarthMoon() {
+    const earth = this.earthNode();
+    if (!earth) return;
+    this.placeBodies(this.julianDay);
+    this.follow = null;
+    earth.anchor.getWorldPosition(this.worldPoint);
+    let reach = 0.05;
+    if (earth.moon) {
+      const positions = earth.moon.orbitPositions;
+      for (let index = 0; index < positions.length; index += 3) {
+        reach = Math.max(
+          reach,
+          Math.hypot(
+            positions[index] ?? 0,
+            positions[index + 1] ?? 0,
+            positions[index + 2] ?? 0
+          )
+        );
+      }
+    }
+    const span = Math.max(reach * 4.8, 0.2);
+    this.controls.target.copy(this.worldPoint);
+    this.camera.position.set(
+      this.worldPoint.x + span * 0.2,
+      this.worldPoint.y + span * 0.85,
+      this.worldPoint.z + span * 0.45
+    );
+    this.applyCameraLimits(span);
+    this.controls.update();
+    this.refreshTextureDemand();
   }
 
   private clearPlanets() {
@@ -1182,8 +1265,10 @@ export class Orrery {
       node.orbit.visible = this.showOrbits;
       node.label.visible = this.showLabels;
       if (node.moon) {
-        node.moon.orbit.visible = this.showOrbits;
-        node.moon.label.visible = this.showLabels;
+        const showMoon = moonShownInScene(this.scaleMode);
+        node.moon.anchor.visible = showMoon;
+        node.moon.orbit.visible = showMoon && this.showOrbits;
+        node.moon.label.visible = showMoon && this.showLabels;
       }
     }
     const sunLabel = this.sunMesh.userData.label as CSS2DObject | undefined;
@@ -1291,8 +1376,10 @@ export class Orrery {
     }
     const simDays = this.julianDay - before;
     if (this.playing || this.snapSpin) this.onTime(this.julianDay);
-    this.placeBodies(this.julianDay, delta, simDays);
+    this.placeBodies(this.julianDay);
     if (Math.abs(simDays) > 2) this.sampleOrbits(this.julianDay);
+    this.textureTick += 1;
+    if (this.textureTick % 15 === 0) this.refreshTextureDemand();
     this.followTarget();
     this.updateReticles();
     this.updateClipping();

@@ -64,14 +64,23 @@ describe("Showcase", () => {
     render(Showcase, { props: { planets: [], error: null } });
     expect(screen.getByTestId("sim-date")).toBeInTheDocument();
     expect(screen.getByTestId("today")).toHaveTextContent("Heute");
-    expect(screen.getByTestId("speed-readout")).toHaveTextContent("1×");
+    expect(screen.getByTestId("speed-readout")).toHaveTextContent(
+      "1 Erdjahr / 3 Min."
+    );
+    expect(screen.getByTestId("play-toggle")).toHaveTextContent("Start");
     await screen.getByTestId("speed-slower").click();
-    expect(screen.getByTestId("speed-readout")).toHaveTextContent("−1×");
+    expect(screen.getByTestId("speed-readout")).toHaveTextContent("rückwärts");
     await screen.getByTestId("today").click();
-    expect(screen.getByTestId("scale-toggle")).toHaveTextContent("Schaustück");
-    await screen.getByTestId("scale-toggle").click();
     expect(screen.getByTestId("scale-toggle")).toHaveTextContent("Echtmaß");
-    expect(screen.getByRole("button", { name: "Mond" })).toBeInTheDocument();
+    expect(screen.getByTestId("scale-hint")).toHaveTextContent("einer Einheit");
+    expect(screen.getByTestId("view-local")).toHaveTextContent("Erde–Mond");
+    await screen.getByTestId("scale-toggle").click();
+    expect(screen.getByTestId("scale-toggle")).toHaveTextContent("Schaustück");
+    expect(screen.getByTestId("scale-hint")).toHaveTextContent(
+      "keine echte Geometrie"
+    );
+    await screen.getByRole("button", { name: "Mond" }).click();
+    expect(screen.getByTestId("scale-toggle")).toHaveTextContent("Echtmaß");
   });
 
   it("opens live planet facts from the rail", async () => {
@@ -91,7 +100,11 @@ describe("Showcase", () => {
   it("switches the dock and body names to English", async () => {
     render(Showcase, { props: { planets: [], error: null } });
     await screen.getByTestId("locale-en").click();
-    expect(screen.getByTestId("scale-toggle")).toHaveTextContent("Showcase");
+    expect(screen.getByTestId("scale-toggle")).toHaveTextContent("True scale");
+    expect(screen.getByTestId("view-local")).toHaveTextContent("Earth–Moon");
+    expect(screen.getByTestId("speed-readout")).toHaveTextContent(
+      "1 Earth year / 3 min."
+    );
     expect(screen.getByTestId("today")).toHaveTextContent("Today");
     expect(screen.getByRole("button", { name: "Earth" })).toBeInTheDocument();
     expect(screen.getByText("Reference catalog")).toBeInTheDocument();
