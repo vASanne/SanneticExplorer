@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { CATALOG, MOON } from "./catalog";
 import {
+  DEFAULT_SCALE_MODE,
   SUN_SCENE_RADIUS,
+  TRUE_AU,
   auToScene,
   bloomFor,
   orbitalOmega,
@@ -14,8 +16,16 @@ import {
 } from "./scale";
 
 describe("orrery scale", () => {
+  it("defaults to one physical scale", () => {
+    expect(DEFAULT_SCALE_MODE).toBe("true");
+    expect(auToScene(1)).toBe(TRUE_AU);
+    expect(auToScene(30) / auToScene(0.387)).toBeCloseTo(30 / 0.387, 5);
+  });
+
   it("keeps orbital distances in solar-system order", () => {
-    const distances = CATALOG.map((body) => auToScene(body.distanceAu));
+    const distances = CATALOG.map((body) =>
+      auToScene(body.distanceAu, "showcase")
+    );
     const sorted = [...distances].sort((a, b) => a - b);
     expect(distances).toEqual(sorted);
     expect(distances[distances.length - 1] / distances[0]).toBeGreaterThan(15);
@@ -23,9 +33,11 @@ describe("orrery scale", () => {
 
   it("keeps Mercury outside the Sun at perihelion", () => {
     const mercury = CATALOG[0];
-    const perihelion = sceneRadius(positionFromEccentricAnomaly(mercury, 0));
+    const perihelion = sceneRadius(
+      positionFromEccentricAnomaly(mercury, 0, "showcase")
+    );
     const aphelion = sceneRadius(
-      positionFromEccentricAnomaly(mercury, Math.PI)
+      positionFromEccentricAnomaly(mercury, Math.PI, "showcase")
     );
     expect(perihelion).toBeGreaterThan(SUN_SCENE_RADIUS + 1);
     expect(perihelion).toBeLessThan(aphelion);

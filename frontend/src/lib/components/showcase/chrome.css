@@ -247,6 +247,16 @@
   white-space: nowrap;
 }
 
+.sx-scale-hint {
+  flex-basis: 100%;
+  margin: 0;
+  text-align: center;
+  color: #a39c92;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+}
+
 .sx-panel {
   top: 92px;
   right: 22px;

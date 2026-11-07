@@ -17,7 +17,11 @@
   } from "$lib/solar/format";
   import type { Orrery } from "$lib/solar/Orrery";
   import { resolvePlanets, type ResolvedBody } from "$lib/solar/resolve";
-  import { EARTH_YEAR_SECONDS, type ScaleMode } from "$lib/solar/scale";
+  import {
+    DEFAULT_SCALE_MODE,
+    EARTH_YEAR_SECONDS,
+    type ScaleMode,
+  } from "$lib/solar/scale";
   import { spinSummary } from "$lib/solar/spin";
   import { formatSimDate as formatJulian, julianNow } from "$lib/solar/time";
   import LocaleSwitch from "./LocaleSwitch.svelte";
@@ -35,7 +39,7 @@
   let showOrbits = true;
   let showLabels = true;
   let selectedName: string | null = null;
-  let scale: ScaleMode = "showcase";
+  let scale: ScaleMode = DEFAULT_SCALE_MODE;
   let simJd = julianNow();
 
   $: model = resolvePlanets(planets);
@@ -64,8 +68,23 @@
   $: if (orrery) orrery.setSelected(selectedName);
 
   function choose(name: string) {
+    if (name === "Moon" && scale !== "true") {
+      scale = "true";
+      orrery?.setScale("true");
+    }
     selectedName = name;
     orrery?.focus(name);
+  }
+
+  function showEarthMoon() {
+    scale = "true";
+    orrery?.setScale("true");
+    orrery?.frame("local");
+  }
+
+  function toggleScale() {
+    scale = scale === "true" ? "showcase" : "true";
+    if (scale !== "true" && selectedName === "Moon") selectedName = "Earth";
   }
 
   function goToday() {
@@ -120,6 +139,20 @@
       orrery.setSpeed(speed);
       orrery.setOrbitsVisible(showOrbits);
       orrery.setLabelsVisible(showLabels);
+      const params = new URLSearchParams(window.location.search);
+      const jd = Number(params.get("jd"));
+      if (Number.isFinite(jd) && jd > 2000000) {
+        orrery.setJulianDay(jd);
+        simJd = jd;
+      }
+      const view = params.get("view");
+      if (view === "local") {
+        scale = "true";
+        orrery.setScale("true");
+        orrery.frame("local");
+      } else if (view === "inner" || view === "system") {
+        orrery.frame(view);
+      }
     });
 
     if (model.origin !== "live") {
@@ -398,10 +431,13 @@
         type="button"
         data-testid="scale-toggle"
         aria-pressed={scale === "true" ? "true" : "false"}
-        on:click={() => (scale = scale === "true" ? "showcase" : "true")}
+        on:click={toggleScale}
       >
         {scale === "true" ? $_("dock.trueScale") : $_("dock.showcase")}
       </button>
+      <button type="button" data-testid="view-local" on:click={showEarthMoon}
+        >{$_("dock.local")}</button
+      >
       <span class="sx-rule" />
       <button
         type="button"
@@ -413,6 +449,9 @@
         data-testid="view-system"
         on:click={() => orrery?.frame("system")}>{$_("dock.system")}</button
       >
+      <p class="sx-scale-hint" data-testid="scale-hint">
+        {scale === "true" ? $_("dock.physicalHint") : $_("dock.showcaseHint")}
+      </p>
     </div>
   {/key}
 </div>

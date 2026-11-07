@@ -56,6 +56,9 @@
     "labels": "Labels",
     "showcase": "Showcase",
     "trueScale": "True scale",
+    "physicalHint": "True scale: one unit for orbits and radii.",
+    "showcaseHint": "Showcase: enlarged bodies and compressed distances, not real geometry. The Moon is drawn only at true scale.",
+    "local": "Earth–Moon",
     "inner": "Inner",
     "system": "System"
   },
@@ -68,7 +71,7 @@
     "liveNote": "Sizes and J2000 elements follow the API. Missing angles use the JPL tables, with secular rates. Tilt and spin follow the IAU poles.",
     "referenceNote": "This body is not in the current API payload, so the JPL reference elements are shown.",
     "sunSummary": "The Sun is drawn in the scene. Planet sizes and orbital elements come from the live /planets API when the database has rows. Missing elements fall back to the JPL J2000 tables.",
-    "moonSummary": "Distance, size, eccentricity, inclination and sidereal period follow Data/Planets/earth.json. Node, perigee and the main perturbations are the reference model, because those angles are not in Data/."
+    "moonSummary": "Distance, size, eccentricity, inclination and sidereal period follow Data/Planets/earth.json. Node, perigee and the main perturbations are the reference model at epoch 1999-12-31, because those angles are not in Data/. The orbit drawn in the scene is Earth-centered and uses the same scale as the planets."
   },
   "facts": {
     "distance": "Distance",

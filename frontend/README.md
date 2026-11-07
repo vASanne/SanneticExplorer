@@ -8,7 +8,7 @@ A modern SvelteKit frontend for the Sannetic Explorer solar system simulation pr
 - **TypeScript** - Type-safe development
 - **TailwindCSS** - Utility-first CSS framework
 - **daisyUI** - Beautiful component library
-- **Three.js** - Orrery with mapped planet textures
+- **Three.js** - Orrery with mapped planet textures. The default scene is one physical scale (distances and radii share kilometres). Showcase sizes are an explicit, labelled exaggeration and do not draw the Moon. `?jd=` and `?view=local` open a date or the Earth–Moon frame.
 - **Vite** - Fast build tool with hot module replacement
 
 ## Project Structure

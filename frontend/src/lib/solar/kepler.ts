@@ -347,6 +347,12 @@ const TABLE_LONG: Record<string, RateRow> = {
 
 const AU_KM = 149597870.7;
 const MOON_EARTH_RADIUS_KM = 6378.14;
+/**
+ * Paul Schlyter's lunar elements are for 1999-12-31 00:00 UT (JD 2451543.5).
+ * J2000 is 1.5 days later. Using J2000 here shifts the Moon by about 20°.
+ */
+export const LUNAR_ELEMENT_JD = 2451543.5;
+const LUNAR_ANOMALY_RATE = 13.0649929509;
 
 function rad(degrees: number): number {
   return (degrees * Math.PI) / 180;
@@ -495,16 +501,18 @@ export interface MoonElements {
 }
 
 /**
- * Geocentric ecliptic position of the Moon.
- * Size, eccentricity, inclination and sidereal period come from the caller
- * (Data/Planets/earth.json). Node, perigee and the main perturbations are the
- * reference model — Data/ does not carry those angles or rates.
+ * Geocentric ecliptic position of the Moon (mean ecliptic of J2000).
+ * Size, eccentricity and inclination come from the caller
+ * (Data/Planets/earth.json). Node, perigee and the main perturbations are
+ * Paul Schlyter's truncated series at JD 2451543.5 — Data/ does not carry
+ * those angles. This is not a JPL ephemeris: a few thousand kilometres of
+ * position error is normal, which is still far inside the Earth–Venus gap.
  */
 export function moonGeocentricAu(
   jd: number,
   elements: MoonElements = {}
 ): AuPoint {
-  const d = jd - J2000_JD;
+  const d = jd - LUNAR_ELEMENT_JD;
   const node = rad(125.1228 - 0.0529538083 * d);
   const inclination = rad(pick(elements.inclinationDeg, 5.1454));
   const peri = rad(318.0634 + 0.1643573223 * d);
@@ -515,10 +523,17 @@ export function moonGeocentricAu(
     Math.max(pick(elements.eccentricity, 0.0549), 0),
     0.2
   );
-  const anomalyRate =
+  // Data/ records the sidereal month as 27.322 days. That rounding drifts
+  // about 1.6° by 2026 if it replaces the rate these angles were published with.
+  // A clearly different period (another moon) still overrides the reference rate.
+  const fromPeriod =
     elements.periodDays && elements.periodDays > 0
       ? 360 / elements.periodDays - 0.1643573223 + 0.0529538083
-      : 13.0649929509;
+      : LUNAR_ANOMALY_RATE;
+  const anomalyRate =
+    Math.abs(fromPeriod - LUNAR_ANOMALY_RATE) > 0.01
+      ? fromPeriod
+      : LUNAR_ANOMALY_RATE;
   const mean = rad(115.3654 + anomalyRate * d);
   const eccentric = eccentricAnomaly(mean, eccentricity);
   const xv = aEarthRadii * (Math.cos(eccentric) - eccentricity);

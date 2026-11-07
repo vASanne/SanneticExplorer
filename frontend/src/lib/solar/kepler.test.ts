@@ -8,6 +8,7 @@ import {
   keplerState,
   moonGeocentricAu,
   planetPositionAu,
+  type AuPoint,
   type EpochElements,
 } from "./kepler";
 import { spinPose, spinSummary } from "./spin";
@@ -35,6 +36,17 @@ const EARTH_DATA: EpochElements = {
   argPeriapsisDeg: 114.20783,
   meanAnomalyDeg: 357.51716,
 };
+
+function delta(a: AuPoint, b: AuPoint): AuPoint {
+  return { x: a.x - b.x, y: a.y - b.y, z: a.z - b.z };
+}
+
+function angleBetween(a: AuPoint, b: AuPoint): number {
+  const dot = a.x * b.x + a.y * b.y + a.z * b.z;
+  const denom = distanceAu(a) * distanceAu(b);
+  if (denom <= 0) return 180;
+  return (Math.acos(Math.min(1, Math.max(-1, dot / denom))) * 180) / Math.PI;
+}
 
 function angleDelta(a: number, b: number): number {
   const raw = Math.abs(((((a - b) % 360) + 540) % 360) - 180);
@@ -83,6 +95,78 @@ describe("keplerian positions", () => {
     const reference = keplerState("Mars", 2451545, null);
     expect(state.ascendingNodeDeg).toBeCloseTo(reference.ascendingNodeDeg, 6);
     expect(state.meanAnomalyDeg).toBeCloseTo(reference.meanAnomalyDeg, 4);
+  });
+
+  it("matches Horizons for Venus and the Moon on sampled TDB dates", () => {
+    // Geometric states, no light-time or aberration.
+    // Planets: Sun body center (500@10), mean ecliptic of J2000.
+    // Moon: Earth body center (500@399), same plane.
+    // Our Earth is the Earth–Moon barycenter from the JPL Keplerian table,
+    // so a few thousand km versus Horizons geocenter 399 is expected.
+    // The Moon is Schlyter's truncated series, not DE441.
+    const moonElements = {
+      semiMajorKm: 384400,
+      eccentricity: 0.0549,
+      inclinationDeg: 5.145,
+      periodDays: 27.322,
+    };
+    const samples: Array<{
+      jd: number;
+      venus: AuPoint;
+      moon: AuPoint;
+    }> = [
+      {
+        jd: 2451545.0,
+        venus: {
+          x: -7.18302296345389e-1,
+          y: -3.265430819980606e-2,
+          z: 4.101418202684621e-2,
+        },
+        moon: {
+          x: -1.949281649686695e-3,
+          y: -1.838126040073046e-3,
+          z: 2.424579738820632e-4,
+        },
+      },
+      {
+        jd: 2460760.5,
+        venus: {
+          x: -7.139430875163638e-1,
+          y: -8.870957079388866e-2,
+          z: 3.997553584484202e-2,
+        },
+        moon: {
+          x: 1.854329456175498e-3,
+          y: -1.660861974270432e-3,
+          z: -1.446577605487008e-4,
+        },
+      },
+      {
+        jd: 2461349.5,
+        venus: {
+          x: 4.706736086844561e-1,
+          y: 5.480009408357099e-1,
+          z: -1.962666810317525e-2,
+        },
+        moon: {
+          x: -2.534815131222421e-3,
+          y: 3.738832188452365e-4,
+          z: -9.579422279496562e-5,
+        },
+      },
+    ];
+    for (const sample of samples) {
+      const venus = planetPositionAu("Venus", sample.jd, null);
+      const moon = moonGeocentricAu(sample.jd, moonElements);
+      const venusKm = distanceAu(delta(venus, sample.venus)) * AU_IN_KM;
+      const moonKm = distanceAu(delta(moon, sample.moon)) * AU_IN_KM;
+      const moonAngle = angleBetween(moon, sample.moon);
+      // Measured 2000-01-01, 2025-03-26 and 2026-11-05: Venus under 8,200 km,
+      // Moon under 2,600 km and 0.4°. The old J2000 epoch was about 20°.
+      expect(venusKm, `Venus ${sample.jd}`).toBeLessThan(12000);
+      expect(moonKm, `Moon ${sample.jd}`).toBeLessThan(8000);
+      expect(moonAngle, `Moon angle ${sample.jd}`).toBeLessThan(1);
+    }
   });
 
   it("keeps the Moon near 384,400 km and out of the ecliptic", () => {
